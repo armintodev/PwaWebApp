@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>8e0ec51d-64a8-479e-a023-bebf12680734</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pwa.Infrastructure\Pwa.Infrastructure.EfCore.csproj" />
+  </ItemGroup>
+
+</Project>
