@@ -13,7 +13,7 @@ namespace Pwa.Domain.Base
     {
         public int Id { get; set; }
         public DateTime CreationDate { get; private set; }
-        public DateTime LastEditdate { get; private set; }
+        public DateTime LastEditDate { get; private set; }
     }
 
 }
