@@ -11,11 +11,11 @@ namespace Pwa.Infrastructure.EfCore.Extensions
             service.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            service.Configure<IdentityOptions>(opt =>
+            service.Configure<IdentityOptions>(_ =>
             {
-                opt.User.RequireUniqueEmail = true;
-                opt.SignIn.RequireConfirmedPhoneNumber = true;
-                opt.SignIn.RequireConfirmedAccount = true;
+                _.User.RequireUniqueEmail = true;
+                _.SignIn.RequireConfirmedPhoneNumber = true;
+                _.SignIn.RequireConfirmedAccount = true;
             });
         }
     }
