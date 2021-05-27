@@ -1,28 +1,36 @@
-﻿using Pwa.Domain.Base;
+﻿using Pwa.Domain.Account;
+using Pwa.Domain.Base;
 using System;
+using System.Collections.Generic;
 using WebFramework.Enums;
 
 namespace Pwa.Domain.Product
 {
-    public class Application : BaseDetail
+    public class WebApplication : BaseDetail
     {
+        public int CategoryId { get; private set; }
+        public int DeveloperId { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
         public string WebSiteAddress { get; private set; }
-        public string[] Icons { get; private set; }
+        public byte[] Icons { get; private set; }
         public TypeAdd TypeAdd { get; private set; }
         public Status Status { get; private set; }
-        //public int Quantity { get; private set; }
         public int Visit { get; private set; }
         public int Installed { get; private set; }
 
-        protected Application()
+        public Category Category { get; private set; }
+        public Developer Developer { get; private set; }
+        public ICollection<Comment> Comments { get; private set; }
+
+
+        protected WebApplication()
         {
 
         }
 
-        public Application(string name, string description, string websiteAddress,
-            string[] icons, TypeAdd typeAdd, Status status/*, int quantity*/)
+        public WebApplication(string name, string description, string websiteAddress,
+            byte[] icons, TypeAdd typeAdd, Status status, int categoryId, int developerId)
         {
             Name = name;
             Description = description;
@@ -30,17 +38,19 @@ namespace Pwa.Domain.Product
             Icons = icons;
             TypeAdd = typeAdd;
             Status = status;
-            //Quantity = quantity;
             CreationDate = DateTime.Now;
+            CategoryId = categoryId;
+            DeveloperId = developerId;
+            Comments = new List<Comment>();
         }
 
-        public void Edit(string name, string description, string[] icons, Status status)
+        public void Edit(string name, string description, byte[] icons, Status status)
         {
             Name = name;
             Description = description;
             Icons = icons;
             Status = status;
-            LastEditdate = DateTime.Now;
+            LastEditDate = DateTime.Now;
         }
 
         public void IncreaseVisit()
