@@ -9,11 +9,16 @@ namespace Pwa.Domain.Base
     public interface IEntity : IEntity<int>
     {
     }
-    public class BaseDetail
+
+    public class BaseEntity
     {
         public int Id { get; set; }
-        public DateTime CreationDate { get; private set; }
-        public DateTime LastEditDate { get; private set; }
+    }
+    public abstract class BaseDetail
+    {
+        public int Id { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastEditDate { get; set; }
     }
 
 }
