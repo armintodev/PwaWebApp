@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Pwa.Domain.Product;
 using System;
+using System.Collections.Generic;
 using WebFramework.Enums;
 
 namespace Pwa.Domain.Account
@@ -11,6 +13,9 @@ namespace Pwa.Domain.Account
         public DateTime CreationDate { get; private set; }
         public DateTime LastEditDate { get; private set; }
 
+        public ICollection<Comment> Comments { get; private set; }
+        public ICollection<SourceSite> SourceSites { get; private set; }
+
         protected User()
         {
 
@@ -19,7 +24,10 @@ namespace Pwa.Domain.Account
         public User(string phone)
         {
             PhoneNumber = phone;
+            Status = Status.DeActive;
             CreationDate = DateTime.Now;
+            Comments = new List<Comment>();
+            SourceSites = new List<SourceSite>();
         }
 
         public void Edit(string fullName = null, string email = null)
