@@ -1,11 +1,12 @@
 ﻿using Pwa.Domain.Account;
 using Pwa.Domain.Base;
 using System;
+using WebFramework.Domain;
 using WebFramework.Enums;
 
 namespace Pwa.Domain.Product
 {
-    public class Comment : BaseDetail
+    public class Comment : BaseDetail, IEntity
     {
         public int UserId { get; private set; }
         public int WebApplicationId { get; private set; }

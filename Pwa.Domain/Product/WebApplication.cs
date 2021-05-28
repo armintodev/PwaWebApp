@@ -2,11 +2,12 @@
 using Pwa.Domain.Base;
 using System;
 using System.Collections.Generic;
+using WebFramework.Domain;
 using WebFramework.Enums;
 
 namespace Pwa.Domain.Product
 {
-    public class WebApplication : BaseDetail
+    public class WebApplication : BaseDetail, IEntity
     {
         public int CategoryId { get; private set; }
         public int DeveloperId { get; private set; }

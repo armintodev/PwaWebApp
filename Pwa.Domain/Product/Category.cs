@@ -1,10 +1,11 @@
 ﻿using Pwa.Domain.Base;
 using System;
 using System.Collections.Generic;
+using WebFramework.Domain;
 
 namespace Pwa.Domain.Product
 {
-    public class Category : BaseDetail
+    public class Category : BaseDetail, IEntity
     {
         public string Title { get; private set; }
 

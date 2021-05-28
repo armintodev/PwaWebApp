@@ -1,9 +1,10 @@
 ﻿using Pwa.Domain.Base;
 using System;
+using WebFramework.Domain;
 
 namespace Pwa.Domain.Account
 {
-    public class Address : BaseEntity
+    public class Address : BaseEntity, IEntity
     {
         public string City { get; private set; }
         public string Province { get; private set; }

@@ -1,10 +1,11 @@
 ﻿using Pwa.Domain.Base;
 using System;
 using System.Collections.Generic;
+using WebFramework.Domain;
 
 namespace Pwa.Domain.Account
 {
-    public class Statistic : BaseEntity
+    public class Statistic : BaseEntity, IEntity
     {
         public string Browser { get; private set; }
         public string Device { get; private set; }

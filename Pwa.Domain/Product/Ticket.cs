@@ -1,10 +1,11 @@
 ﻿using Pwa.Domain.Account;
 using Pwa.Domain.Base;
 using System;
+using WebFramework.Domain;
 
 namespace Pwa.Domain.Product
 {
-    public class Ticket : BaseDetail
+    public class Ticket : BaseDetail, IEntity
     {
         public int DeveloperId { get; private set; }
         public string Title { get; private set; }

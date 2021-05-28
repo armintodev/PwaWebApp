@@ -2,11 +2,12 @@
 using Pwa.Domain.Product;
 using System;
 using System.Collections.Generic;
+using WebFramework.Domain;
 using WebFramework.Enums;
 
 namespace Pwa.Domain.Account
 {
-    public class Developer : IdentityUser<int>
+    public class Developer : IdentityUser<int>, IEntity
     {
         public int AddressId { get; private set; }
         public int StatisticId { get; private set; }
