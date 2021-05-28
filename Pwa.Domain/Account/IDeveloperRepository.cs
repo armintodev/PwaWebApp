@@ -1,6 +1,8 @@
-﻿namespace Pwa.Domain.Account
+﻿using WebFramework.Domain;
+
+namespace Pwa.Domain.Account
 {
-    public interface IDeveloperRepository
+    public interface IDeveloperRepository : IBaseRepository<Developer>
     {
     }
 }

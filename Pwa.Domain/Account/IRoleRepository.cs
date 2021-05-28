@@ -1,6 +1,8 @@
-﻿namespace Pwa.Domain.Account
+﻿using WebFramework.Domain;
+
+namespace Pwa.Domain.Account
 {
-    public interface IRoleRepository
+    public interface IRoleRepository : IBaseRepository<Role>
     {
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace Pwa.Domain.Product
+﻿using WebFramework.Domain;
+
+namespace Pwa.Domain.Product
 {
-    public interface ICommentRepository
+    public interface ICommentRepository : IBaseRepository<Comment>
     {
     }
 }
