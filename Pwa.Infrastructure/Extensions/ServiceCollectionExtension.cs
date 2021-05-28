@@ -6,6 +6,8 @@ namespace Pwa.Infrastructure.EfCore.Extensions
     {
         public static void AddExtensionsApplication(this IServiceCollection services, string connectionString)
         {
+            services.AddLifeCycleApplication();
+
             services.AddDatabaseExtension(connectionString);
 
             services.AddIdentityApplication();
