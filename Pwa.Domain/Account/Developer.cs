@@ -3,7 +3,6 @@ using Pwa.Domain.Aggregates;
 using Pwa.Domain.Product;
 using System;
 using System.Collections.Generic;
-using WebFramework.Domain;
 using WebFramework.Enums;
 
 namespace Pwa.Domain.Account
@@ -33,6 +32,7 @@ namespace Pwa.Domain.Account
             Email = email;
             CreationDate = DateTime.Now;
             StatisticId = statisticId;
+            DeActive();
             WebApplications = new List<WebApplication>();
             Tickets = new List<Ticket>();
         }
@@ -46,6 +46,7 @@ namespace Pwa.Domain.Account
             CreationDate = DateTime.Now;
             AddressId = addressId;
             StatisticId = statisticId;
+            DeActive();
             WebApplications = new List<WebApplication>();
             Tickets = new List<Ticket>();
         }
