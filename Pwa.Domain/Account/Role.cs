@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using WebFramework.Domain;
+using Pwa.Domain.Aggregates;
 
 namespace Pwa.Domain.Account
 {
-    public class Role : IdentityRole<int>, IEntity
+    public class Role : IdentityRole<int>, IRoleAggregate
     {
     }
 }
