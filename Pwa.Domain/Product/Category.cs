@@ -1,11 +1,11 @@
-﻿using Pwa.Domain.Base;
+﻿using Pwa.Domain.Aggregates;
+using Pwa.Domain.Base;
 using System;
 using System.Collections.Generic;
-using WebFramework.Domain;
 
 namespace Pwa.Domain.Product
 {
-    public class Category : BaseDetail, IEntity
+    public class Category : BaseDetail, ICategoryAggregate
     {
         public string Title { get; private set; }
 
