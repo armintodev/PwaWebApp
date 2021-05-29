@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Pwa.Domain.Aggregates;
 using Pwa.Domain.Product;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using WebFramework.Enums;
 
 namespace Pwa.Domain.Account
 {
-    public class Developer : IdentityUser<int>, IEntity
+    public class Developer : IdentityUser<int>, IDeveloperAggregate
     {
         public int AddressId { get; private set; }
         public int StatisticId { get; private set; }
