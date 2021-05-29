@@ -1,13 +1,13 @@
 ﻿using Pwa.Domain.Account;
+using Pwa.Domain.Aggregates;
 using Pwa.Domain.Base;
 using System;
 using System.Collections.Generic;
-using WebFramework.Domain;
 using WebFramework.Enums;
 
 namespace Pwa.Domain.Product
 {
-    public class WebApplication : BaseDetail, IEntity
+    public class WebApplication : BaseDetail, IWebApplicationAggregate
     {
         public int CategoryId { get; private set; }
         public int DeveloperId { get; private set; }
