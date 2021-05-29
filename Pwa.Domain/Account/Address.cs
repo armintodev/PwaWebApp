@@ -1,10 +1,10 @@
-﻿using Pwa.Domain.Base;
+﻿using Pwa.Domain.Aggregates;
+using Pwa.Domain.Base;
 using System;
-using WebFramework.Domain;
 
 namespace Pwa.Domain.Account
 {
-    public class Address : BaseEntity, IEntity
+    public class Address : BaseEntity, IAddressAggregate
     {
         public string City { get; private set; }
         public string Province { get; private set; }
