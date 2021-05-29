@@ -1,11 +1,11 @@
 ﻿using Pwa.Domain.Account;
+using Pwa.Domain.Aggregates;
 using Pwa.Domain.Base;
 using System;
-using WebFramework.Domain;
 
 namespace Pwa.Domain.Product
 {
-    public class SourceSite : BaseDetail, IEntity
+    public class SourceSite : BaseDetail, ISourceSiteAggregate
     {
         public int UserId { get; private set; }
         public string Name { get; private set; }
