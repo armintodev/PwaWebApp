@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Pwa.Infrastructure\Pwa.Infrastructure.EfCore.csproj" />
+    <ProjectReference Include="..\Pwa.Infrastructure.EfCore\Pwa.Infrastructure.EfCore.csproj" />
   </ItemGroup>
 
 </Project>
