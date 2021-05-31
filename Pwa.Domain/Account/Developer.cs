@@ -13,6 +13,7 @@ namespace Pwa.Domain.Account
         public int StatisticId { get; private set; }
         public string NationalCode { get; private set; }
         public string FullName { get; private set; }
+        public string Code { get; private set; }
         public Status Status { get; private set; }
         public DateTime CreationDate { get; private set; }
         public DateTime LastEditDate { get; private set; }
