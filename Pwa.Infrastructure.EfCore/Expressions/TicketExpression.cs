@@ -16,5 +16,11 @@ namespace Pwa.Infrastructure.EfCore.Expressions
             DeveloperFullName = _.Developer.FullName,
             DeveloperEmail = _.Developer.Email
         };
+
+        //to create ticket , maybe i use to CreateTicketDto rather than TicketDto
+        public static Expression<Func<TicketDto, Ticket>> FromDto => _ => new Ticket(_.Title, _.Description, _.DeveloperId)
+        {
+            Id = _.Id
+        };
     }
 }
