@@ -77,6 +77,16 @@ namespace WebFramework.Infrastructure
             if (saveNow)
                 await DbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
+
+        public virtual async Task<bool> IsExistsAsync(Expression<Func<TEntity, bool>> expression)
+        {
+            return await TableNoTracking.AnyAsync(expression);
+        }
+
+        public virtual async Task SaveChangesAsync()
+        {
+            await DbContext.SaveChangesAsync();
+        }
         #endregion
 
         #region Sync Methods
@@ -131,6 +141,16 @@ namespace WebFramework.Infrastructure
             Entities.RemoveRange(entities);
             if (saveNow)
                 DbContext.SaveChanges();
+        }
+
+        public virtual bool IsExists(Expression<Func<TEntity, bool>> expression)
+        {
+            return TableNoTracking.Any(expression);
+        }
+
+        public virtual void SaveChanges()
+        {
+            DbContext.SaveChanges();
         }
         #endregion
 
