@@ -15,5 +15,11 @@ namespace Pwa.Infrastructure.EfCore.Expressions
             Country = _.Country,
             CreationDate = _.CreationDate.ToString(),
         };
+
+        //to create address , maybe i use to CreateAddressDto rather than AddressDto
+        public static Expression<Func<AddressDto, Address>> FromDto => _ => new Address(_.City, _.Province, _.Country)
+        {
+            Id = _.Id,
+        };
     }
 }
