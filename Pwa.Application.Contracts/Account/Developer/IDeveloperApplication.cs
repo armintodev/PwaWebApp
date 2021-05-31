@@ -1,8 +1,14 @@
-﻿using WebFramework.Infrastructure;
+﻿using System.Threading.Tasks;
 
 namespace Pwa.Application.Contracts.Account.Developer
 {
-    public interface IDeveloperApplication<TDto> where TDto : IDto
+    public interface IDeveloperApplication
     {
+        Task Login(CreateDeveloperDto login);
+        Task Register(CreateDeveloperDto register);
+        Task Edit(EditDeveloperDto edit);
+        Task Delete(int id);
+        Task Activate(int id);
+        Task DeActivate(int id);
     }
 }
