@@ -17,5 +17,11 @@ namespace Pwa.Infrastructure.EfCore.Expressions
             UserFullName = _.User.FullName,
             UserPhoneNumber = _.User.PhoneNumber
         };
+
+        //to create source site , maybe i use to CreateSourceSiteDto rather than SourceSiteDto
+        public static Expression<Func<SourceSiteDto, SourceSite>> FromDto => _ => new SourceSite(_.Name, _.Description, _.Address, null, _.IsPwa, _.UserId)
+        {
+            Id = _.Id
+        };
     }
 }
