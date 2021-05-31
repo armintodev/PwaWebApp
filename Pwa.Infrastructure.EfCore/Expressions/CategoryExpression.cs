@@ -12,5 +12,11 @@ namespace Pwa.Infrastructure.EfCore.Expressions
             Id = _.Id,
             Title = _.Title,
         };
+
+        //to create category , maybe i use to CreateCategoryDto rather than CategoryDto
+        public static Expression<Func<CategoryDto, Category>> FromDto => _ => new Category(_.Title)
+        {
+            Id = _.Id
+        };
     }
 }
