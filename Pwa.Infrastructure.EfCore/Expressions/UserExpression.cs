@@ -18,5 +18,13 @@ namespace Pwa.Infrastructure.EfCore.Expressions
             Status = (StatusDto)_.Status,
             CreationDate = _.CreationDate.ToString(),
         };
+
+        //to create user , maybe i use to CreateUserDto rather than UserDto
+        public static Expression<Func<UserDto, User>> FromDto => _ => new User(_.PhoneNumber)
+        {
+            Id = _.Id,
+            Email = _.Email,
+            UserName = _.PhoneNumber
+        };
     }
 }
