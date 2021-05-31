@@ -8,17 +8,18 @@ namespace Pwa.Infrastructure.EfCore.Expressions
 {
     public static class DeveloperExpression
     {
-        public static Expression<Func<Developer, DeveloperDto>> ToDto => developer => new DeveloperDto
+        public static Expression<Func<Developer, DeveloperDto>> ToDto => _ => new DeveloperDto
         {
-            Id = developer.Id,
-            FullName = developer.FullName,
-            Email = developer.Email,
-            PhoneNumber = developer.PhoneNumber,
-            NationalCode = developer.NationalCode,
-            Status = (StatusDto)developer.Status,
-            CreationDate = developer.CreationDate.ToString(),
-            AddressId = developer.AddressId,
-            StatisticId = developer.StatisticId
+            Id = _.Id,
+            FullName = _.FullName,
+            Email = _.Email,
+            PhoneNumber = _.PhoneNumber,
+            NationalCode = _.NationalCode,
+            Code = _.Code,
+            Status = (StatusDto)_.Status,
+            CreationDate = _.CreationDate.ToString(),
+            AddressId = _.AddressId,
+            StatisticId = _.StatisticId
         };
     }
 }
