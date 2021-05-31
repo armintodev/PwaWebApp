@@ -10,6 +10,7 @@ namespace Pwa.Domain.Account
     public class User : IdentityUser<int>, IUserAggregate
     {
         public string FullName { get; private set; }
+        public string Code { get; private set; }
         public Status Status { get; private set; }
         public DateTime CreationDate { get; private set; }
         public DateTime LastEditDate { get; private set; }
@@ -25,7 +26,7 @@ namespace Pwa.Domain.Account
         public User(string phone)
         {
             PhoneNumber = phone;
-            Status = Status.DeActive;
+            DeActive();
             CreationDate = DateTime.Now;
             Comments = new List<Comment>();
             SourceSites = new List<SourceSite>();
