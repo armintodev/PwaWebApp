@@ -22,5 +22,11 @@ namespace Pwa.Infrastructure.EfCore.Expressions
             CategoryId = _.CategoryId,
             DeveloperId = _.DeveloperId,
         };
+
+        //to create web application , maybe i use to CreateWebApplicationDto rather than WebApplicationDto
+        public static Expression<Func<WebApplicationDto, WebApplication>> FromDto => _ => new WebApplication(_.Name, _.Description, _.WebSiteAddress, _.Icons, (TypeAdd)_.TypeAdd, (Status)_.Status, _.CategoryId, _.DeveloperId)
+        {
+            Id = _.Id,
+        };
     }
 }
