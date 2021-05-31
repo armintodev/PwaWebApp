@@ -17,5 +17,11 @@ namespace Pwa.Infrastructure.EfCore.Expressions
             Version = _.Version,
             CreationDate = _.CreationDate.ToString()
         };
+
+        //to create statistic , maybe i use to CreateStatisticDto rather than StatisticDto
+        public static Expression<Func<StatisticDto, Statistic>> FromDto => _ => new Statistic(_.IpAddress, _.Browser, _.Device, _.Os, _.Version)
+        {
+            Id = _.Id
+        };
     }
 }
