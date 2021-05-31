@@ -12,5 +12,11 @@ namespace Pwa.Infrastructure.EfCore.Expressions
             Id = _.Id,
             Name = _.Name
         };
+
+        //to create role , maybe i use to CreateRoleDto rather than RoleDto
+        public static Expression<Func<RoleDto, Role>> FromDto => _ => new Role(_.Name)
+        {
+            Id = _.Id
+        };
     }
 }
