@@ -28,6 +28,10 @@ namespace WebFramework.Domain
         Task DeleteAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true);
         void DeleteRange(IEnumerable<TEntity> entities, bool saveNow = true);
         Task DeleteRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true);
+        Task<bool> IsExistsAsync(Expression<Func<TEntity, bool>> expression);
+        bool IsExists(Expression<Func<TEntity, bool>> expression);
+        Task SaveChangesAsync();
+        void SaveChanges();
         void Attach(TEntity entity);
         void Detach(TEntity entity);
         void LoadCollection<TProperty>(TEntity entity, Expression<Func<TEntity, IEnumerable<TProperty>>> collectionProperty) where TProperty : class;
