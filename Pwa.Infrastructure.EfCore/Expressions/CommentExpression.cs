@@ -21,5 +21,11 @@ namespace Pwa.Infrastructure.EfCore.Expressions
             WebAppName = _.WebApplication.Name,
             WebAppAddress = _.WebApplication.WebSiteAddress
         };
+
+        //to create comment , maybe i use to CreateCommentDto rather than CommentDto
+        public static Expression<Func<CommentDto, Comment>> FromDto => _ => new Comment(_.Description, _.IsDeveloper, _.UserId, _.WebApplicationId)
+        {
+            Id = _.Id
+        };
     }
 }
