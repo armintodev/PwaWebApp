@@ -21,5 +21,11 @@ namespace Pwa.Infrastructure.EfCore.Expressions
             AddressId = _.AddressId,
             StatisticId = _.StatisticId
         };
+
+        //to create developer , maybe i use to CreateDeveloperDto rather than DeveloperDto
+        public static Expression<Func<DeveloperDto, Developer>> FromDto => _ => new Developer(_.Email, _.FullName, _.NationalCode, _.PhoneNumber, _.AddressId, _.StatisticId)
+        {
+            Id = _.Id,
+        };
     }
 }
