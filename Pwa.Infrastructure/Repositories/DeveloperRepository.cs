@@ -1,4 +1,6 @@
-﻿using Pwa.Domain.Account;
+﻿using Microsoft.EntityFrameworkCore;
+using Pwa.Domain.Account;
+using System.Threading.Tasks;
 using WebFramework.Infrastructure;
 
 namespace Pwa.Infrastructure.EfCore.Repositories
@@ -9,6 +11,11 @@ namespace Pwa.Infrastructure.EfCore.Repositories
         public DeveloperRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
+        }
+
+        public async Task<Developer> GetByEmail(string email)
+        {
+            return await _context.Developers.FirstOrDefaultAsync(_ => _.Email == email);
         }
     }
 }
