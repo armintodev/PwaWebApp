@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Pwa.Application;
+using Pwa.Application.Contracts.Account.Developer;
 using Pwa.Domain.Account;
 using Pwa.Domain.Product;
 using Pwa.Infrastructure.EfCore.Repositories;
@@ -10,7 +12,10 @@ namespace Pwa.Infrastructure.EfCore.Extensions
         public static void AddLifeCycleApplication(this IServiceCollection service)
         {
             service.AddScoped<IAddressRepository, AddressRepository>();
+
             service.AddScoped<IDeveloperRepository, DeveloperRepository>();
+            service.AddScoped<IDeveloperApplication, DeveloperApplication>();
+
             service.AddScoped<IRoleRepository, RoleRepository>();
             service.AddScoped<IStatisticRepository, StatisticRepository>();
             service.AddScoped<IUserRepository, UserRepository>();
