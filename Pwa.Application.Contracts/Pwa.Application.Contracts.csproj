@@ -5,6 +5,7 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <ProjectReference Include="..\Pwa.Domain\Pwa.Domain.csproj" />
     <ProjectReference Include="..\WebFramework\WebFramework.csproj" />
   </ItemGroup>
 
