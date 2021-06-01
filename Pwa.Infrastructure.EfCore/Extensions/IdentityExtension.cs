@@ -8,8 +8,12 @@ namespace Pwa.Infrastructure.EfCore.Extensions
     {
         public static void AddIdentityApplication(this IServiceCollection service)
         {
-            service.AddIdentity<User, Role>()
+            service.AddIdentityCore<User>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            service.AddIdentityCore<Developer>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             service.Configure<IdentityOptions>(_ =>
             {
