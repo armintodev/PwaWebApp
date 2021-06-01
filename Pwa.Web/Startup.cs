@@ -17,6 +17,9 @@ namespace Pwa.Web
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
+
             services.AddExtensionsApplication(Configuration.GetConnectionString("PwaWebAppConnection"));
         }
 
@@ -29,12 +32,19 @@ namespace Pwa.Web
 
             app.UseRouting();
 
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+
+                endpoints.MapGet("/", async _ =>
+                 {
+                     await _.Response.WriteAsync("Hello World!");
+                 });
             });
         }
     }
