@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Pwa.Application.Contracts.Account.Developer;
 using Pwa.Domain.Account;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using WebFramework.Enums;
+using WebFramework.Infrastructure;
 
 namespace Pwa.Application
 {
@@ -18,6 +22,30 @@ namespace Pwa.Application
             _userManager = userManager;
             _developer = developer;
             _signInManager = signInManager;
+        }
+
+        public async Task<List<DeveloperDto>> ListAsync()
+        {
+            var developer = await _developer.TableNoTracking.ToListAsync();
+            List<DeveloperDto> list = new();
+            foreach (var _ in developer)
+            {
+                list.Add(new DeveloperDto
+                {
+                    Id = _.Id,
+                    FullName = _.FullName,
+                    Email = _.Email,
+                    PhoneNumber = _.PhoneNumber,
+                    NationalCode = _.NationalCode,
+                    Code = _.Code,
+                    Status = (StatusDto)_.Status,
+                    CreationDate = _.CreationDate.ToFarsi(),
+                    AddressId = _.AddressId,
+                    StatisticId = _.StatisticId
+                });
+            }
+
+            return list;
         }
 
         public async Task Login(CreateDeveloperDto login)
@@ -39,6 +67,7 @@ namespace Pwa.Application
 
             //maybe i using just email and password to register
             Developer developer = new(register.Email, register.FullName, register.NationalCode, register.PhoneNumber, 0, 0);
+            //Developer developer = DeveloperExpression
             await _userManager.CreateAsync(developer, register.Password);
         }
 
