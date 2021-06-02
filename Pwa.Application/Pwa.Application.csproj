@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AddressApplication.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Pwa.Application.Contracts\Pwa.Application.Contracts.csproj" />
     <ProjectReference Include="..\Pwa.Domain\Pwa.Domain.csproj" />
   </ItemGroup>
