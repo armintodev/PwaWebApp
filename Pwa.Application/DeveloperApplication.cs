@@ -41,7 +41,6 @@ namespace Pwa.Application
                     Code = _.Code,
                     Status = (StatusDto)_.Status,
                     CreationDate = _.CreationDate.ToFarsi(),
-                    AddressId = _.AddressId,
                     StatisticId = _.StatisticId
                 });
             }
