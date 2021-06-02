@@ -11,8 +11,6 @@ namespace Pwa.Infrastructure.EfCore.Extensions
     {
         public static void AddLifeCycleApplication(this IServiceCollection service)
         {
-            service.AddScoped<IAddressRepository, AddressRepository>();
-
             service.AddScoped<IDeveloperRepository, DeveloperRepository>();
             service.AddScoped<IDeveloperApplication, DeveloperApplication>();
 
