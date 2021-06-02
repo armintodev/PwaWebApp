@@ -24,6 +24,24 @@ namespace Pwa.Web.Areas.Admin.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Register(CreateDeveloperDto dto)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _developer.Register(dto);
+                if (result.Success)
+                    return View("Index");
+
+                else
+                {
+                    ModelState.AddModelError("", result.Message);
+                    return View();
+                }
+            }
+            return View();
+        }
+
         public IActionResult Edit()
         {
             return View();
