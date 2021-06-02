@@ -10,6 +10,10 @@ namespace Pwa.Application.Contracts.Account.Statistic
         [Required(ErrorMessage = ValidationMessages.Required)]
         public string IpAddress { get; init; }
 
+        [Display(Name = "مسیر درخواست")]
+        [Required(ErrorMessage = ValidationMessages.Required)]
+        public string Path { get; init; }
+
         [Display(Name = "مرورگر")]
         [Required(ErrorMessage = ValidationMessages.Required)]
         public string Browser { get; init; }
