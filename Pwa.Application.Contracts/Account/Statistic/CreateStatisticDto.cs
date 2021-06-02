@@ -6,6 +6,10 @@ namespace Pwa.Application.Contracts.Account.Statistic
 {
     public record CreateStatisticDto : IDto
     {
+        [Display(Name = "آدرس آی پی")]
+        [Required(ErrorMessage = ValidationMessages.Required)]
+        public string IpAddress { get; init; }
+
         [Display(Name = "مرورگر")]
         [Required(ErrorMessage = ValidationMessages.Required)]
         public string Browser { get; init; }
