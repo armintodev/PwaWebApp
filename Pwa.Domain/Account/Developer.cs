@@ -9,8 +9,7 @@ namespace Pwa.Domain.Account
 {
     public class Developer : IdentityUser<int>, IDeveloperAggregate
     {
-        public int AddressId { get; private set; }
-        public int StatisticId { get; private set; }
+        public int? StatisticId { get; private set; }
         public string NationalCode { get; private set; }
         public string FullName { get; private set; }
         public string City { get; private set; }
