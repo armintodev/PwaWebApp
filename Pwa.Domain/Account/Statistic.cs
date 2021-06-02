@@ -8,6 +8,7 @@ namespace Pwa.Domain.Account
     {
         public int DeveloperId { get; private set; }
         public string IpAddress { get; private set; }
+        public string Path { get; private set; }
         public string Browser { get; private set; }
         public string Device { get; private set; }
         public string Os { get; private set; }
@@ -21,9 +22,10 @@ namespace Pwa.Domain.Account
 
         }
 
-        public Statistic(string ipAddress, string browser, string device, string os, string version, int developerId)
+        public Statistic(string ipAddress, string path, string browser, string device, string os, string version, int developerId)
         {
             IpAddress = ipAddress;
+            Path = path;
             Browser = browser;
             Device = device;
             Os = os;
