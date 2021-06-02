@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using WebFramework.Enums;
 using WebFramework.Infrastructure;
+using WebFramework.Utilities;
 
 namespace Pwa.Application
 {
@@ -48,7 +49,7 @@ namespace Pwa.Application
             return list;
         }
 
-        public async Task Login(CreateDeveloperDto login)
+        public async Task<OperationResult> Login(CreateDeveloperDto login)
         {
             var developer = await _developer.GetByEmail(login.Email);
             if (developer is null) { }
@@ -56,19 +57,25 @@ namespace Pwa.Application
             await _signInManager.PasswordSignInAsync(developer, login.Password, false, false);
 
             //await _signInManager.SignInAsync(developer, false);
+            return new OperationResult(false, "");
         }
 
-        public async Task Register(CreateDeveloperDto register)
+        public async Task<OperationResult> Register(CreateDeveloperDto register)
         {
             //add statistic developer
             //add address location
 
-            if (await _developer.IsExistsAsync(_ => _.PhoneNumber == register.PhoneNumber || _.Email == register.Email)) { }
+            if (await _developer.IsExistsAsync(_ => _.PhoneNumber == register.PhoneNumber || _.Email == register.Email))
+                return new OperationResult(false, "توسعه دهنده ای با این مشخصات وجود دارد");
 
             //maybe i using just email and password to register
-            Developer developer = new(register.Email, register.FullName, register.NationalCode, register.PhoneNumber, 0, 0);
+            Developer developer = new(register.Email, register.UserName, register.FullName, register.NationalCode, register.PhoneNumber, register.City, register.Province, register.Country, 0);
             //Developer developer = DeveloperExpression
-            await _userManager.CreateAsync(developer, register.Password);
+            var result = await _userManager.CreateAsync(developer, register.Password);
+            if (result.Succeeded)
+                return new OperationResult(true, "عملیات با موفقیت انجام شد");
+
+            return new OperationResult(false, result.Errors.GetEnumerator().ToString());
         }
 
         public async Task Edit(EditDeveloperDto edit)
@@ -78,7 +85,7 @@ namespace Pwa.Application
 
             if (await _developer.IsExistsAsync(_ => (_.FullName == edit.FullName || _.NationalCode == edit.NationalCode) && _.Id != edit.Id)) { }
 
-            developer.Edit(edit.FullName, edit.NationalCode);
+            developer.Edit(edit.FullName, edit.NationalCode, edit.City, edit.Province, edit.Country);
             await _developer.SaveChangesAsync();
         }
 
