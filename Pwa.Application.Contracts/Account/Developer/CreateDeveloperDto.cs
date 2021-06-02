@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Pwa.Application.Contracts.Account.Statistic;
 using WebFramework.Infrastructure;
 using WebFramework.Utilities;
 
@@ -51,5 +52,6 @@ namespace Pwa.Application.Contracts.Account.Developer
         public string Country { get; init; }
 
         public int StatisticId { get; init; }
+        public CreateStatisticDto Statistic { get; init; }
     }
 }
