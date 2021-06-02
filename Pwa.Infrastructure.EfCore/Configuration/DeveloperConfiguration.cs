@@ -38,10 +38,6 @@ namespace Pwa.Infrastructure.EfCore.Configuration
                 .WithMany(_ => _.Developers)
                 .HasForeignKey(_ => _.StatisticId);
 
-            builder.HasOne(_ => _.Address)
-                .WithMany()
-                .HasForeignKey(_ => _.AddressId);
-
             builder.HasMany(_ => _.WebApplications)
                 .WithOne(_ => _.Developer)
                 .HasForeignKey(_ => _.DeveloperId);
