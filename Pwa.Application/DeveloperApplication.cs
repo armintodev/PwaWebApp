@@ -14,15 +14,17 @@ namespace Pwa.Application
     public class DeveloperApplication : IDeveloperApplication
     {
         private readonly IDeveloperRepository _developer;
+        private readonly IStatisticRepository _statistic;
         private readonly UserManager<Developer> _userManager;
         private readonly SignInManager<Developer> _signInManager;
         public DeveloperApplication(IDeveloperRepository developer,
             UserManager<Developer> userManager,
-            SignInManager<Developer> signInManager)
+            SignInManager<Developer> signInManager, IStatisticRepository statistic)
         {
             _userManager = userManager;
             _developer = developer;
             _signInManager = signInManager;
+            _statistic = statistic;
         }
 
         public async Task<List<DeveloperDto>> ListAsync()
@@ -62,14 +64,14 @@ namespace Pwa.Application
         public async Task<OperationResult> Register(CreateDeveloperDto register)
         {
             //add statistic developer
-            //add address location
+            Statistic statistic = new(register.Statistic.IpAddress, register.Statistic.Browser, register.Statistic.Device, register.Statistic.Os, register.Statistic.Version);
+            await _statistic.AddAsync(statistic, CancellationToken.None);
 
             if (await _developer.IsExistsAsync(_ => _.PhoneNumber == register.PhoneNumber || _.Email == register.Email))
                 return new OperationResult(false, "توسعه دهنده ای با این مشخصات وجود دارد");
 
             //maybe i using just email and password to register
             Developer developer = new(register.Email, register.UserName, register.FullName, register.NationalCode, register.PhoneNumber, register.City, register.Province, register.Country, 0);
-            //Developer developer = DeveloperExpression
             var result = await _userManager.CreateAsync(developer, register.Password);
             if (result.Succeeded)
                 return new OperationResult(true, "عملیات با موفقیت انجام شد");
