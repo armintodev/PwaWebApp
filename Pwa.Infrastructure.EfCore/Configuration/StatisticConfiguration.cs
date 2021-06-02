@@ -26,9 +26,9 @@ namespace Pwa.Infrastructure.EfCore.Configuration
                 .HasMaxLength(500)
                 .IsRequired();
 
-            builder.HasMany(_ => _.Developers)
-                .WithOne(_ => _.Statistic)
-                .HasForeignKey(_ => _.StatisticId);
+            builder.HasOne(_ => _.Developer)
+                .WithOne()
+                .HasForeignKey<Statistic>(_ => _.DeveloperId);
         }
     }
 }

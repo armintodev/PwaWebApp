@@ -35,8 +35,9 @@ namespace Pwa.Infrastructure.EfCore.Configuration
                 .IsRequired();
 
             builder.HasOne(_ => _.Statistic)
-                .WithMany(_ => _.Developers)
-                .HasForeignKey(_ => _.StatisticId);
+                .WithOne()
+                .HasForeignKey<Developer>(_ => _.StatisticId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(_ => _.WebApplications)
                 .WithOne(_ => _.Developer)
