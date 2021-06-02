@@ -6,7 +6,7 @@ using Pwa.Infrastructure.EfCore.Configuration;
 
 namespace Pwa.Infrastructure.EfCore
 {
-    public class ApplicationDbContext : IdentityDbContext<User, Role, int>
+    public class ApplicationDbContext : IdentityDbContext<Developer, Role, int>
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
@@ -21,7 +21,6 @@ namespace Pwa.Infrastructure.EfCore
             builder.ApplyConfigurationsFromAssembly(assembly);
         }
 
-        public DbSet<Address> Addresses { get; set; }
         public DbSet<Developer> Developers { get; set; }
         public DbSet<Statistic> Statistics { get; set; }
         public DbSet<Category> Categories { get; set; }
