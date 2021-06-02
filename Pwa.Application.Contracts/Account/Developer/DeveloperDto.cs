@@ -14,6 +14,6 @@ namespace Pwa.Application.Contracts.Account.Developer
         public string Code { get; init; }
         public StatusDto Status { get; init; }
         public string CreationDate { get; init; }
-        public int StatisticId { get; init; }
+        public int? StatisticId { get; init; }
     }
 }
