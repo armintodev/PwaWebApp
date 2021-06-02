@@ -13,13 +13,16 @@ namespace Pwa.Domain.Account
         public int StatisticId { get; private set; }
         public string NationalCode { get; private set; }
         public string FullName { get; private set; }
+        public string City { get; private set; }
+        public string Province { get; private set; }
+        public string Country { get; private set; }
+
         public string Code { get; private set; }
         public Status Status { get; private set; }
         public DateTime CreationDate { get; private set; }
         public DateTime LastEditDate { get; private set; }
 
         public Statistic Statistic { get; private set; }
-        public Address Address { get; private set; }
         public ICollection<WebApplication> WebApplications { get; private set; }
         public ICollection<Ticket> Tickets { get; private set; }
 
@@ -38,24 +41,30 @@ namespace Pwa.Domain.Account
             Tickets = new List<Ticket>();
         }
 
-        public Developer(string email, string fullName, string nationalCode, string phoneNumber, int addressId, int statisticId)
+        public Developer(string email, string userName, string fullName, string nationalCode, string phoneNumber, string city, string province, string country, int statisticId)
         {
             Email = email;
+            UserName = userName;
             FullName = fullName;
             NationalCode = nationalCode;
             PhoneNumber = phoneNumber;
+            City = city;
+            Province = province;
+            Country = country;
             CreationDate = DateTime.Now;
-            AddressId = addressId;
             StatisticId = statisticId;
             DeActive();
             WebApplications = new List<WebApplication>();
             Tickets = new List<Ticket>();
         }
 
-        public void Edit(string fullName, string nationalCode)
+        public void Edit(string fullName, string nationalCode, string city, string province, string country)
         {
             FullName = fullName;
             NationalCode = nationalCode;
+            City = city;
+            Province = province;
+            Country = country;
             LastEditDate = DateTime.Now;
         }
 
