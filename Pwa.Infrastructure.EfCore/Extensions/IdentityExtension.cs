@@ -8,19 +8,27 @@ namespace Pwa.Infrastructure.EfCore.Extensions
     {
         public static void AddIdentityApplication(this IServiceCollection service)
         {
-            service.AddIdentityCore<User>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            service.AddIdentity<Developer, Role>(_ =>
+              {
+                  _.Password.RequireNonAlphanumeric = false;
+                  _.Password.RequireUppercase = false;
+                  _.SignIn.RequireConfirmedEmail = true;
+                  _.SignIn.RequireConfirmedPhoneNumber = true;
+                  _.SignIn.RequireConfirmedAccount = true;
+              }).AddEntityFrameworkStores<ApplicationDbContext>();
 
-            service.AddIdentityCore<Developer>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            //service.AddIdentity<User, Role>(_ =>
+            //{
+            //    _.SignIn.RequireConfirmedPhoneNumber = true;
+            //    _.SignIn.RequireConfirmedAccount = true;
+            //}).AddEntityFrameworkStores<ApplicationDbContext>();
 
-            service.Configure<IdentityOptions>(_ =>
-            {
-                _.User.RequireUniqueEmail = true;
-                _.SignIn.RequireConfirmedPhoneNumber = true;
-                _.SignIn.RequireConfirmedAccount = true;
-            });
+            //service.AddIdentityCore<Developer>(_ =>
+            //{
+            //    _.User.RequireUniqueEmail = true;
+            //    _.SignIn.RequireConfirmedPhoneNumber = true;
+            //    _.SignIn.RequireConfirmedAccount = true;
+            //}).AddEntityFrameworkStores<ApplicationDbContext>();
         }
     }
 }
