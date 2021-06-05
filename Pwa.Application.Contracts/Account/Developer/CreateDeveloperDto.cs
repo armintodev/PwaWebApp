@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 using Pwa.Application.Contracts.Account.Statistic;
 using WebFramework.Infrastructure;
 using WebFramework.Utilities;
@@ -50,6 +51,9 @@ namespace Pwa.Application.Contracts.Account.Developer
         [Display(Name = "کشور")]
         [Required(ErrorMessage = ValidationMessages.Required)]
         public string Country { get; init; }
+
+        [Display(Name = "تصویر پروفایل")]
+        public IFormFile ProfileUrl { get; init; }
 
         public int StatisticId { get; init; }
         public CreateStatisticDto Statistic { get; init; }
