@@ -12,9 +12,9 @@ namespace Pwa.Domain.Account
         public string NationalCode { get; private set; }
         public string FullName { get; private set; }
         public string City { get; private set; }
+        public string ProfileUrl { get; private set; }
         public string Province { get; private set; }
         public string Country { get; private set; }
-
         public string Code { get; private set; }
         public Status Status { get; private set; }
         public DateTime CreationDate { get; private set; }
@@ -39,7 +39,7 @@ namespace Pwa.Domain.Account
             Tickets = new List<Ticket>();
         }
 
-        public Developer(string email, string userName, string fullName, string nationalCode, string phoneNumber, string city, string province, string country)
+        public Developer(string email, string userName, string fullName, string nationalCode, string phoneNumber, string city, string province, string country, string profileUrl)
         {
             Email = email;
             UserName = userName;
@@ -49,6 +49,7 @@ namespace Pwa.Domain.Account
             City = city;
             Province = province;
             Country = country;
+            ProfileUrl = profileUrl;
             CreationDate = DateTime.Now;
             DeActive();
             Statistics = new List<Statistic>();
@@ -56,13 +57,14 @@ namespace Pwa.Domain.Account
             Tickets = new List<Ticket>();
         }
 
-        public void Edit(string fullName, string nationalCode, string city, string province, string country)
+        public void Edit(string fullName, string nationalCode, string city, string province, string country, string profileUrl)
         {
             FullName = fullName;
             NationalCode = nationalCode;
             City = city;
             Province = province;
             Country = country;
+            ProfileUrl = profileUrl;
             LastEditDate = DateTime.Now;
         }
 
