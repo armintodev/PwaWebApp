@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Pwa.Application.Contracts.Account.Developer;
 using Pwa.Domain.Account;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Pwa.Application.Contracts.Account.User;
 using WebFramework.Enums;
 using WebFramework.Infrastructure;
 using WebFramework.Utilities;
@@ -14,17 +16,15 @@ namespace Pwa.Application
     public class DeveloperApplication : IDeveloperApplication
     {
         private readonly IDeveloperRepository _developer;
-        private readonly IStatisticRepository _statistic;
         private readonly UserManager<Developer> _userManager;
         private readonly SignInManager<Developer> _signInManager;
         public DeveloperApplication(IDeveloperRepository developer,
             UserManager<Developer> userManager,
-            SignInManager<Developer> signInManager, IStatisticRepository statistic)
+            SignInManager<Developer> signInManager)
         {
             _userManager = userManager;
             _developer = developer;
             _signInManager = signInManager;
-            _statistic = statistic;
         }
 
         public async Task<List<DeveloperDto>> ListAsync()
@@ -43,40 +43,36 @@ namespace Pwa.Application
                     Code = _.Code,
                     Status = (StatusDto)_.Status,
                     CreationDate = _.CreationDate.ToFarsi(),
-                    StatisticId = _.StatisticId
                 });
             }
 
             return list;
         }
 
-        public async Task<OperationResult> Login(CreateDeveloperDto login)
+        public async Task<OperationResult> Login(LoginDto login)
         {
-            var developer = await _developer.GetByEmail(login.Email);
-            if (developer is null) { }
+            var developer = await _developer.Entities.Where(_ => _.PhoneNumber == login.PhoneNumber && _.PhoneNumberConfirmed)
+                .FirstOrDefaultAsync();
+            if (developer is null) return new OperationResult(false, "توسعه دهنده ای با این مشخصات وجود ندارد");
 
-            await _signInManager.PasswordSignInAsync(developer, login.Password, false, false);
+            //await _signInManager.PasswordSignInAsync(developer, createDeveloper.Password, false, false);
 
-            //await _signInManager.SignInAsync(developer, false);
+            await _signInManager.SignInAsync(developer, false);
             return new OperationResult(false, "");
         }
 
         public async Task<OperationResult> Register(CreateDeveloperDto register)
         {
-            //add statistic developer
-            Statistic statistic = new(register.Statistic.IpAddress, register.Statistic.Browser, register.Statistic.Device, register.Statistic.Os, register.Statistic.Version);
-            await _statistic.AddAsync(statistic, CancellationToken.None);
-
             if (await _developer.IsExistsAsync(_ => _.PhoneNumber == register.PhoneNumber || _.Email == register.Email))
                 return new OperationResult(false, "توسعه دهنده ای با این مشخصات وجود دارد");
 
             //maybe i using just email and password to register
-            Developer developer = new(register.Email, register.UserName, register.FullName, register.NationalCode, register.PhoneNumber, register.City, register.Province, register.Country, 0);
+            Developer developer = new(register.Email, register.UserName, register.FullName, register.NationalCode, register.PhoneNumber, register.City, register.Province, register.Country);
             var result = await _userManager.CreateAsync(developer, register.Password);
             if (result.Succeeded)
                 return new OperationResult(true, "عملیات با موفقیت انجام شد");
 
-            return new OperationResult(false, result.Errors.GetEnumerator().ToString());
+            return new OperationResult(false, result.Errors.Select(_ => _.Description).ToString());
         }
 
         public async Task Edit(EditDeveloperDto edit)
