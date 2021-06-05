@@ -27,8 +27,8 @@ namespace Pwa.Infrastructure.EfCore.Configuration
                 .IsRequired();
 
             builder.HasOne(_ => _.Developer)
-                .WithOne()
-                .HasForeignKey<Statistic>(_ => _.DeveloperId);
+                .WithMany(_ => _.Statistics)
+                .HasForeignKey(_ => _.DeveloperId);
         }
     }
 }
