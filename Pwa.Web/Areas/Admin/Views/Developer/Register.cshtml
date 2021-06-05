@@ -8,8 +8,8 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Register" method="post">
+    <form asp-action="Register" method="post" enctype="multipart/form-data">
+        <div class="col-md-9">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FullName" class="control-label"></label>
@@ -62,10 +62,19 @@
                 <span asp-validation-for="Country" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="ProfileUrl" class="control-label"></label>
+                <input asp-for="ProfileUrl" class="form-control" />
+            </div>
+            <!--<div class="form-group">
+                <label class="control-label">تصویر انتخاب شده</label>
+                <img src="/lib/Photos/Developer/2021-06-06-00-08-36-۲۰۱۹۱۲۱۳_۲۱۴۳۰۷.jpg" alt="" width="50%" />
+            </div>-->
+
+            <div class="form-group">
                 <input type="submit" value="ایجاد" class="btn btn-primary" />
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
 <div>
