@@ -9,7 +9,6 @@ namespace Pwa.Domain.Account
 {
     public class Developer : IdentityUser<int>, IDeveloperAggregate
     {
-        public int? StatisticId { get; private set; }
         public string NationalCode { get; private set; }
         public string FullName { get; private set; }
         public string City { get; private set; }
@@ -21,7 +20,7 @@ namespace Pwa.Domain.Account
         public DateTime CreationDate { get; private set; }
         public DateTime LastEditDate { get; private set; }
 
-        public Statistic Statistic { get; private set; }
+        public ICollection<Statistic> Statistics { get; private set; }
         public ICollection<WebApplication> WebApplications { get; private set; }
         public ICollection<Ticket> Tickets { get; private set; }
 
@@ -30,17 +29,17 @@ namespace Pwa.Domain.Account
 
         }
 
-        public Developer(string email, int statisticId)
+        public Developer(string email)
         {
             Email = email;
             CreationDate = DateTime.Now;
-            StatisticId = statisticId;
             DeActive();
+            Statistics = new List<Statistic>();
             WebApplications = new List<WebApplication>();
             Tickets = new List<Ticket>();
         }
 
-        public Developer(string email, string userName, string fullName, string nationalCode, string phoneNumber, string city, string province, string country, int statisticId)
+        public Developer(string email, string userName, string fullName, string nationalCode, string phoneNumber, string city, string province, string country)
         {
             Email = email;
             UserName = userName;
@@ -51,8 +50,8 @@ namespace Pwa.Domain.Account
             Province = province;
             Country = country;
             CreationDate = DateTime.Now;
-            StatisticId = statisticId;
             DeActive();
+            Statistics = new List<Statistic>();
             WebApplications = new List<WebApplication>();
             Tickets = new List<Ticket>();
         }
