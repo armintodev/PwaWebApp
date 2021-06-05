@@ -1,11 +1,13 @@
-﻿namespace WebFramework.Enums
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebFramework.Enums
 {
     public enum StatusDto
     {
-        Active = 0,
-        DeActive = 1,
-        Accepted = 10,
-        Rejected = 11,
-        Pending = 12
+        [Display(Name = "فعال")] Active = 0,
+        [Display(Name = "غیر فعال")] DeActive = 1,
+        [Display(Name = "تایید شده")] Accepted = 10,
+        [Display(Name = "رد شده")] Rejected = 11,
+        [Display(Name = "درحال بررسی")] Pending = 12
     }
 }
