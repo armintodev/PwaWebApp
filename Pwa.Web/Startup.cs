@@ -20,6 +20,9 @@ namespace Pwa.Web
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
 
+            services.AddHttpContextAccessor();
+            services.AddDetection();
+
             services.AddExtensionsApplication(Configuration.GetConnectionString("PwaWebAppConnection"));
         }
 
