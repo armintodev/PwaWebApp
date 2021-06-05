@@ -10,21 +10,24 @@ using Pwa.Application.Contracts.Account.User;
 using WebFramework.Enums;
 using WebFramework.Infrastructure;
 using WebFramework.Utilities;
+using WebFramework.Utilities.Uploader;
 
 namespace Pwa.Application
 {
     public class DeveloperApplication : IDeveloperApplication
     {
         private readonly IDeveloperRepository _developer;
+        private readonly IFileUploader _file;
         private readonly UserManager<Developer> _userManager;
         private readonly SignInManager<Developer> _signInManager;
         public DeveloperApplication(IDeveloperRepository developer,
             UserManager<Developer> userManager,
-            SignInManager<Developer> signInManager)
+            SignInManager<Developer> signInManager, IFileUploader file)
         {
             _userManager = userManager;
             _developer = developer;
             _signInManager = signInManager;
+            _file = file;
         }
 
         public async Task<List<DeveloperDto>> ListAsync()
@@ -66,8 +69,12 @@ namespace Pwa.Application
             if (await _developer.IsExistsAsync(_ => _.PhoneNumber == register.PhoneNumber || _.Email == register.Email))
                 return new OperationResult(false, "توسعه دهنده ای با این مشخصات وجود دارد");
 
+            const string path = "Developer";
+            var profileUrl = await _file.Upload(register.ProfileUrl, path);
+
             //maybe i using just email and password to register
-            Developer developer = new(register.Email, register.UserName, register.FullName, register.NationalCode, register.PhoneNumber, register.City, register.Province, register.Country);
+            Developer developer = new(register.Email, register.UserName, register.FullName, register.NationalCode, register.PhoneNumber, register.City, register.Province, register.Country, profileUrl);
+
             var result = await _userManager.CreateAsync(developer, register.Password);
             if (result.Succeeded)
                 return new OperationResult(true, "عملیات با موفقیت انجام شد");
@@ -82,7 +89,9 @@ namespace Pwa.Application
 
             if (await _developer.IsExistsAsync(_ => (_.FullName == edit.FullName || _.NationalCode == edit.NationalCode) && _.Id != edit.Id)) { }
 
-            developer.Edit(edit.FullName, edit.NationalCode, edit.City, edit.Province, edit.Country);
+            var profileUrl = "";
+
+            developer.Edit(edit.FullName, edit.NationalCode, edit.City, edit.Province, edit.Country, profileUrl);
             await _developer.SaveChangesAsync();
         }
 
