@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pwa.Application.Contracts.Account.Developer;
-using System.Threading.Tasks;
 using Pwa.Application.Contracts.Account.User;
 using Pwa.Web.Filters;
+using System.Threading.Tasks;
 
 namespace Pwa.Web.Areas.Admin.Controllers
 {
@@ -26,8 +26,7 @@ namespace Pwa.Web.Areas.Admin.Controllers
             return View();
         }
 
-        [HttpPost]
-        [NeedInformation]
+        [HttpPost, NeedInformation, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(CreateDeveloperDto dto)
         {
             if (ModelState.IsValid)
@@ -38,9 +37,40 @@ namespace Pwa.Web.Areas.Admin.Controllers
 
                 ModelState.AddModelError("", result.Message);
             }
-            return View();
+            return View(dto);
         }
 
+        public async Task<IActionResult> Edit(int id)
+        {
+            var developer = await _developer.Get(id);
+            if (developer.Success is false)
+                return NotFound();
+
+            return View(developer.Data);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EditDeveloperDto dto)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _developer.Edit(dto);
+                if (result.Success)
+                    return RedirectToAction("Index");
+
+                ModelState.AddModelError("", result.Message);
+            }
+            return View(dto);
+        }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var developer = await _developer.Detail(id);
+            if (developer.Success is false)
+                return NotFound();
+
+            return View(developer.Data);
+        }
 
         public IActionResult Login()
         {
@@ -59,9 +89,17 @@ namespace Pwa.Web.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult Edit()
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            var developer = await _developer.Get(id);
+            if (developer.Success is false)
+                return NotFound();
+
+            var result = await _developer.Delete(id);
+            if (result.Success)
+                return RedirectToAction("Index");
+
+            return BadRequest(result.Message);
         }
     }
 }
