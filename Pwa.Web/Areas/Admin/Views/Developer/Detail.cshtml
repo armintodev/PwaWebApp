@@ -1,0 +1,85 @@
+﻿@model Pwa.Application.Contracts.Account.Developer.DeveloperDto
+
+@{
+    ViewData["Title"] = $"اطلاعات {Model.FullName}";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="FullName" class="control-label"></label>
+                    <input asp-for="FullName" class="form-control" disabled />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" disabled />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" disabled />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" disabled />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NationalCode" class="control-label"></label>
+                    <input asp-for="NationalCode" class="form-control" disabled />
+                    <span asp-validation-for="NationalCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control" disabled />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Province" class="control-label"></label>
+                    <input asp-for="Province" class="form-control" disabled />
+                    <span asp-validation-for="Province" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Country" class="control-label"></label>
+                    <input asp-for="Country" class="form-control" disabled />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+                @if (Model.ProfileUrl is not null)
+                {
+                    <div class="form-group">
+                        <label class="control-label">تصویر انتخاب شده</label>
+                        <img src="/lib/Photos/@Model.ProfileUrl" alt="@Model.FullName" width="20%" />
+                    </div>
+                }
+                <div class="form-group">
+                    <label asp-for="CreationDate" class="control-label"></label>
+                    <input asp-for="CreationDate" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastEditDate" class="control-label"></label>
+                    <input asp-for="LastEditDate" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status" class="control-label"></label>
+                    <input asp-for="Status" class="form-control" disabled />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+        <a asp-action="Index" class="btn btn-info">بازگشت به لیست</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">ویرایش</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">حذف</a>
+    </div>
+</div>
+
