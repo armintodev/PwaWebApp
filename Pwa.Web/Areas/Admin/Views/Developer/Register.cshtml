@@ -7,78 +7,79 @@
 <h1>@ViewData["Title"]</h1>
 
 <hr />
-<div class="row">
-    <form asp-action="Register" method="post" enctype="multipart/form-data">
-        <div class="col-md-9">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FullName" class="control-label"></label>
-                <input asp-for="FullName" class="form-control" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RePassword" class="control-label"></label>
-                <input asp-for="RePassword" class="form-control" />
-                <span asp-validation-for="RePassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NationalCode" class="control-label"></label>
-                <input asp-for="NationalCode" class="form-control" />
-                <span asp-validation-for="NationalCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Province" class="control-label"></label>
-                <input asp-for="Province" class="form-control" />
-                <span asp-validation-for="Province" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Country" class="control-label"></label>
-                <input asp-for="Country" class="form-control" />
-                <span asp-validation-for="Country" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProfileUrl" class="control-label"></label>
-                <input asp-for="ProfileUrl" class="form-control" />
-            </div>
-            <!--<div class="form-group">
-                <label class="control-label">تصویر انتخاب شده</label>
-                <img src="/lib/Photos/Developer/2021-06-06-00-08-36-۲۰۱۹۱۲۱۳_۲۱۴۳۰۷.jpg" alt="" width="50%" />
-            </div>-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Register" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FullName" class="control-label"></label>
+                    <input asp-for="FullName" class="form-control" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RePassword" class="control-label"></label>
+                    <input asp-for="RePassword" class="form-control" />
+                    <span asp-validation-for="RePassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NationalCode" class="control-label"></label>
+                    <input asp-for="NationalCode" class="form-control" />
+                    <span asp-validation-for="NationalCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Province" class="control-label"></label>
+                    <input asp-for="Province" class="form-control" />
+                    <span asp-validation-for="Province" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Country" class="control-label"></label>
+                    <input asp-for="Country" class="form-control" />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProfileUrl" class="control-label"></label>
+                    <input asp-for="ProfileUrl" class="form-control" />
+                </div>
+                <!--<div class="form-group">
+                    <label class="control-label">تصویر انتخاب شده</label>
+                    <img src="/lib/Photos/Developer/2021-06-06-00-08-36-۲۰۱۹۱۲۱۳_۲۱۴۳۰۷.jpg" alt="" width="50%" />
+                </div>-->
 
-            <div class="form-group">
-                <input type="submit" value="ایجاد" class="btn btn-primary" />
-            </div>
+                <div class="form-group">
+                    <input type="submit" value="ایجاد" class="btn btn-primary" />
+                </div>
+            </form>
         </div>
-    </form>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    </div>
+    <div>
+        <a asp-action="Index">بازگشت به لیست</a>
+    </div>
 </div>
 
 @section Scripts {
