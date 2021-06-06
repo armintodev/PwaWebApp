@@ -52,6 +52,27 @@ namespace Pwa.Application
             return list;
         }
 
+        public async Task<OperationResult<EditDeveloperDto>> Get(int id)
+        {
+            var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
+            if (developer is null)
+            {
+                EditDeveloperDto nullEditDeveloperDto = new();
+                return new OperationResult<EditDeveloperDto>(nullEditDeveloperDto, false, "توسعه دهنده ای با این مشخصات وجود ندارد");
+            }
+            EditDeveloperDto data = new()
+            {
+                Id = developer.Id,
+                FullName = developer.FullName,
+                NationalCode = developer.NationalCode,
+                City = developer.City,
+                Province = developer.Province,
+                Country = developer.Country,
+                //ProfileUrl = developer.ProfileUrl,
+            };
+            return new OperationResult<EditDeveloperDto>(data, true, "");
+        }
+
         public async Task<OperationResult> Login(LoginDto login)
         {
             var developer = await _developer.Entities.Where(_ => _.PhoneNumber == login.PhoneNumber && _.PhoneNumberConfirmed)
@@ -69,8 +90,8 @@ namespace Pwa.Application
             if (await _developer.IsExistsAsync(_ => _.PhoneNumber == register.PhoneNumber || _.Email == register.Email))
                 return new OperationResult(false, "توسعه دهنده ای با این مشخصات وجود دارد");
 
-            const string path = "Developer";
-            var profileUrl = await _file.Upload(register.ProfileUrl, path);
+
+            var profileUrl = await _file.Upload(register.ProfileUrl, UploadPath.Developer);
 
             //maybe i using just email and password to register
             Developer developer = new(register.Email, register.UserName, register.FullName, register.NationalCode, register.PhoneNumber, register.City, register.Province, register.Country, profileUrl);
@@ -82,24 +103,27 @@ namespace Pwa.Application
             return new OperationResult(false, result.Errors.Select(_ => _.Description).ToString());
         }
 
-        public async Task Edit(EditDeveloperDto edit)
+        public async Task<OperationResult> Edit(EditDeveloperDto edit)
         {
             var developer = await _developer.GetByIdAsync(CancellationToken.None, edit.Id);
-            if (developer is null) { }
 
             if (await _developer.IsExistsAsync(_ => (_.FullName == edit.FullName || _.NationalCode == edit.NationalCode) && _.Id != edit.Id)) { }
 
             var profileUrl = "";
+            if (edit.ProfileUrl is not null)
+                profileUrl = await _file.Upload(edit.ProfileUrl, UploadPath.Developer);
 
             developer.Edit(edit.FullName, edit.NationalCode, edit.City, edit.Province, edit.Country, profileUrl);
             await _developer.SaveChangesAsync();
+            return new OperationResult(true, "عملیات ویرایش با موفقیت انجام شد");
         }
 
-        public async Task Delete(int id)
+        public async Task<OperationResult> Delete(int id)
         {
             var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
-            if (developer is null) { }
-            await _developer.DeleteAsync(developer, CancellationToken.None, true);
+
+            await _developer.DeleteAsync(developer, CancellationToken.None);
+            return new OperationResult(message: "توسعه دهنده با موفقیت حذف شد");
         }
 
         public async Task Activate(int id)
@@ -116,6 +140,33 @@ namespace Pwa.Application
             if (developer is null) { }
             developer.DeActive();
             await _developer.SaveChangesAsync();
+        }
+
+        public async Task<OperationResult<DeveloperDto>> Detail(int id)
+        {
+            var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
+            if (developer is null)
+            {
+                DeveloperDto nullDeveloperDto = new();
+                return new OperationResult<DeveloperDto>(nullDeveloperDto, false, "توسعه دهنده ای با این مشخصات وجود ندارد");
+            }
+            DeveloperDto data = new()
+            {
+                Id = developer.Id,
+                FullName = developer.FullName,
+                NationalCode = developer.NationalCode,
+                Email = developer.Email,
+                PhoneNumber = developer.PhoneNumber,
+                Status = (StatusDto)developer.Status,
+                UserName = developer.UserName,
+                City = developer.City,
+                Province = developer.Province,
+                Country = developer.Country,
+                ProfileUrl = developer.ProfileUrl,
+                CreationDate = developer.CreationDate.ToFarsiFull(),
+                LastEditDate = developer.LastEditDate.ToFarsiFull(),
+            };
+            return new OperationResult<DeveloperDto>(data);
         }
     }
 }
