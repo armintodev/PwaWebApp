@@ -18,6 +18,7 @@ namespace Pwa.Application.Contracts.Account.Developer
 
         [Display(Name = "ایمیل")]
         [Required(ErrorMessage = ValidationMessages.Required)]
+        [EmailAddress(ErrorMessage = ValidationMessages.WrongEmail)]
         public string Email { get; init; }
 
         [Display(Name = "شماره همراه")]
