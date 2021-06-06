@@ -48,7 +48,7 @@ namespace WebFramework.Infrastructure
         {
             var pc = new PersianCalendar();
             return
-                $"{pc.GetYear(date)}/{pc.GetMonth(date):00}/{pc.GetDayOfMonth(date):00} {date.Hour:00}:{date.Minute:00}:{date.Second:00}";
+                $"{pc.GetYear(date)}/{pc.GetMonth(date):00}/{pc.GetDayOfMonth(date):00} | {date.Hour:00}:{date.Minute:00}:{date.Second:00}";
         }
 
         private static readonly string[] Pn = { "۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹" };
