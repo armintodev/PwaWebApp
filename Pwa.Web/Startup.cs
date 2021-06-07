@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Pwa.Infrastructure.EfCore.Extensions;
+using WebFramework.Utilities.Sms;
 using WebFramework.Utilities.Uploader;
 
 namespace Pwa.Web
@@ -23,6 +24,7 @@ namespace Pwa.Web
 
             services.AddHttpContextAccessor();
             services.AddScoped<IFileUploader, FileUploader>();
+            services.AddScoped<ISmsService, SmsService>();
             services.AddDetection();
 
             services.AddExtensionsApplication(Configuration.GetConnectionString("PwaWebAppConnection"));
