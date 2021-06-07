@@ -15,6 +15,7 @@ namespace Pwa.Application.Contracts.Account.Developer
         Task<OperationResult> Delete(int id);
         Task Activate(int id);
         Task DeActivate(int id);
+        Task<OperationResult> VerifyBySms(string code);
         Task<OperationResult<DeveloperDto>> Detail(int id);
     }
 }
