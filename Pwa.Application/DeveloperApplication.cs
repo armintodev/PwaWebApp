@@ -10,6 +10,7 @@ using Pwa.Application.Contracts.Account.User;
 using WebFramework.Enums;
 using WebFramework.Infrastructure;
 using WebFramework.Utilities;
+using WebFramework.Utilities.Sms;
 using WebFramework.Utilities.Uploader;
 
 namespace Pwa.Application
@@ -18,16 +19,18 @@ namespace Pwa.Application
     {
         private readonly IDeveloperRepository _developer;
         private readonly IFileUploader _file;
+        private readonly ISmsService _sms;
         private readonly UserManager<Developer> _userManager;
         private readonly SignInManager<Developer> _signInManager;
         public DeveloperApplication(IDeveloperRepository developer,
             UserManager<Developer> userManager,
-            SignInManager<Developer> signInManager, IFileUploader file)
+            SignInManager<Developer> signInManager, IFileUploader file, ISmsService sms)
         {
             _userManager = userManager;
             _developer = developer;
             _signInManager = signInManager;
             _file = file;
+            _sms = sms;
         }
 
         public async Task<List<DeveloperDto>> ListAsync()
@@ -90,13 +93,17 @@ namespace Pwa.Application
             if (await _developer.IsExistsAsync(_ => _.PhoneNumber == register.PhoneNumber || _.Email == register.Email))
                 return new OperationResult(false, "توسعه دهنده ای با این مشخصات وجود دارد");
 
-
             var profileUrl = await _file.Upload(register.ProfileUrl, UploadPath.Developer);
 
             //maybe i using just email and password to register
             Developer developer = new(register.Email, register.UserName, register.FullName, register.NationalCode, register.PhoneNumber, register.City, register.Province, register.Country, profileUrl);
 
+            var code = RandomGenerator.Generate();
+            developer.SmsCode(code);
+            await _sms.Send("09106692003", $"کد فعال سازی داریا : {code}");
+
             var result = await _userManager.CreateAsync(developer, register.Password);
+
             if (result.Succeeded)
                 return new OperationResult(true, "عملیات با موفقیت انجام شد");
 
@@ -140,6 +147,23 @@ namespace Pwa.Application
             if (developer is null) { }
             developer.DeActive();
             await _developer.SaveChangesAsync();
+        }
+
+        public async Task<OperationResult> VerifyBySms(string code)
+        {
+            // get user
+            var developer = await _userManager.GetUserAsync(_signInManager.Context.User);
+            if (developer is null)
+                return new OperationResult(false, "توسعه دهنده ای برای تایید اس ام اس وجود ندارد");
+
+            //check user code with parameter code
+            if (developer.Code.Equals(code))
+            {
+                await Activate(developer.Id);
+                await _developer.SaveChangesAsync();
+            }
+
+            return new OperationResult();
         }
 
         public async Task<OperationResult<DeveloperDto>> Detail(int id)
