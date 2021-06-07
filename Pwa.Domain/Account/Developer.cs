@@ -89,5 +89,11 @@ namespace Pwa.Domain.Account
             Email = email;
             LastEditDate = DateTime.Now;
         }
+
+        public void SmsCode(string code)
+        {
+            Code = code;
+            LastEditDate = DateTime.Now;
+        }
     }
 }
