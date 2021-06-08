@@ -74,22 +74,28 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a asp-area="Admin" asp-controller="User" class='nav-link @(Url.ActionContext.HttpContext.Request.Path.StartsWithSegments(UrlPathRequest.AdminUser)? "active" : "") '>
+                                        <a asp-area="Admin" asp-controller="User" asp-action="Index" class='nav-link @(Url.ActionContext.HttpContext.Request.Path.StartsWithSegments(UrlPathRequest.AdminUser)? "active" : "") '>
                                             <i class="fa fa-circle-o nav-icon"></i>
                                             <p>مدیریت کاربران</p>
                                         </a>
 
                                     </li>
                                     <li class="nav-item">
-                                        <a asp-area="Admin" asp-controller="Developer" class='nav-link @(Url.ActionContext.HttpContext.Request.Path.StartsWithSegments(UrlPathRequest.AdminDeveloper)? "active" : "") '>
+                                        <a asp-area="Admin" asp-controller="Developer" asp-action="Index" class='nav-link @(Url.ActionContext.HttpContext.Request.Path.StartsWithSegments(UrlPathRequest.AdminDeveloper)? "active" : "") '>
                                             <i class="fa fa-circle-o nav-icon"></i>
                                             <p>مدیریت توسعه دهندگان</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a asp-area="Admin" asp-controller="Category" class='nav-link @(Url.ActionContext.HttpContext.Request.Path.StartsWithSegments(UrlPathRequest.AdminCategory)? "active" : "") '>
+                                        <a asp-area="Admin" asp-controller="Category" asp-action="Index" class='nav-link @(Url.ActionContext.HttpContext.Request.Path.StartsWithSegments(UrlPathRequest.AdminCategory)? "active" : "") '>
                                             <i class="fa fa-circle-o nav-icon"></i>
                                             <p>مدیریت دسته بندی ها</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-area="Admin" asp-controller="WebApp" asp-action="Index" class='nav-link @(Url.ActionContext.HttpContext.Request.Path.StartsWithSegments(UrlPathRequest.AdminWebApp)? "active" : "") '>
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>مدیریت وب اپلیکیشن ها</p>
                                         </a>
                                     </li>
                                 </ul>
