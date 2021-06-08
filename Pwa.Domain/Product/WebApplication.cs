@@ -14,7 +14,6 @@ namespace Pwa.Domain.Product
         public string Name { get; private set; }
         public string Description { get; private set; }
         public string WebSiteAddress { get; private set; }
-        public byte[] Icons { get; private set; }
         public TypeAdd TypeAdd { get; private set; }
         public Status Status { get; private set; }
         public int Visit { get; private set; }
@@ -23,6 +22,7 @@ namespace Pwa.Domain.Product
         public Category Category { get; private set; }
         public Developer Developer { get; private set; }
         public ICollection<Comment> Comments { get; private set; }
+        public ICollection<Picture> Pictures { get; private set; }
 
 
         protected WebApplication()
@@ -30,26 +30,25 @@ namespace Pwa.Domain.Product
 
         }
 
-        public WebApplication(string name, string description, string websiteAddress,
-            byte[] icons, TypeAdd typeAdd, Status status, int categoryId, int developerId)
+        public WebApplication(string name, string description, string websiteAddress, TypeAdd typeAdd, Status status, int categoryId, int developerId)
         {
             Name = name;
             Description = description;
             WebSiteAddress = websiteAddress;
-            Icons = icons;
             TypeAdd = typeAdd;
             Status = status;
+            DeActivate();
             CreationDate = DateTime.Now;
             CategoryId = categoryId;
             DeveloperId = developerId;
             Comments = new List<Comment>();
+            Pictures = new List<Picture>();
         }
 
-        public void Edit(string name, string description, byte[] icons, Status status)
+        public void Edit(string name, string description, Status status)
         {
             Name = name;
             Description = description;
-            Icons = icons;
             Status = status;
             LastEditDate = DateTime.Now;
         }
@@ -61,6 +60,16 @@ namespace Pwa.Domain.Product
         public void IncreaseInstalled()
         {
             Installed += 1;
+        }
+
+        public void Activate()
+        {
+            Status = Status.Active;
+        }
+
+        public void DeActivate()
+        {
+            Status = Status.DeActive;
         }
     }
 }
