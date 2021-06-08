@@ -52,5 +52,27 @@ namespace Pwa.Web.Areas.Admin.Controllers
             dto.Categories = model.Categories;
             return View(dto);
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var webApp = await _webApplication.Get(id);
+            if (webApp.Success is false)
+                return NotFound();
+            return View(webApp.Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditWebApplicationDto dto)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _webApplication.Edit(dto);
+                if (result.Success)
+                    return RedirectToAction("Index");
+
+                ModelState.AddModelError("", result.Message);
+            }
+            return View(dto);
+        }
     }
 }
