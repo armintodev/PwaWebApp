@@ -2,6 +2,8 @@
 using Pwa.Application;
 using Pwa.Application.Contracts.Account.Developer;
 using Pwa.Application.Contracts.Account.Statistic;
+using Pwa.Application.Contracts.Product.Category;
+using Pwa.Application.Contracts.Product.WebApplication;
 using Pwa.Domain.Account;
 using Pwa.Domain.Product;
 using Pwa.Infrastructure.EfCore.Repositories;
@@ -20,12 +22,19 @@ namespace Pwa.Infrastructure.EfCore.Extensions
             service.AddScoped<IStatisticRepository, StatisticRepository>();
             service.AddScoped<IStatisticApplication, StatisticApplication>();
 
+            service.AddScoped<IPictureRepository, PictureRepository>();
+
             service.AddScoped<IUserRepository, UserRepository>();
+
             service.AddScoped<ICategoryRepository, CategoryRepository>();
+            service.AddScoped<ICategoryApplication, CategoryApplication>();
+
             service.AddScoped<ICommentRepository, CommentRepository>();
             service.AddScoped<ISourceSiteRepository, SourceSiteRepository>();
             service.AddScoped<ITicketRepository, TicketRepository>();
+
             service.AddScoped<IWebApplicationRepository, WebApplicationRepository>();
+            service.AddScoped<IWebApplicationApplication, WebApplicationApplication>();
         }
     }
 }
