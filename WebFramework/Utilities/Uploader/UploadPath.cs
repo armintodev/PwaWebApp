@@ -3,5 +3,6 @@
     public static class UploadPath
     {
         public const string Developer = "Developer";
+        public const string WebApplication = "WebApplication";
     }
 }
