@@ -42,10 +42,15 @@ namespace Pwa.Web.Areas.Admin.Controllers
                 var result = await _webApplication.Create(dto);
                 if (result.Success)
                     return RedirectToAction("Index");
-                 
+
                 ModelState.AddModelError("WebSiteAddress", result.Message);
             }
-            return View(dto); ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
+            CreateWebApplicationDto model = new()
+            {
+                Categories = new SelectList(await _categoryApplication.List(), "Id", "Title")
+            };
+            dto.Categories = model.Categories;
+            return View(dto);
         }
     }
 }
