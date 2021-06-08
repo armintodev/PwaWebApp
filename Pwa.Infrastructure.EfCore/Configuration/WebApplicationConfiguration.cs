@@ -23,10 +23,6 @@ namespace Pwa.Infrastructure.EfCore.Configuration
                 .HasMaxLength(500)
                 .IsRequired();
 
-            builder.Property(_ => _.Icons)
-                .HasMaxLength(1000)
-                .IsRequired();
-
             builder.HasOne(_ => _.Category)
                 .WithMany(_ => _.WebApplications)
                 .HasForeignKey(_ => _.CategoryId);
@@ -36,6 +32,10 @@ namespace Pwa.Infrastructure.EfCore.Configuration
                 .HasForeignKey(_ => _.DeveloperId);
 
             builder.HasMany(_ => _.Comments)
+                .WithOne(_ => _.WebApplication)
+                .HasForeignKey(_ => _.WebApplicationId);
+
+            builder.HasMany(_ => _.Pictures)
                 .WithOne(_ => _.WebApplication)
                 .HasForeignKey(_ => _.WebApplicationId);
         }
