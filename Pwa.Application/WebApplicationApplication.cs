@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Pwa.Application.Contracts.Product.Category;
 using Pwa.Application.Contracts.Product.WebApplication;
 using Pwa.Domain.Product;
 using System.Collections.Generic;
@@ -83,6 +84,52 @@ namespace Pwa.Application
 
             await _webRepository.SaveChangesAsync();
             return new OperationResult();
+        }
+
+        public async Task<OperationResult<EditWebApplicationDto>> Get(int id)
+        {
+            var webApp = await _webRepository.GetByIdAsync(CancellationToken.None, id);
+            if (webApp is null)
+            {
+                EditWebApplicationDto nullEditWebApplicationDto = new();
+                return new OperationResult<EditWebApplicationDto>(nullEditWebApplicationDto, false, "وب اپلیکیشنی با این مشخصات وجود ندارد");
+            }
+
+            EditWebApplicationDto data = new()
+            {
+                Id = webApp.Id,
+                Name = webApp.Name,
+                Description = webApp.Description,
+                Status = (StatusDto)webApp.Status
+            };
+            return new OperationResult<EditWebApplicationDto>(data, true, "");
+        }
+
+        public async Task<OperationResult> Edit(EditWebApplicationDto dto)
+        {
+            var category = await _webRepository.GetByIdAsync(CancellationToken.None, dto.Id);
+
+            if (await _webRepository.IsExistsAsync(_ => (_.Name == dto.Name) && _.Id != dto.Id))
+            {
+                return new OperationResult(false, "وب اپلیکیشنی با این عنوان وجود دارد");
+            }
+
+            List<Picture> pictures = new();
+            foreach (var _ in dto.Files)
+            {
+                var url = await _file.Upload(_, UploadPath.WebApplication);
+                pictures.Add(new Picture(url, category.Id));
+            }
+
+            //first, get pictures from database
+            //second, delete all than pictures of web application
+            //third, add missing pictures
+
+            await _pictureRepository.AddRangeAsync(pictures, CancellationToken.None);
+
+            category.Edit(dto.Name, dto.Description);
+            await _webRepository.SaveChangesAsync();
+            return new OperationResult(true, "عملیات ویرایش با موفقیت انجام شد");
         }
     }
 }
