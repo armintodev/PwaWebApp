@@ -45,11 +45,10 @@ namespace Pwa.Domain.Product
             Pictures = new List<Picture>();
         }
 
-        public void Edit(string name, string description, Status status)
+        public void Edit(string name, string description)
         {
             Name = name;
             Description = description;
-            Status = status;
             LastEditDate = DateTime.Now;
         }
 
