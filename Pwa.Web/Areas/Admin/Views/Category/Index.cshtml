@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Pwa.Application.Contracts.Product.Category.CategoryDto>
+
+@{
+    ViewData["Title"] = "دسته بندی ها";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                <a class="btn btn-warning" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id">ویرایش</a> |
+                <a class="btn btn-info" asp-controller="Category" asp-action="Detail" asp-route-id="@item.Id">جزیات</a> |
+                <a class="btn btn-danger" asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
