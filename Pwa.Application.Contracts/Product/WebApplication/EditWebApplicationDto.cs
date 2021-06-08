@@ -2,8 +2,8 @@
 
 namespace Pwa.Application.Contracts.Product.WebApplication
 {
-    public record EditWebApplicationDto : IDto
+    public record EditWebApplicationDto : CreateWebApplicationDto, IDto
     {
-        public string Id { get; init; }
+        public int Id { get; init; }
     }
 }
