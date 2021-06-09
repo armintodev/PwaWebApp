@@ -41,6 +41,8 @@ namespace Pwa.Application.Contracts.Product.WebApplication
         public string LastEditDate { get; init; }
 
         public int CategoryId { get; init; }
+
+        [Display(Name = "عنوان دسته بندی")]
         public string CategoryTitle { get; init; }
 
         public List<PictureDto> Pictures { get; init; }
