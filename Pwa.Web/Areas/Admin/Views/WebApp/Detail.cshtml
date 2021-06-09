@@ -1,0 +1,85 @@
+﻿@model Pwa.Application.Contracts.Product.WebApplication.WebApplicationDto
+
+@{
+    ViewData["Title"] = $"اطلاعات دسته بندی {Model.Name}";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" disabled />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" disabled />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="WebSiteAddress" class="control-label"></label>
+                    <input asp-for="WebSiteAddress" class="form-control" disabled />
+                    <span asp-validation-for="WebSiteAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CategoryTitle" class="control-label"></label>
+                    <input asp-for="CategoryTitle" class="form-control" disabled />
+                    <span asp-validation-for="CategoryTitle" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Installed" class="control-label"></label>
+                    <input asp-for="Installed" class="form-control" disabled />
+                    <span asp-validation-for="Installed" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Visit" class="control-label"></label>
+                    <input asp-for="Visit" class="form-control" disabled />
+                    <span asp-validation-for="Visit" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status" class="control-label"></label>
+                    <input asp-for="Status" class="form-control" disabled />
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TypeAdd" class="control-label"></label>
+                    <input asp-for="TypeAdd" class="form-control" disabled />
+                    <span asp-validation-for="TypeAdd" class="text-danger"></span>
+                </div>
+                @foreach (var _ in Model.Pictures)
+                {
+                    <div class="form-group">
+                        <label class="control-label">تصویر انتخاب شده</label>
+                        <img src="/lib/Photos/@_.PictureName" alt="@_.CreationDate" width="20%" />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@_.CreationDate" class="control-label"></label>
+                        <input asp-for="@_.CreationDate" class="form-control" disabled />
+                    </div>
+                }
+                <div class="form-group">
+                    <label asp-for="CreationDate" class="control-label"></label>
+                    <input asp-for="CreationDate" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastEditDate" class="control-label"></label>
+                    <input asp-for="LastEditDate" class="form-control" disabled />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index" class="btn btn-info">بازگشت به لیست</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">ویرایش</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">حذف</a>
+    </div>
+</div>
+
