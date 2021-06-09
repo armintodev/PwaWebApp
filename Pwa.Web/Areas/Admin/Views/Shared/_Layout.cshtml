@@ -98,6 +98,12 @@
                                             <p>مدیریت وب اپلیکیشن ها</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a asp-area="Admin" asp-controller="Ticket" asp-action="Index" class='nav-link @(Url.ActionContext.HttpContext.Request.Path.StartsWithSegments(UrlPathRequest.AdminTicket)? "active" : "") '>
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>مدیریت تیکت ها</p>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
