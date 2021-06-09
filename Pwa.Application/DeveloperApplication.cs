@@ -140,7 +140,6 @@ namespace Pwa.Application
         public async Task Activate(int id)
         {
             var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
-            if (developer is null) { }
             developer.Active();
             await _developer.SaveChangesAsync();
         }
@@ -148,7 +147,6 @@ namespace Pwa.Application
         public async Task DeActivate(int id)
         {
             var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
-            if (developer is null) { }
             developer.DeActive();
             await _developer.SaveChangesAsync();
         }
