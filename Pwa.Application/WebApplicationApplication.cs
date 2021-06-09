@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Pwa.Application.Contracts.Product.Category;
+using Pwa.Application.Contracts.Product.Picture;
 using Pwa.Application.Contracts.Product.WebApplication;
 using Pwa.Domain.Product;
 using System.Collections.Generic;
@@ -138,6 +139,58 @@ namespace Pwa.Application
             webApp.Edit(dto.Name, dto.Description);
             await _webRepository.SaveChangesAsync();
             return new OperationResult(true, "عملیات ویرایش با موفقیت انجام شد");
+        }
+
+        public async Task<OperationResult<WebApplicationDto>> Detail(int id)
+        {
+            var webApp = await _webRepository.Table.Include(_ => _.Category).FirstOrDefaultAsync(_ => _.Id == id);
+            if (webApp is null)
+            {
+                WebApplicationDto nullWebAppDto = new();
+                return new OperationResult<WebApplicationDto>(nullWebAppDto, false, "توسعه دهنده ای با این مشخصات وجود ندارد");
+            }
+
+            var pictures = await _pictureRepository.TableNoTracking.Where(_ => _.WebApplicationId == webApp.Id).ToListAsync();
+            List<PictureDto> pics = new();
+            foreach (var _ in pictures)
+            {
+                pics.Add(new PictureDto()
+                {
+                    PictureName = _.FileName,
+                    CreationDate = _.CreationDate.ToFarsiFull()
+                });
+            }
+
+            WebApplicationDto data = new()
+            {
+                Id = webApp.Id,
+                Name = webApp.Name,
+                Description = webApp.Description,
+                WebSiteAddress = webApp.WebSiteAddress,
+                CategoryTitle = webApp.Category.Title,
+                Pictures = pics,
+                Installed = webApp.Installed,
+                Visit = webApp.Visit,
+                Status = (StatusDto)webApp.Status,
+                TypeAdd = (TypeAddDto)webApp.TypeAdd,
+                CreationDate = webApp.CreationDate.ToFarsiFull(),
+                LastEditDate = webApp.LastEditDate.ToFarsiFull()
+            };
+            return new OperationResult<WebApplicationDto>(data);
+        }
+
+        public async Task<OperationResult> Delete(int id)
+        {
+            var webApp = await _webRepository.GetByIdAsync(CancellationToken.None, id);
+            var oldPictures = await _pictureRepository.Table.Where(_ => _.WebApplicationId == webApp.Id).ToListAsync();
+
+            foreach (var _ in oldPictures)
+            {
+                _file.Delete(_.FileName);
+            }
+
+            await _webRepository.DeleteAsync(webApp, CancellationToken.None);
+            return new OperationResult(message: "توسعه دهنده با موفقیت حذف شد");
         }
     }
 }
