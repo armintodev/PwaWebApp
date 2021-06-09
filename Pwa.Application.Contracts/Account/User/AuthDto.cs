@@ -4,7 +4,7 @@ using WebFramework.Utilities;
 
 namespace Pwa.Application.Contracts.Account.User
 {
-    public record LoginDto : IDto
+    public record AuthDto : IDto
     {
         [Display(Name = "شماره همراه")]
         [Required(ErrorMessage = ValidationMessages.Required)]
