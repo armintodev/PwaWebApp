@@ -24,6 +24,7 @@ namespace Pwa.Infrastructure.EfCore
         public DbSet<Developer> Developers { get; set; }
         public DbSet<Statistic> Statistics { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<SourceSite> SourceSites { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
