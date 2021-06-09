@@ -1,14 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
-using WebFramework.Utilities;
-
-namespace Pwa.Application.Contracts.Product.Picture
+﻿namespace Pwa.Application.Contracts.Product.Picture
 {
-    public class CreatePictureDto
+    public class CreatePictureDto : PictureDto
     {
-        [Display(Name = "تصویر")]
-        [DataType(DataType.ImageUrl)]
-        [Required(ErrorMessage = ValidationMessages.Required)]
-        public IFormFile File { get; set; }
+
     }
 }
