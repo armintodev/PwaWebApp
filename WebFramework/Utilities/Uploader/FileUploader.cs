@@ -31,5 +31,14 @@ namespace WebFramework.Utilities.Uploader
             await file.CopyToAsync(output);
             return $"{path}/{fileName}";
         }
+
+        public void Delete(string fileName)
+        {
+            var directoryPath = $"{_webHost.WebRootPath}//lib//Photos//";
+
+            var filePath = $"{directoryPath}//{fileName}";
+
+            File.Delete(filePath);
+        }
     }
 }

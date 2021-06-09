@@ -48,7 +48,7 @@ namespace Pwa.Application.Contracts.Product.WebApplication
 
         [Range(1, int.MaxValue, ErrorMessage = ValidationMessages.WrongCategory)]
         public int CategoryId { get; init; }
-        public SelectList Categories { get; init; }
+        public SelectList Categories { get; set; }
         public CategoryDto Category { get; init; }
 
         public int DeveloperId { get; init; }
