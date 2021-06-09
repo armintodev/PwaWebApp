@@ -1,0 +1,27 @@
+﻿@model Pwa.Application.Contracts.Account.User.AuthDto
+@{
+    ViewData["Title"] = "ثبت نام";
+    Layout = "_AuthLayout";
+}
+
+<h3 class="title">
+    ساخت حساب کاربری
+</h3>
+<h4>
+    آیا حساب کاربری دارید؟
+    <a asp-action="Login" class="link__color">
+        ورود
+    </a>
+</h4>
+<form asp-action="Register" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="PhoneNumber" placeholder="شماره تماس خود را وارد کنید">
+    <span asp-validation-for="PhoneNumber"></span>
+    <button type="submit">
+        ثبت نام
+    </button>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
