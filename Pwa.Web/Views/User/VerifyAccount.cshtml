@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "تایید حساب کاربری";
+    Layout = "_AuthLayout";
+}
+
+<h3 class="title">
+    تایید حساب کاربری
+</h3>
+<h4 class="description">
+    زمان باقی مانده
+    <span class="link__color" data-count-num="30">
+        30
+    </span>
+    ثانیه
+</h4>
+<form asp-action="Login" method="post">
+    <input type="text" placeholder="لطفا کد را وارد کنید">
+    <button type="submit">
+        تایید حساب
+    </button>
+</form>
+<div class="retry__send__sms d-none">
+    <h5>آیا کد برای شما ارسال نشد ؟</h5>
+    <a asp-action="VerifyAccount" class="link__color">
+        ارسال مجدد
+    </a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+<script src="/Main/js/countdown.js"></script>
+}
