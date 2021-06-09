@@ -107,27 +107,35 @@ namespace Pwa.Application
 
         public async Task<OperationResult> Edit(EditWebApplicationDto dto)
         {
-            var category = await _webRepository.GetByIdAsync(CancellationToken.None, dto.Id);
+            var webApp = await _webRepository.GetByIdAsync(CancellationToken.None, dto.Id);
 
             if (await _webRepository.IsExistsAsync(_ => (_.Name == dto.Name) && _.Id != dto.Id))
             {
                 return new OperationResult(false, "وب اپلیکیشنی با این عنوان وجود دارد");
             }
 
-            List<Picture> pictures = new();
-            foreach (var _ in dto.Files)
+            if (dto.Files is not null)
             {
-                var url = await _file.Upload(_, UploadPath.WebApplication);
-                pictures.Add(new Picture(url, category.Id));
+                var oldPictures = await _pictureRepository.Table.Where(_ => _.WebApplicationId == webApp.Id).ToListAsync();
+
+                await _pictureRepository.DeleteRangeAsync(oldPictures, CancellationToken.None, false);
+
+                foreach (var _ in oldPictures)
+                {
+                    _file.Delete(_.FileName);
+                }
+
+                List<Picture> newPictures = new();
+                foreach (var _ in dto.Files)
+                {
+                    var url = await _file.Upload(_, UploadPath.WebApplication);
+                    newPictures.Add(new Picture(url, webApp.Id));
+                }
+
+                await _pictureRepository.AddRangeAsync(newPictures, CancellationToken.None);
             }
 
-            //first, get pictures from database
-            //second, delete all than pictures of web application
-            //third, add missing pictures
-
-            await _pictureRepository.AddRangeAsync(pictures, CancellationToken.None);
-
-            category.Edit(dto.Name, dto.Description);
+            webApp.Edit(dto.Name, dto.Description);
             await _webRepository.SaveChangesAsync();
             return new OperationResult(true, "عملیات ویرایش با موفقیت انجام شد");
         }
