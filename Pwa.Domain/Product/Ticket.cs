@@ -23,11 +23,13 @@ namespace Pwa.Domain.Product
             Title = title;
             Description = description;
             CreationDate = DateTime.Now;
+            LastEditDate = DateTime.Now;
             DeveloperId = developerId;
         }
 
-        public void Edit(string description)
+        public void Edit(string title, string description)
         {
+            Title = title;
             Description = description;
             LastEditDate = DateTime.Now;
         }

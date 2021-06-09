@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pwa.Application.Contracts.Product.Category;
+using Pwa.Application.Contracts.Product.Ticket;
 using System.Threading.Tasks;
 
 namespace Pwa.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CategoryController : Controller
+    public class TicketController : Controller
     {
-        private readonly ICategoryApplication _category;
-        public CategoryController(ICategoryApplication category)
+        private readonly ITicketApplication _ticket;
+        public TicketController(ITicketApplication ticket)
         {
-            _category = category;
+            _ticket = ticket;
         }
 
         public async Task<IActionResult> Index()
         {
-            var category = await _category.List();
-            return View(category);
+            var list = await _ticket.List();
+            return View(list);
         }
 
         public IActionResult Create()
@@ -25,11 +25,11 @@ namespace Pwa.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateCategoryDto dto)
+        public async Task<IActionResult> Create(CreateTicketDto dto)
         {
             if (ModelState.IsValid)
             {
-                var result = await _category.Create(dto);
+                var result = await _ticket.Create(dto);
                 if (result.Success)
                     return RedirectToAction("Index");
 
@@ -40,18 +40,19 @@ namespace Pwa.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var category = await _category.Get(id);
-            if (category.Success is false)
+            var ticket = await _ticket.Get(id);
+            if (ticket.Success is false)
                 return NotFound();
-            return View(category.Data);
+            return View(ticket.Data);
+
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditCategoryDto dto)
+        public async Task<IActionResult> Edit(EditTicketDto dto)
         {
             if (ModelState.IsValid)
             {
-                var result = await _category.Edit(dto);
+                var result = await _ticket.Edit(dto);
                 if (result.Success)
                     return RedirectToAction("Index");
 
@@ -62,20 +63,20 @@ namespace Pwa.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Detail(int id)
         {
-            var category = await _category.Detail(id);
-            if (category.Success is false)
+            var ticket = await _ticket.Detail(id);
+            if (ticket.Success is false)
                 return NotFound();
 
-            return View(category.Data);
+            return View(ticket.Data);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var category = await _category.Get(id);
-            if (category.Success is false)
+            var ticket = await _ticket.Get(id);
+            if (ticket.Success is false)
                 return NotFound();
 
-            var result = await _category.Delete(id);
+            var result = await _ticket.Delete(id);
             if (result.Success)
                 return RedirectToAction("Index");
 

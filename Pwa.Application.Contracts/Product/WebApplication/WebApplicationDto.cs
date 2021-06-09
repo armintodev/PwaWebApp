@@ -1,5 +1,7 @@
 ﻿using Pwa.Application.Contracts.Account.Developer;
 using Pwa.Application.Contracts.Product.Category;
+using Pwa.Application.Contracts.Product.Picture;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using WebFramework.Enums;
 using WebFramework.Infrastructure;
@@ -35,7 +37,16 @@ namespace Pwa.Application.Contracts.Product.WebApplication
         [Display(Name = "تاریخ ایجاد محصول")]
         public string CreationDate { get; init; }
 
+        [Display(Name = "تاریخ آخرین ویرایش")]
+        public string LastEditDate { get; init; }
+
         public int CategoryId { get; init; }
+
+        [Display(Name = "عنوان دسته بندی")]
+        public string CategoryTitle { get; init; }
+
+        public List<PictureDto> Pictures { get; init; }
+
         public int DeveloperId { get; init; }
         //public CategoryDto Category { get; init; }
         //public DeveloperDto Developer { get; init; }

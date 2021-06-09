@@ -29,6 +29,7 @@ namespace Pwa.Domain.Product
             Icons = icons;
             IsPwa = isPwa;
             CreationDate = DateTime.Now;
+            LastEditDate = DateTime.Now;
             UserId = userId;
         }
 

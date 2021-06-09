@@ -30,6 +30,7 @@ namespace Pwa.Domain.Product
             UserId = userId;
             WebApplicationId = webApplicationId;
             CreationDate = DateTime.Now;
+            LastEditDate = DateTime.Now;
         }
 
         public void Edit(string description)

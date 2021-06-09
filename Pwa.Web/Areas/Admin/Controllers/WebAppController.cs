@@ -74,5 +74,27 @@ namespace Pwa.Web.Areas.Admin.Controllers
             }
             return View(dto);
         }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var webApp = await _webApplication.Detail(id);
+            if (webApp.Success is false)
+                return NotFound();
+
+            return View(webApp.Data);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var webApp = await _webApplication.Get(id);
+            if (webApp.Success is false)
+                return NotFound();
+
+            var result = await _webApplication.Delete(id);
+            if (result.Success)
+                return RedirectToAction("Index");
+
+            return BadRequest(result.Message);
+        }
     }
 }

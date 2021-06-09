@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Pwa.Application.Contracts.Account.Developer.DeveloperDto>
-
+@using WebFramework.Enums
 @{
     ViewData["Title"] = "توسعه دهندگان";
 }
@@ -65,6 +65,14 @@
                     <a class="btn btn-warning" asp-controller="Developer" asp-action="Edit" asp-route-id="@item.Id">ویرایش</a> |
                     <a class="btn btn-info" asp-controller="Developer" asp-action="Detail" asp-route-id="@item.Id">جزیات</a> |
                     <a class="btn btn-danger" asp-controller="Developer" asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+                    @if (item.Status == StatusDto.Active)
+                    {
+                        <a class="btn btn-outline-danger" asp-controller="Developer" asp-action="DeActivate" asp-route-id="@item.Id">غیرفعال کردن</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-success" asp-controller="Developer" asp-action="Activate" asp-route-id="@item.Id">فعال کردن</a>
+                    }
                 </td>
             </tr>
         }

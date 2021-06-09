@@ -28,6 +28,7 @@ namespace Pwa.Domain.Account
             PhoneNumber = phone;
             DeActive();
             CreationDate = DateTime.Now;
+            LastEditDate = DateTime.Now;
             Comments = new List<Comment>();
             SourceSites = new List<SourceSite>();
         }

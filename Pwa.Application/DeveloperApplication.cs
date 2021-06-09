@@ -118,7 +118,10 @@ namespace Pwa.Application
 
             var profileUrl = "";
             if (edit.ProfileUrl is not null)
+            {
+                _file.Delete(developer.ProfileUrl);
                 profileUrl = await _file.Upload(edit.ProfileUrl, UploadPath.Developer);
+            }
 
             developer.Edit(edit.FullName, edit.NationalCode, edit.City, edit.Province, edit.Country, profileUrl);
             await _developer.SaveChangesAsync();
@@ -130,13 +133,13 @@ namespace Pwa.Application
             var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
 
             await _developer.DeleteAsync(developer, CancellationToken.None);
+            _file.Delete(developer.ProfileUrl);
             return new OperationResult(message: "توسعه دهنده با موفقیت حذف شد");
         }
 
         public async Task Activate(int id)
         {
             var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
-            if (developer is null) { }
             developer.Active();
             await _developer.SaveChangesAsync();
         }
@@ -144,7 +147,6 @@ namespace Pwa.Application
         public async Task DeActivate(int id)
         {
             var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
-            if (developer is null) { }
             developer.DeActive();
             await _developer.SaveChangesAsync();
         }
