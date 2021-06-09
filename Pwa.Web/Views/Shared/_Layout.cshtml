@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/Main/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="/Main/lib/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/Main/css/style.css" />
+    <title>Pwa DariaTech</title>
+</head>
+<body>
+    <header class="">
+        <div class="container">
+            <div class="content">
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="34.638"
+                         height="29.392"
+                         viewBox="0 0 34.638 29.392">
+                        <g id="medium" transform="translate(0 -29.8)">
+                            <path id="Path_1"
+                                  data-name="Path 1"
+                                  d="M272.675,61.4l-10.668-5.128-.08-23.248a.735.735,0,0,1,1.054-.665l10.114,4.863a.735.735,0,0,1,.417.663v22.99A.583.583,0,0,1,272.675,61.4Z"
+                                  transform="translate(-238.873 -2.268)"
+                                  fill="#fff" />
+                            <path id="Path_2"
+                                  data-name="Path 2"
+                                  d="M143.206,54.006,131.66,48.454l11.115-18.3a.735.735,0,0,1,.947-.281L153.978,34.8a.735.735,0,0,1,.309,1.046Z"
+                                  transform="translate(-120.072 0)"
+                                  fill="#e4e4e4" />
+                            <path id="Path_3"
+                                  data-name="Path 3"
+                                  d="M32.654,59.785,21.108,54.234,10.525,37a.565.565,0,0,1,.726-.8l9.857,4.74Z"
+                                  transform="translate(-9.52 -5.779)"
+                                  fill="#d3d3d3" />
+                            <path id="Path_4"
+                                  data-name="Path 4"
+                                  d="M10.752,60.342.33,55.33A.583.583,0,0,1,0,54.8V31.689a.565.565,0,0,1,.809-.509l10.779,5.183V59.816A.583.583,0,0,1,10.752,60.342Z"
+                                  transform="translate(0 -1.207)"
+                                  fill="#c4c4c4" />
+                        </g>
+                    </svg>
+
+                    <h1>pwa داریا</h1>
+                </div>
+                <nav>
+                    <button class="close_menu">
+                        <svg id="Group_2322"
+                             data-name="Group 2322"
+                             xmlns="http://www.w3.org/2000/svg"
+                             width="21.291"
+                             height="20.589"
+                             viewBox="0 0 21.291 20.589">
+                            <path id="Path_26033"
+                                  data-name="Path 26033"
+                                  d="M18.173,3.015A10.761,10.761,0,0,0,10.645,0,10.761,10.761,0,0,0,3.118,3.015a10.056,10.056,0,0,0,0,14.559,10.761,10.761,0,0,0,7.527,3.015,10.761,10.761,0,0,0,7.527-3.015,10.056,10.056,0,0,0,0-14.559ZM15.338,13.98a.589.589,0,0,1,0,.853.639.639,0,0,1-.882,0l-3.811-3.685L6.835,14.833a.639.639,0,0,1-.882,0,.589.589,0,0,1,0-.853l3.811-3.685L5.953,6.609a.589.589,0,0,1,0-.853.639.639,0,0,1,.882,0l3.811,3.685,3.811-3.685a.639.639,0,0,1,.882,0,.589.589,0,0,1,0,.853l-3.811,3.685Z"
+                                  transform="translate(0 0)"
+                                  fill="#fff" />
+                        </svg>
+                    </button>
+                    <ul>
+                        <li><a class="active" href="/">خانه</a></li>
+                        <li><a href="#">درباره ما</a></li>
+                        <li><a href="#">دسته بندی</a></li>
+                        <li><a href="#">توسعه دهندگان</a></li>
+                    </ul>
+                </nav>
+                <div class="left">
+                    <button class="search_btn">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="21.673"
+                             height="21.97"
+                             viewBox="0 0 21.673 21.97">
+                            <path id="search"
+                                  d="M21.244,20.169l-4.865-5.161a9.236,9.236,0,1,0-1.372,1.372l4.865,5.161a.485.485,0,0,0,.686,0l.686-.686A.485.485,0,0,0,21.244,20.169ZM9.217,16.494a7.277,7.277,0,1,1,7.277-7.277A7.285,7.285,0,0,1,9.217,16.494Z"
+                                  transform="translate(0.125 0.125)"
+                                  fill="#fff"
+                                  stroke="#fff"
+                                  stroke-width="0.25" />
+                        </svg>
+                    </button>
+                    <a class="login_btn" asp-controller="User">ثبت نام<span>/</span> ورود</a>
+
+                    <div class="search_box">
+                        <button class="close_search_box_btn">
+                            <svg id="Group_2322"
+                                 data-name="Group 2322"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 width="21.291"
+                                 height="20.589"
+                                 viewBox="0 0 21.291 20.589">
+                                <path id="Path_26033"
+                                      data-name="Path 26033"
+                                      d="M18.173,3.015A10.761,10.761,0,0,0,10.645,0,10.761,10.761,0,0,0,3.118,3.015a10.056,10.056,0,0,0,0,14.559,10.761,10.761,0,0,0,7.527,3.015,10.761,10.761,0,0,0,7.527-3.015,10.056,10.056,0,0,0,0-14.559ZM15.338,13.98a.589.589,0,0,1,0,.853.639.639,0,0,1-.882,0l-3.811-3.685L6.835,14.833a.639.639,0,0,1-.882,0,.589.589,0,0,1,0-.853l3.811-3.685L5.953,6.609a.589.589,0,0,1,0-.853.639.639,0,0,1,.882,0l3.811,3.685,3.811-3.685a.639.639,0,0,1,.882,0,.589.589,0,0,1,0,.853l-3.811,3.685Z"
+                                      transform="translate(0 0)"
+                                      fill="#fff" />
+                            </svg>
+                        </button>
+                        <input type="text" placeholder="جستجو کنید" />
+                    </div>
+                    <button class="account_icon">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             height="29px"
+                             viewBox="0 0 24 24"
+                             width="29px"
+                             fill="#000000">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M12 6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m0 10c2.7 0 5.8 1.29 6 2H6c.23-.72 3.31-2 6-2m0-12C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 10c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                        </svg>
+                    </button>
+                    <button class="hamberger_menu_btn">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             id="Layer_1"
+                             enable-background="new 0 0 512 512"
+                             height="25"
+                             viewBox="0 0 512 512"
+                             width="25">
+                            <path d="m464.883 64.267h-417.766c-25.98 0-47.117 21.136-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.013-21.137-47.149-47.117-47.149z" />
+                            <path d="m464.883 208.867h-417.766c-25.98 0-47.117 21.136-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.013-21.137-47.149-47.117-47.149z" />
+                            <path d="m464.883 353.467h-417.766c-25.98 0-47.117 21.137-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.012-21.137-47.149-47.117-47.149z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <footer>
+        <div class="container">
+            <div class="content">
+                <div class="info">
+                    <div class="logo">
+                        <svg id="medium"
+                             xmlns="http://www.w3.org/2000/svg"
+                             width="43.106"
+                             height="36.578"
+                             viewBox="0 0 43.106 36.578">
+                            <path id="Path_1"
+                                  data-name="Path 1"
+                                  d="M275.3,68.52l-13.276-6.382-.1-28.931a.915.915,0,0,1,1.311-.828l12.586,6.052a.915.915,0,0,1,.518.825v28.61A.726.726,0,0,1,275.3,68.52Z"
+                                  transform="translate(-233.237 -32.015)"
+                                  fill="#b811b2" />
+                            <path id="Path_2"
+                                  data-name="Path 2"
+                                  d="M146.029,59.923,131.66,53.015,145.493,30.24a.915.915,0,0,1,1.178-.35l12.762,6.137a.915.915,0,0,1,.384,1.3Z"
+                                  transform="translate(-117.239 -29.8)"
+                                  fill="#9846f4" />
+                            <path id="Path_3"
+                                  data-name="Path 3"
+                                  d="M38.085,65.566,23.716,58.657,10.546,37.211a.7.7,0,0,1,.9-1l12.267,5.9Z"
+                                  transform="translate(-9.295 -35.443)"
+                                  fill="#eda6ff" />
+                            <path id="Path_4"
+                                  data-name="Path 4"
+                                  d="M13.381,67.484.411,61.247A.726.726,0,0,1,0,60.593V31.828a.7.7,0,0,1,1.007-.633l13.414,6.45V66.83A.726.726,0,0,1,13.381,67.484Z"
+                                  transform="translate(0 -30.979)"
+                                  fill="#dd46f4" />
+                        </svg>
+
+                        pwa داریا
+                    </div>
+                    <p>
+                        مقادیر متنوعی از Lorem Ipsum در دسترس است ، اما اکثریت از طریق
+                        تزریق یا تصادفی. کلمات دچار تغییراتی شده اند که اگر بخواهید
+                        استفاده کنید حتی کمی باورپذیر به نظر نمی رسند.
+                    </p>
+                </div>
+
+                <div class="quick_access">
+                    <h5>دسترسی سریـع</h5>
+                    <ul>
+                        <li><a href="#">خانه</a></li>
+                        <li><a href="#">درباره ما</a></li>
+                        <li><a href="#">دسته بندی</a></li>
+                        <li><a href="#">توسعه دهندگان</a></li>
+                    </ul>
+                </div>
+                <div class="call_uss">
+                    <h5>تماس با ما</h5>
+                    <ul>
+                        <li><span>تماس :</span><a href="#">۰۲۱۸۵۰۰</a></li>
+                        <li><span>تماس :</span><a href="#">۰۲۱۸۵۰۰</a></li>
+                    </ul>
+                </div>
+                <div class="address">
+                    <h5>آدرس</h5>
+                    <address>
+                        <span>آدرس </span> تهران ، خیابان انقلاب ، بلوار دانشگاه پـلاک ۲۰
+                        ، طبقه سوم
+                    </address>
+                </div>
+            </div>
+        </div>
+
+        <div class="copy_right">
+            <div class="container">
+                <div class="content_copy_right">
+                    <div class="right">کلیه حقوق این سایت به داریا متعلق است</div>
+                    <div class="left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         width="18.751"
+                                         height="18.751"
+                                         viewBox="0 0 18.751 18.751">
+                                        <g id="instagram" transform="translate(0.25 0.25)">
+                                            <path id="Path_256"
+                                                  data-name="Path 256"
+                                                  d="M2.674,18.251h12.9a2.677,2.677,0,0,0,2.674-2.674V2.674A2.677,2.677,0,0,0,15.577,0H2.674A2.677,2.677,0,0,0,0,2.674v12.9a2.677,2.677,0,0,0,2.674,2.674ZM1.07,2.674a1.606,1.606,0,0,1,1.6-1.6h12.9a1.606,1.606,0,0,1,1.6,1.6v12.9a1.606,1.606,0,0,1-1.6,1.6H2.674a1.606,1.606,0,0,1-1.6-1.6Zm0,0"
+                                                  fill="#7140e0"
+                                                  stroke="#7140e0"
+                                                  stroke-width="0.5" />
+                                            <path id="Path_257"
+                                                  data-name="Path 257"
+                                                  d="M125.863,130.727A4.863,4.863,0,1,0,121,125.863,4.863,4.863,0,0,0,125.863,130.727Zm0-8.646a3.783,3.783,0,1,1-3.783,3.783,3.783,3.783,0,0,1,3.783-3.783Zm0,0"
+                                                  transform="translate(-116.738 -116.738)"
+                                                  fill="#7140e0"
+                                                  stroke="#7140e0"
+                                                  stroke-width="0.5" />
+                                            <path id="Path_258"
+                                                  data-name="Path 258"
+                                                  d="M362.585,64.17A1.585,1.585,0,1,0,361,62.584,1.585,1.585,0,0,0,362.585,64.17Zm0-2.113a.528.528,0,1,1-.529.528A.528.528,0,0,1,362.585,62.056Zm0,0"
+                                                  transform="translate(-348.068 -58.851)"
+                                                  fill="#7140e0"
+                                                  stroke="#7140e0"
+                                                  stroke-width="0.5" />
+                                        </g>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         width="10.776"
+                                         height="20.119"
+                                         viewBox="0 0 10.776 20.119">
+                                        <path id="facebook-f"
+                                              d="M32.959,11.317l.559-3.641H30.024V5.313a1.821,1.821,0,0,1,2.053-1.967h1.588V.246A19.369,19.369,0,0,0,30.846,0c-2.877,0-4.758,1.744-4.758,4.9V7.676h-3.2v3.641h3.2v8.8h3.936v-8.8Z"
+                                              transform="translate(-22.89)"
+                                              fill="#7140e0" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         width="19.09"
+                                         height="15.504"
+                                         viewBox="0 0 19.09 15.504">
+                                        <path id="twitter"
+                                              d="M17.127,51.946c.012.17.012.339.012.509A11.055,11.055,0,0,1,6.008,63.586,11.056,11.056,0,0,1,0,61.83a8.1,8.1,0,0,0,.945.048A7.835,7.835,0,0,0,5.8,60.207a3.919,3.919,0,0,1-3.658-2.713,4.935,4.935,0,0,0,.739.061,4.138,4.138,0,0,0,1.03-.133,3.913,3.913,0,0,1-3.137-3.84v-.048a3.94,3.94,0,0,0,1.768.5A3.918,3.918,0,0,1,1.332,48.8,11.121,11.121,0,0,0,9.4,52.891a4.417,4.417,0,0,1-.1-.9,3.916,3.916,0,0,1,6.771-2.677,7.7,7.7,0,0,0,2.483-.945,3.9,3.9,0,0,1-1.72,2.156,7.843,7.843,0,0,0,2.253-.606,8.41,8.41,0,0,1-1.962,2.023Z"
+                                              transform="translate(0 -48.082)"
+                                              fill="#7140e0" />
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/Main/lib/swiper/swiper-bundle.min.js"></script>
+    <script src="/Main/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/Main/js/index.js"></script>
+    <script src="/Main/js/common.js"></script>
+    <script>
+        var swiper = new Swiper(`.app_category_tab_content_0`, {
+            slidesPerView: 4,
+            spaceBetween: 18,
+            slidesPerGroup: 1,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            breakpoints: {
+                992: {
+                    slidesPerView: 4,
+                    spaceBetween: 18,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 18,
+                },
+
+                500: {
+                    slidesPerView: 2,
+                    spaceBetween: 18,
+                },
+                280: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                },
+            },
+        });
+    </script>
+</body>
+</html>
