@@ -9,7 +9,6 @@ namespace Pwa.Application.Contracts.Account.Developer
     {
         Task<List<DeveloperDto>> ListAsync();
         Task<OperationResult<EditDeveloperDto>> Get(int id);
-        Task<OperationResult> Login(LoginDto login);
         Task<OperationResult> Register(CreateDeveloperDto register);
         Task<OperationResult> Edit(EditDeveloperDto edit);
         Task<OperationResult> Delete(int id);
