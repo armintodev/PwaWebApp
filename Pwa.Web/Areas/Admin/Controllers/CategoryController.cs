@@ -40,10 +40,10 @@ namespace Pwa.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var developer = await _category.Get(id);
-            if (developer.Success is false)
+            var category = await _category.Get(id);
+            if (category.Success is false)
                 return NotFound();
-            return View(developer.Data);
+            return View(category.Data);
         }
 
         [HttpPost]
