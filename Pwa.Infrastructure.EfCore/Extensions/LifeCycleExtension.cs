@@ -2,6 +2,7 @@
 using Pwa.Application;
 using Pwa.Application.Contracts.Account.Developer;
 using Pwa.Application.Contracts.Account.Statistic;
+using Pwa.Application.Contracts.Account.User;
 using Pwa.Application.Contracts.Product.Category;
 using Pwa.Application.Contracts.Product.Ticket;
 using Pwa.Application.Contracts.Product.WebApplication;
@@ -26,6 +27,7 @@ namespace Pwa.Infrastructure.EfCore.Extensions
             service.AddScoped<IPictureRepository, PictureRepository>();
 
             service.AddScoped<IUserRepository, UserRepository>();
+            service.AddScoped<IUserApplication, UserApplication>();
 
             service.AddScoped<ICategoryRepository, CategoryRepository>();
             service.AddScoped<ICategoryApplication, CategoryApplication>();
