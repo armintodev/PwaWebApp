@@ -101,5 +101,25 @@ namespace Pwa.Web.Areas.Admin.Controllers
 
             return BadRequest(result.Message);
         }
+
+        public async Task<IActionResult> Activate(int id)
+        {
+            var developer = await _developer.Get(id);
+            if (developer.Success is false)
+                return NotFound();
+
+            await _developer.Activate(id);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DeActivate(int id)
+        {
+            var developer = await _developer.Get(id);
+            if (developer.Success is false)
+                return NotFound();
+
+            await _developer.DeActivate(id);
+            return RedirectToAction("Index");
+        }
     }
 }
