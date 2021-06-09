@@ -23,6 +23,7 @@ namespace Pwa.Domain.Product
             Title = title;
             Description = description;
             CreationDate = DateTime.Now;
+            LastEditDate = DateTime.Now;
             DeveloperId = developerId;
         }
 

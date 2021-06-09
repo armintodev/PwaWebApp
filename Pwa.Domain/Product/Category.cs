@@ -21,6 +21,7 @@ namespace Pwa.Domain.Product
             Title = title;
             WebApplications = new List<WebApplication>();
             CreationDate = DateTime.Now;
+            LastEditDate = DateTime.Now;
         }
 
         public void Edit(string title)

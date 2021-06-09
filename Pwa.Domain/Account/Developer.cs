@@ -33,6 +33,7 @@ namespace Pwa.Domain.Account
         {
             Email = email;
             CreationDate = DateTime.Now;
+            LastEditDate = DateTime.Now;
             DeActive();
             Statistics = new List<Statistic>();
             WebApplications = new List<WebApplication>();
@@ -51,6 +52,7 @@ namespace Pwa.Domain.Account
             Country = country;
             ProfileUrl = profileUrl;
             CreationDate = DateTime.Now;
+            LastEditDate = DateTime.Now;
             DeActive();
             Statistics = new List<Statistic>();
             WebApplications = new List<WebApplication>();

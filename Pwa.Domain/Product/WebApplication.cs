@@ -39,6 +39,7 @@ namespace Pwa.Domain.Product
             Status = status;
             DeActivate();
             CreationDate = DateTime.Now;
+            LastEditDate = DateTime.Now;
             CategoryId = categoryId;
             DeveloperId = developerId;
             Comments = new List<Comment>();
