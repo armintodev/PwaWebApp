@@ -27,8 +27,9 @@ namespace Pwa.Domain.Product
             DeveloperId = developerId;
         }
 
-        public void Edit(string description)
+        public void Edit(string title, string description)
         {
+            Title = title;
             Description = description;
             LastEditDate = DateTime.Now;
         }
