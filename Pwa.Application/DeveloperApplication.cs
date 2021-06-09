@@ -76,18 +76,6 @@ namespace Pwa.Application
             return new OperationResult<EditDeveloperDto>(data, true, "");
         }
 
-        public async Task<OperationResult> Login(LoginDto login)
-        {
-            var developer = await _developer.Entities.Where(_ => _.PhoneNumber == login.PhoneNumber && _.PhoneNumberConfirmed)
-                .FirstOrDefaultAsync();
-            if (developer is null) return new OperationResult(false, "توسعه دهنده ای با این مشخصات وجود ندارد");
-
-            //await _signInManager.PasswordSignInAsync(developer, createDeveloper.Password, false, false);
-
-            await _signInManager.SignInAsync(developer, false);
-            return new OperationResult(false, "");
-        }
-
         public async Task<OperationResult> Register(CreateDeveloperDto register)
         {
             if (await _developer.IsExistsAsync(_ => _.PhoneNumber == register.PhoneNumber || _.Email == register.Email))
