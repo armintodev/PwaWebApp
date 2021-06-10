@@ -1,0 +1,57 @@
+﻿@model Pwa.Application.Contracts.Account.User.UserDto
+
+@{
+    ViewData["Title"] = $"اطلاعات {Model.PhoneNumber}";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" disabled />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" disabled />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" disabled />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                 <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <input asp-for="Role" class="form-control" disabled />
+                <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="CreationDate" class="control-label"></label>
+                <input asp-for="CreationDate" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                <label asp-for="LastEditDate" class="control-label"></label>
+                <input asp-for="LastEditDate" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" disabled />
+                </div>
+                </div>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index" class="btn btn-info">بازگشت به لیست</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">ویرایش</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">حذف</a>
+    </div>
+</div>
+
