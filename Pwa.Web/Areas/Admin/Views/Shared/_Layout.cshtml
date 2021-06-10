@@ -78,7 +78,12 @@
                                             <i class="fa fa-circle-o nav-icon"></i>
                                             <p>مدیریت کاربران</p>
                                         </a>
-
+                                    </li>
+                                     <li class="nav-item">
+                                        <a asp-area="Admin" asp-controller="Role" asp-action="Index" class='nav-link @(Url.ActionContext.HttpContext.Request.Path.StartsWithSegments(UrlPathRequest.AdminRole)? "active" : "") '>
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>مدیریت نقش</p>
+                                        </a>
                                     </li>
                                     <li class="nav-item">
                                         <a asp-area="Admin" asp-controller="Developer" asp-action="Index" class='nav-link @(Url.ActionContext.HttpContext.Request.Path.StartsWithSegments(UrlPathRequest.AdminDeveloper)? "active" : "") '>
