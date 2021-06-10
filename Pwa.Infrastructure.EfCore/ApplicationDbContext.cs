@@ -6,7 +6,7 @@ using Pwa.Infrastructure.EfCore.Configuration;
 
 namespace Pwa.Infrastructure.EfCore
 {
-    public class ApplicationDbContext : IdentityDbContext<Developer, Role, int>
+    public class ApplicationDbContext : IdentityDbContext<User, Role, int>
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {

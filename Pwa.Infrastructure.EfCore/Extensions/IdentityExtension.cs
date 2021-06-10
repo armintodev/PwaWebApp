@@ -8,27 +8,15 @@ namespace Pwa.Infrastructure.EfCore.Extensions
     {
         public static void AddIdentityApplication(this IServiceCollection service)
         {
-            service.AddIdentity<Developer, Role>(_ =>
+            service.AddIdentity<User, Role>(_ =>
               {
                   _.Password.RequireNonAlphanumeric = false;
                   _.Password.RequireUppercase = false;
-                  _.SignIn.RequireConfirmedEmail = true;
+                  _.SignIn.RequireConfirmedEmail = false;
                   _.SignIn.RequireConfirmedPhoneNumber = true;
                   _.SignIn.RequireConfirmedAccount = true;
-              }).AddEntityFrameworkStores<ApplicationDbContext>();
-
-            //service.AddIdentity<User, Role>(_ =>
-            //{
-            //    _.SignIn.RequireConfirmedPhoneNumber = true;
-            //    _.SignIn.RequireConfirmedAccount = true;
-            //}).AddEntityFrameworkStores<ApplicationDbContext>();
-
-            //service.AddIdentityCore<Developer>(_ =>
-            //{
-            //    _.User.RequireUniqueEmail = true;
-            //    _.SignIn.RequireConfirmedPhoneNumber = true;
-            //    _.SignIn.RequireConfirmedAccount = true;
-            //}).AddEntityFrameworkStores<ApplicationDbContext>();
+              }).AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
         }
     }
 }
