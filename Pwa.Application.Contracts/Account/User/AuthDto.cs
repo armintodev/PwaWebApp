@@ -9,5 +9,8 @@ namespace Pwa.Application.Contracts.Account.User
         [Display(Name = "شماره همراه")]
         [Required(ErrorMessage = ValidationMessages.Required)]
         public string PhoneNumber { get; init; }
+
+        [Display(Name = "نام کامل")]
+        public string FullName { get; init; }
     }
 }
