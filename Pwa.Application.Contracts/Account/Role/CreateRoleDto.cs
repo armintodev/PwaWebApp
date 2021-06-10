@@ -9,5 +9,9 @@ namespace Pwa.Application.Contracts.Account.Role
         [Display(Name = "نام")]
         [Required(ErrorMessage = ValidationMessages.Required)]
         public string Name { get; init; }
+
+        [Display(Name = "نام نمایشی")]
+        [Required(ErrorMessage = ValidationMessages.Required)]
+        public string DisplayName { get; init; }
     }
 }
