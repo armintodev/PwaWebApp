@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Pwa.Application.Contracts.Account.User.UserDto>
+@using WebFramework.Enums
+@{
+    ViewData["Title"] = "کاربران";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create">ایجاد کاربر</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreationDate)
+            </th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-controller="User" asp-action="Edit" asp-route-id="@item.Id">ویرایش</a> |
+                    <a class="btn btn-info" asp-controller="User" asp-action="Detail" asp-route-id="@item.Id">جزیات</a> |
+                    <a class="btn btn-danger" asp-controller="User" asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+                @if (item.Status == StatusDto.Active)
+                {
+                            <a class="btn btn-outline-danger" asp-controller="User" asp-action="DeActivate" asp-route-id="@item.Id">غیرفعال کردن</a>
+                }
+                else
+                {
+                            <a class="btn btn-outline-success" asp-controller="User" asp-action="Activate" asp-route-id="@item.Id">فعال کردن</a>
+                }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
