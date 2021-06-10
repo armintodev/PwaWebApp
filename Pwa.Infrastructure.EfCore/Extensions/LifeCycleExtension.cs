@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Pwa.Application;
 using Pwa.Application.Contracts.Account.Developer;
+using Pwa.Application.Contracts.Account.Role;
 using Pwa.Application.Contracts.Account.Statistic;
 using Pwa.Application.Contracts.Account.User;
 using Pwa.Application.Contracts.Product.Category;
@@ -20,6 +21,7 @@ namespace Pwa.Infrastructure.EfCore.Extensions
             service.AddScoped<IDeveloperApplication, DeveloperApplication>();
 
             service.AddScoped<IRoleRepository, RoleRepository>();
+            service.AddScoped<IRoleApplication, RoleApplication>();
 
             service.AddScoped<IStatisticRepository, StatisticRepository>();
             service.AddScoped<IStatisticApplication, StatisticApplication>();
