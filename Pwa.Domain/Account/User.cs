@@ -12,32 +12,51 @@ namespace Pwa.Domain.Account
         public string FullName { get; private set; }
         public string Code { get; private set; }
         public Status Status { get; private set; }
+        public RoleStatus RoleStatus { get; private set; }
         public DateTime CreationDate { get; private set; }
         public DateTime LastEditDate { get; private set; }
 
+        public int? DeveloperId { get; private set; }
+        public Developer Developer { get; private set; }
+        public ICollection<Statistic> Statistics { get; private set; }
         public ICollection<Comment> Comments { get; private set; }
-        public ICollection<SourceSite> SourceSites { get; private set; }
 
         protected User()
         {
 
         }
 
-        public User(string phone)
+        public User(string phone, string fullName = "")
         {
+            FullName = fullName;
             PhoneNumber = phone;
+            UserName = phone;
+            RoleStatus = RoleStatus.Basic;
             DeActive();
             CreationDate = DateTime.Now;
             LastEditDate = DateTime.Now;
+            Statistics = new List<Statistic>();
             Comments = new List<Comment>();
-            SourceSites = new List<SourceSite>();
         }
 
-        public void Edit(string fullName = null, string email = null)
+        public User(string email, string userName, string phoneNumber, string fullName)
         {
             FullName = fullName;
             Email = email;
+            UserName = userName;
+            PhoneNumber = phoneNumber;
+            RoleStatus = RoleStatus.Developer;
+            DeActive();
+            CreationDate = DateTime.Now;
             LastEditDate = DateTime.Now;
+            Statistics = new List<Statistic>();
+        }
+
+        public void Edit(string fullName)
+        {
+            FullName = fullName;
+            LastEditDate = DateTime.Now;
+            DeActive();
         }
 
         public void Active()
@@ -53,6 +72,21 @@ namespace Pwa.Domain.Account
         public void ChangePhoneNumber(string phoneNumber)
         {
             PhoneNumber = phoneNumber;
+            DeActive();
+            LastEditDate = DateTime.Now;
+        }
+
+        public void ChangeEmail(string email)
+        {
+            Email = email;
+            DeActive();
+            LastEditDate = DateTime.Now;
+        }
+
+        public void SmsCode(string code)
+        {
+            Code = code;
+            LastEditDate = DateTime.Now;
         }
     }
 }
