@@ -1,0 +1,54 @@
+@model IEnumerable<Pwa.Application.Contracts.Account.Role.RoleDto>
+
+@{
+    ViewData["Title"] = "نقش ها";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create">ایجاد نقش</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+              <th>
+                @Html.DisplayNameFor(model => model.DisplayName)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.CreationDate)
+            </th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationDate)
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-controller="Role" asp-action="Edit" asp-route-id="@item.Id">ویرایش</a> |
+                    <a class="btn btn-info" asp-controller="Role" asp-action="Detail" asp-route-id="@item.Id">جزیات</a> |
+                    <a class="btn btn-danger" asp-controller="Role" asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
