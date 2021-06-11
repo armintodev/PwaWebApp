@@ -51,14 +51,7 @@ namespace Pwa.Web
                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
 
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-                endpoints.MapGet("/", async _ =>
-                 {
-                     await _.Response.WriteAsync("Hello World!");
-                 });
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }
