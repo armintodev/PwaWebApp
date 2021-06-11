@@ -12,5 +12,9 @@ namespace Pwa.Application.Contracts.Account.User
 
         [Display(Name = "نام کامل")]
         public string FullName { get; init; }
+
+        [Display(Name = "مرا به خاطر بسپار")]
+        public bool RememberMe { get; init; }
+
     }
 }
