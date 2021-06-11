@@ -80,8 +80,14 @@
                                   stroke-width="0.25" />
                         </svg>
                     </button>
-                    <a class="login_btn" asp-controller="User">ثبت نام<span>/</span> ورود</a>
-
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                            <a class="login_btn" asp-controller="User" asp-action="Logout">خروج</a>
+                    }
+                    else
+                    {
+                            <a class="login_btn" asp-controller="User" asp-action="Login">ثبت نام<span>/</span> ورود</a>
+                    }
                     <div class="search_box">
                         <button class="close_search_box_btn">
                             <svg id="Group_2322"
