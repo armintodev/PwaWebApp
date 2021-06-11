@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -95,9 +96,6 @@ namespace Pwa.Application
 
             User user = new(dto.PhoneNumber, dto.FullName);
 
-            var code = RandomGenerator.Generate();
-            user.SmsCode(code);
-
             var userResult = await _userManager.CreateAsync(user);
             if (userResult.Succeeded is false)
                 return new OperationResult(false, "ثبت نام کاربر با مشکل مواجه شد");
@@ -106,7 +104,6 @@ namespace Pwa.Application
             if (roleResult.Succeeded is false)
                 return new OperationResult(false, "ثبت نام کاربر با مشکل مواجه شد");
 
-            //await _sms.Send("09106692003", $"کد فعال سازی داریا : {code}");
             return new OperationResult();
         }
 
@@ -141,6 +138,47 @@ namespace Pwa.Application
                 PhoneNumber = user.PhoneNumber
             };
             return new OperationResult<EditUserDto>(data, true, "");
+        }
+
+        public async Task<OperationResult> Login(AuthDto dto, CancellationToken cancellationToken)
+        {
+            if (await _user.IsExistsAsync(_ => _.PhoneNumber != dto.PhoneNumber))
+            {
+                return new OperationResult(false, "کاربری با این مشخصات وجود ندارد");
+            }
+
+            //send sms
+            return new OperationResult();
+        }
+
+        public async Task<OperationResult> VerifyAccountBySms(SmsVerifyDto dto, CancellationToken cancellationToken)
+        {
+            var user = await _user.Table.FirstOrDefaultAsync(_ => _.PhoneNumber == dto.PhoneNumber, cancellationToken);
+            if (user is null)
+                return new OperationResult(false, "مشکلی رخ داده،لطفا دوباره امتحان کنید");
+
+            if (user.Code == dto.Code)
+                user.PhoneNumberConfirmed = true;
+
+            else return new OperationResult(false, "کد فعال سازی اشتباه است");
+
+            await _signInManager.SignInAsync(user, dto.RememberMe);
+            user.Active();
+            await _user.SaveChangesAsync();
+            return new OperationResult();
+        }
+
+        public async Task<OperationResult> SendCode(string phoneNumber, CancellationToken cancellationToken)
+        {
+            var user = await _user.Table.FirstOrDefaultAsync(_ => _.PhoneNumber == phoneNumber, cancellationToken);
+            if (user is null)
+                return new OperationResult(false, "مشکلی رخ داده،لطفا دوباره امتحان کنید");
+
+            var code = RandomGenerator.Generate();
+            user.SmsCode(code);
+            await _sms.Send("09106692003", $"کد فعال سازی داریا : {code}");
+            await _user.SaveChangesAsync();
+            return new OperationResult();
         }
     }
 }
