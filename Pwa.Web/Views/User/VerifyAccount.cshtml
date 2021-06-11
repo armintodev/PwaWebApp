@@ -1,4 +1,4 @@
-﻿
+﻿@model Pwa.Application.Contracts.Account.User.SmsVerifyDto
 @{
     ViewData["Title"] = "تایید حساب کاربری";
     Layout = "_AuthLayout";
@@ -14,8 +14,12 @@
     </span>
     ثانیه
 </h4>
-<form asp-action="Login" method="post">
-    <input type="text" placeholder="لطفا کد را وارد کنید">
+<form asp-action="VerifyAccount" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="PhoneNumber"/>
+    <input type="hidden" asp-for="RememberMe"/>
+    <input asp-for="Code" placeholder="لطفا کد را وارد کنید">
+    <span asp-validation-for="Code"></span>
     <button type="submit">
         تایید حساب
     </button>
