@@ -23,7 +23,11 @@ namespace Pwa.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                return View("VerifyAccount");
+                var result = await _user.Register(dto, cancellationToken);
+                if (result.Success)
+                    return RedirectToAction("VerifyAccount", new SmsVerifyDto { PhoneNumber = dto.PhoneNumber, RememberMe = dto.RememberMe });
+
+                ModelState.AddModelError("", result.Message);
             }
             return View(dto);
         }
@@ -36,18 +40,39 @@ namespace Pwa.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(AuthDto dto, CancellationToken cancellationToken)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var result = await _user.Login(dto, cancellationToken);
+                if (result.Success)
+                    return RedirectToAction("VerifyAccount", new SmsVerifyDto { PhoneNumber = dto.PhoneNumber, RememberMe = dto.RememberMe });
+
+                ModelState.AddModelError("", result.Message);
+            }
+            return View(dto);
         }
 
-        public async Task<IActionResult> VerifyAccount()
+        public async Task<IActionResult> VerifyAccount(SmsVerifyDto dto)
         {
-            return View();
+            if (dto.PhoneNumber is null) return NotFound();
+            var result = await _user.SendCode(dto.PhoneNumber, HttpContext.RequestAborted);
+            if (result.Success)
+                return View(dto);
+
+            return BadRequest();
         }
 
         [HttpPost]
-        public async Task<IActionResult> VerifyAccount(CancellationToken cancellationToken)
+        public async Task<IActionResult> VerifyAccount(SmsVerifyDto dto, CancellationToken cancellationToken)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var result = await _user.VerifyAccountBySms(dto, cancellationToken);
+                if (result.Success)
+                    return RedirectToAction("Index", "Home");
+
+                ModelState.AddModelError("", result.Message);
+            }
+            return View(dto);
         }
     }
 }
