@@ -180,5 +180,10 @@ namespace Pwa.Application
             await _user.SaveChangesAsync();
             return new OperationResult();
         }
+
+        public async Task Logout()
+        {
+            await _signInManager.SignOutAsync();
+        }
     }
 }

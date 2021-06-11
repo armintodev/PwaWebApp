@@ -13,7 +13,7 @@ namespace Pwa.Web.Controllers
             _user = user;
         }
 
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
             return View();
         }
@@ -32,7 +32,7 @@ namespace Pwa.Web.Controllers
             return View(dto);
         }
 
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
             return View();
         }
@@ -73,6 +73,12 @@ namespace Pwa.Web.Controllers
                 ModelState.AddModelError("", result.Message);
             }
             return View(dto);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _user.Logout();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

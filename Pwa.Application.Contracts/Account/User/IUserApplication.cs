@@ -18,5 +18,6 @@ namespace Pwa.Application.Contracts.Account.User
         Task<OperationResult> Login(AuthDto dto, CancellationToken cancellationToken);
         Task<OperationResult> VerifyAccountBySms(SmsVerifyDto dto, CancellationToken cancellationToken);
         Task<OperationResult> SendCode(string phoneNumber, CancellationToken cancellationToken);
+        Task Logout();
     }
 }
