@@ -2,6 +2,7 @@
 using Pwa.Application.Contracts.Account.Developer;
 using Pwa.Application.Contracts.Account.User;
 using Pwa.Web.Filters;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Pwa.Web.Areas.Admin.Controllers
@@ -26,11 +27,11 @@ namespace Pwa.Web.Areas.Admin.Controllers
         }
 
         [HttpPost, NeedInformation, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(CreateDeveloperDto dto)
+        public async Task<IActionResult> Register(CreateDeveloperDto dto, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
-                var result = await _developer.Register(dto);
+                var result = await _developer.Register(dto, cancellationToken);
                 if (result.Success)
                     return RedirectToAction("Index");
 
