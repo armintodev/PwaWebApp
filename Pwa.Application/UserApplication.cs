@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -109,7 +108,7 @@ namespace Pwa.Application
 
         public async Task<List<UserDto>> List()
         {
-            var users = _user.TableNoTracking.Select(_ => new UserDto()
+            var users = _user.TableNoTracking.Where(_ => (RoleStatusDto)_.RoleStatus != RoleStatusDto.Developer).Select(_ => new UserDto()
             {
                 Id = _.Id,
                 UserName = _.PhoneNumber,
@@ -117,8 +116,6 @@ namespace Pwa.Application
                 Role = (RoleStatusDto)_.RoleStatus,
                 CreationDate = _.CreationDate.ToFarsiFull(),
             });
-
-            users.Where(_ => _.Role != RoleStatusDto.Developer);
 
             return await users.ToListAsync();
         }
