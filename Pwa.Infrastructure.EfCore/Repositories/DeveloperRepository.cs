@@ -15,7 +15,7 @@ namespace Pwa.Infrastructure.EfCore.Repositories
 
         public async Task<Developer> GetByEmail(string email)
         {
-            return await _context.Developers.FirstOrDefaultAsync(_ => _.Email == email);
+            return await _context.Developers.FirstOrDefaultAsync(_ => _.User.Email == email);
         }
     }
 }
