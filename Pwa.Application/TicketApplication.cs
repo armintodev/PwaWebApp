@@ -41,11 +41,11 @@ namespace Pwa.Application
 
         public async Task<List<TicketDto>> List()
         {
-            var ticket = _ticket.TableNoTracking.Include(_ => _.Developer).Select(_ => new TicketDto
+            var ticket = _ticket.TableNoTracking.Include(_ => _.Developer).ThenInclude(_ => _.User).Select(_ => new TicketDto
             {
                 Id = _.Id,
                 Title = _.Title,
-                DeveloperFullName = _.Developer.FullName
+                DeveloperFullName = _.Developer.User.FullName
             });
             return await ticket.ToListAsync();
         }
@@ -60,7 +60,7 @@ namespace Pwa.Application
 
         public async Task<OperationResult<TicketDto>> Detail(int id)
         {
-            var ticket = await _ticket.TableNoTracking.Include(_ => _.Developer).FirstOrDefaultAsync(_ => _.Id == id);
+            var ticket = await _ticket.TableNoTracking.Include(_ => _.Developer).ThenInclude(_ => _.User).FirstOrDefaultAsync(_ => _.Id == id);
             if (ticket is null)
             {
                 TicketDto nullTicketDto = new();
@@ -71,8 +71,8 @@ namespace Pwa.Application
                 Id = ticket.Id,
                 Title = ticket.Title,
                 Description = ticket.Description,
-                DeveloperFullName = ticket.Developer.FullName,
-                DeveloperEmail = ticket.Developer.Email,
+                DeveloperFullName = ticket.Developer.User.FullName,
+                DeveloperEmail = ticket.Developer.User.Email,
                 CreationDate = ticket.CreationDate.ToFarsiFull(),
                 LastEditDate = ticket.LastEditDate.ToFarsiFull(),
             };
@@ -90,7 +90,7 @@ namespace Pwa.Application
 
         public async Task<OperationResult<EditTicketDto>> Get(int id)
         {
-            var ticket = await _ticket.TableNoTracking.Include(_ => _.Developer).FirstOrDefaultAsync(_ => _.Id == id);
+            var ticket = await _ticket.TableNoTracking.Include(_ => _.Developer).ThenInclude(_ => _.User).FirstOrDefaultAsync(_ => _.Id == id);
 
             if (ticket is null)
             {
@@ -102,8 +102,8 @@ namespace Pwa.Application
                 Id = ticket.Id,
                 Title = ticket.Title,
                 Description = ticket.Description,
-                DeveloperFullName = ticket.Developer.FullName,
-                DeveloperEmail = ticket.Developer.Email
+                DeveloperFullName = ticket.Developer.User.FullName,
+                DeveloperEmail = ticket.Developer.User.Email
             };
             return new OperationResult<EditTicketDto>(data, true, "");
         }
