@@ -18,46 +18,46 @@ namespace Pwa.Application
     public class DeveloperApplication : IDeveloperApplication
     {
         private readonly IDeveloperRepository _developer;
+        private readonly IUserRepository _user;
         private readonly IFileUploader _file;
         private readonly ISmsService _sms;
-        private readonly UserManager<Developer> _userManager;
-        private readonly SignInManager<Developer> _signInManager;
+        private readonly UserManager<User> _userManager;
+        //private readonly SignInManager<Developer> _signInManager;
         public DeveloperApplication(IDeveloperRepository developer,
-            UserManager<Developer> userManager,
-            SignInManager<Developer> signInManager, IFileUploader file, ISmsService sms)
+            UserManager<User> userManager,
+            //SignInManager<Developer> signInManager,
+            IFileUploader file,
+            ISmsService sms,
+            IUserRepository user)
         {
             _userManager = userManager;
             _developer = developer;
-            _signInManager = signInManager;
+            // _signInManager = signInManager;
             _file = file;
             _sms = sms;
+            _user = user;
         }
 
         public async Task<List<DeveloperDto>> ListAsync()
         {
-            var developer = await _developer.TableNoTracking.ToListAsync();
-            List<DeveloperDto> list = new();
-            foreach (var _ in developer)
+            var developer = _developer.TableNoTracking.Where(_ => (RoleStatusDto)_.User.RoleStatus == RoleStatusDto.Developer).Include(_ => _.User).Select(_ => new DeveloperDto
             {
-                list.Add(new DeveloperDto
-                {
-                    Id = _.Id,
-                    FullName = _.FullName,
-                    Email = _.Email,
-                    PhoneNumber = _.PhoneNumber,
-                    NationalCode = _.NationalCode,
-                    Code = _.Code,
-                    Status = (StatusDto)_.Status,
-                    CreationDate = _.CreationDate.ToFarsi(),
-                });
-            }
+                Id = _.Id,
+                FullName = _.User.FullName,
+                Email = _.User.Email,
+                PhoneNumber = _.User.PhoneNumber,
+                NationalCode = _.NationalCode,
+                Status = (StatusDto)_.Status,
+                Role = (RoleStatusDto)_.User.RoleStatus,
+                CreationDate = _.CreationDate.ToFarsiFull(),
+            });
 
-            return list;
+            return await developer.ToListAsync();
         }
 
         public async Task<OperationResult<EditDeveloperDto>> Get(int id)
         {
-            var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
+            var developer = await _developer.TableNoTracking.Include(_ => _.User).FirstOrDefaultAsync(_ => _.Id == id);
             if (developer is null)
             {
                 EditDeveloperDto nullEditDeveloperDto = new();
@@ -66,7 +66,7 @@ namespace Pwa.Application
             EditDeveloperDto data = new()
             {
                 Id = developer.Id,
-                FullName = developer.FullName,
+                FullName = developer.User.FullName,
                 NationalCode = developer.NationalCode,
                 City = developer.City,
                 Province = developer.Province,
@@ -76,33 +76,37 @@ namespace Pwa.Application
             return new OperationResult<EditDeveloperDto>(data, true, "");
         }
 
-        public async Task<OperationResult> Register(CreateDeveloperDto register)
+        public async Task<OperationResult> Register(CreateDeveloperDto register, CancellationToken cancellationToken)
         {
-            if (await _developer.IsExistsAsync(_ => _.PhoneNumber == register.PhoneNumber || _.Email == register.Email))
+            if (await _developer.TableNoTracking.Include(_ => _.User).AnyAsync(_ => _.User.Email == register.Email || _.User.PhoneNumber == register.PhoneNumber))
                 return new OperationResult(false, "توسعه دهنده ای با این مشخصات وجود دارد");
 
             var profileUrl = await _file.Upload(register.ProfileUrl, UploadPath.Developer);
 
-            //maybe i using just email and password to register
-            Developer developer = new(register.Email, register.UserName, register.FullName, register.NationalCode, register.PhoneNumber, register.City, register.Province, register.Country, profileUrl);
+            User user = new(register.Email, register.UserName, register.PhoneNumber, register.FullName);
+            user.SetRoleStatus(RoleStatus.Developer);
 
             var code = RandomGenerator.Generate();
-            developer.SmsCode(code);
-            await _sms.Send("09106692003", $"کد فعال سازی داریا : {code}");
+            user.SmsCode(code);
+            //await _sms.Send("09106692003", $"کد فعال سازی داریا : {code}");
 
-            var result = await _userManager.CreateAsync(developer, register.Password);
+            var userResult = await _userManager.CreateAsync(user, register.Password);
+            if (userResult.Succeeded is false)
+                return new OperationResult(true, "ثبت نام توسعه دهنده با مشکل مواجه شد");
 
-            if (result.Succeeded)
-                return new OperationResult(true, "عملیات با موفقیت انجام شد");
+            var roleResult = await _userManager.AddToRoleAsync(user, user.RoleStatus.ToString());
+            if (roleResult.Succeeded is false)
+                return new OperationResult(false, "ثبت نام توسعه دهنده با مشکل مواجه شد");
 
-            return new OperationResult(false, result.Errors.Select(_ => _.Description).ToString());
+            Developer developer = new(user.Id, register.NationalCode, register.City, register.Province, register.Country, profileUrl);
+            await _developer.AddAsync(developer, cancellationToken);
+            await _developer.SaveChangesAsync();
+            return new OperationResult(true/*, result.Errors.Select(_ => _.Description).ToString()*/);
         }
 
         public async Task<OperationResult> Edit(EditDeveloperDto edit)
         {
-            var developer = await _developer.GetByIdAsync(CancellationToken.None, edit.Id);
-
-            if (await _developer.IsExistsAsync(_ => (_.FullName == edit.FullName || _.NationalCode == edit.NationalCode) && _.Id != edit.Id)) { }
+            var developer = await _developer.Table.Include(_ => _.User).FirstOrDefaultAsync(_ => _.Id == edit.Id);
 
             var profileUrl = "";
             if (edit.ProfileUrl is not null)
@@ -127,38 +131,38 @@ namespace Pwa.Application
 
         public async Task Activate(int id)
         {
-            var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
-            developer.Active();
+            //var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
+            //developer.Active();
             await _developer.SaveChangesAsync();
         }
 
         public async Task DeActivate(int id)
         {
-            var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
-            developer.DeActive();
+            //var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
+            //developer.DeActive();
             await _developer.SaveChangesAsync();
         }
 
         public async Task<OperationResult> VerifyBySms(string code)
         {
             // get user
-            var developer = await _userManager.GetUserAsync(_signInManager.Context.User);
-            if (developer is null)
-                return new OperationResult(false, "توسعه دهنده ای برای تایید اس ام اس وجود ندارد");
+            //var developer = await _userManager.GetUserAsync(_signInManager.Context.User);
+            //if (developer is null)
+            //    return new OperationResult(false, "توسعه دهنده ای برای تایید اس ام اس وجود ندارد");
 
-            //check user code with parameter code
-            if (developer.Code.Equals(code))
-            {
-                await Activate(developer.Id);
-                await _developer.SaveChangesAsync();
-            }
+            ////check user code with parameter code
+            //if (developer.Code.Equals(code))
+            //{
+            //    await Activate(developer.Id);
+            //    await _developer.SaveChangesAsync();
+            //}
 
             return new OperationResult();
         }
 
         public async Task<OperationResult<DeveloperDto>> Detail(int id)
         {
-            var developer = await _developer.GetByIdAsync(CancellationToken.None, id);
+            var developer = await _developer.TableNoTracking.Include(_ => _.User).FirstOrDefaultAsync(_ => _.Id == id);
             if (developer is null)
             {
                 DeveloperDto nullDeveloperDto = new();
@@ -167,12 +171,12 @@ namespace Pwa.Application
             DeveloperDto data = new()
             {
                 Id = developer.Id,
-                FullName = developer.FullName,
+                FullName = developer.User.FullName,
                 NationalCode = developer.NationalCode,
-                Email = developer.Email,
-                PhoneNumber = developer.PhoneNumber,
+                Email = developer.User.Email,
+                PhoneNumber = developer.User.PhoneNumber,
                 Status = (StatusDto)developer.Status,
-                UserName = developer.UserName,
+                UserName = developer.User.UserName,
                 City = developer.City,
                 Province = developer.Province,
                 Country = developer.Country,
