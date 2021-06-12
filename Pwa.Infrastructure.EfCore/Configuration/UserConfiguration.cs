@@ -28,6 +28,10 @@ namespace Pwa.Infrastructure.EfCore.Configuration
             builder.HasMany(_ => _.Comments)
                 .WithOne(_ => _.User)
                 .HasForeignKey(_ => _.UserId);
+
+            builder.HasOne(_ => _.Developer)
+                .WithOne(_ => _.User)
+                .HasForeignKey<Developer>(_ => _.Id);
         }
     }
 }
