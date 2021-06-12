@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Pwa.Domain.Product;
-using System;
 
 namespace Pwa.Infrastructure.EfCore.Configuration
 {
@@ -22,7 +21,8 @@ namespace Pwa.Infrastructure.EfCore.Configuration
 
             builder.HasOne(o => o.WebApplication)
                 .WithMany(m => m.Comments)
-                .HasForeignKey(f => f.WebApplicationId);
+                .HasForeignKey(f => f.WebApplicationId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
