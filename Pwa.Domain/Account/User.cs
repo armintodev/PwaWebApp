@@ -16,7 +16,6 @@ namespace Pwa.Domain.Account
         public DateTime CreationDate { get; private set; }
         public DateTime LastEditDate { get; private set; }
 
-        public int? DeveloperId { get; private set; }
         public Developer Developer { get; private set; }
         public ICollection<Statistic> Statistics { get; private set; }
         public ICollection<Comment> Comments { get; private set; }
@@ -87,6 +86,11 @@ namespace Pwa.Domain.Account
         {
             Code = code;
             LastEditDate = DateTime.Now;
+        }
+
+        public void SetRoleStatus(RoleStatus role)
+        {
+            RoleStatus = role;
         }
     }
 }
