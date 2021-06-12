@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
-using Pwa.Application.Contracts.Account.User;
 using WebFramework.Utilities;
 
 namespace Pwa.Application.Contracts.Account.Developer
@@ -9,7 +9,7 @@ namespace Pwa.Application.Contracts.Account.Developer
     {
         Task<List<DeveloperDto>> ListAsync();
         Task<OperationResult<EditDeveloperDto>> Get(int id);
-        Task<OperationResult> Register(CreateDeveloperDto register);
+        Task<OperationResult> Register(CreateDeveloperDto register, CancellationToken cancellationToken);
         Task<OperationResult> Edit(EditDeveloperDto edit);
         Task<OperationResult> Delete(int id);
         Task Activate(int id);
