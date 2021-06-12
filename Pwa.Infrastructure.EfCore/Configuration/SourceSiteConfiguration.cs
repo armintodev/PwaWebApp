@@ -26,9 +26,9 @@ namespace Pwa.Infrastructure.EfCore.Configuration
                 .HasMaxLength(1000)
                 .IsRequired();
 
-            builder.HasOne(_ => _.User)
-                .WithMany(_ => _.SourceSites)
-                .HasForeignKey(_ => _.UserId);
+            //builder.HasOne(_ => _.User)
+            //    .WithMany(_ => _.SourceSites)
+            //    .HasForeignKey(_ => _.UserId);
         }
     }
 }
