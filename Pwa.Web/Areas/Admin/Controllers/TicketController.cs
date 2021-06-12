@@ -4,8 +4,7 @@ using System.Threading.Tasks;
 
 namespace Pwa.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class TicketController : Controller
+    public class TicketController : AdminBaseController
     {
         private readonly ITicketApplication _ticket;
         public TicketController(ITicketApplication ticket)

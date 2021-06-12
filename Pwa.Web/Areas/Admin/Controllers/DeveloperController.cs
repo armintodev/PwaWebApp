@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pwa.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class DeveloperController : Controller
+    public class DeveloperController : AdminBaseController
     {
         private readonly IDeveloperApplication _developer;
         public DeveloperController(IDeveloperApplication developer)
@@ -78,13 +77,13 @@ namespace Pwa.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginDto dto)
+        public async Task<IActionResult> Login(AuthDto dto)
         {
             if (ModelState.IsValid)
             {
-                var result = await _developer.Login(dto);
-                if (result.Success) return View("Index");
-                ModelState.AddModelError("", result.Message);
+                //var result = await _developer.Login(dto);
+                //if (result.Success) return View("Index");
+                //ModelState.AddModelError("", result.Message);
             }
             return View();
         }

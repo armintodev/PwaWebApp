@@ -5,8 +5,7 @@ using Pwa.Application.Contracts.Account.User;
 
 namespace Pwa.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class UserController : Controller
+    public class UserController : AdminBaseController
     {
         private readonly IUserApplication _user;
         public UserController(IUserApplication user)

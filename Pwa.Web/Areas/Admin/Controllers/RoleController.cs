@@ -5,8 +5,7 @@ using Pwa.Application.Contracts.Account.Role;
 
 namespace Pwa.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class RoleController : Controller
+    public class RoleController : AdminBaseController
     {
         private readonly IRoleApplication _role;
         public RoleController(IRoleApplication role)

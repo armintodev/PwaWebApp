@@ -4,8 +4,7 @@ using System.Threading.Tasks;
 
 namespace Pwa.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class CategoryController : Controller
+    public class CategoryController : AdminBaseController
     {
         private readonly ICategoryApplication _category;
         public CategoryController(ICategoryApplication category)
