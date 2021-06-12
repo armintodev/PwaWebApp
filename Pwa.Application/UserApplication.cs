@@ -142,12 +142,11 @@ namespace Pwa.Application
 
         public async Task<OperationResult> Login(AuthDto dto, CancellationToken cancellationToken)
         {
-            if (await _user.IsExistsAsync(_ => _.PhoneNumber != dto.PhoneNumber))
+            if (!await _user.IsExistsAsync(_ => _.PhoneNumber == dto.PhoneNumber))
             {
                 return new OperationResult(false, "کاربری با این مشخصات وجود ندارد");
             }
 
-            //send sms
             return new OperationResult();
         }
 
