@@ -20,7 +20,7 @@ namespace WebFramework.Utilities.Uploader
             if (file is null) return "";
 
             //for example: Photos//Developer//fileName
-            var directoryPath = $"{_webHost.WebRootPath}//lib//Photos//{path}";
+            var directoryPath = $"{Directory.GetCurrentDirectory()}//wwwroot//lib//Photos//{path}";
 
             if (!Directory.Exists(directoryPath))
                 Directory.CreateDirectory(directoryPath);
@@ -34,9 +34,9 @@ namespace WebFramework.Utilities.Uploader
 
         public void Delete(string fileName)
         {
-            var directoryPath = $"{_webHost.WebRootPath}//lib//Photos//";
+            var path = Path.Combine($"{Directory.GetCurrentDirectory()}//wwwroot//lib//Photos//");
 
-            var filePath = $"{directoryPath}//{fileName}";
+            var filePath = $"{path}//{fileName}";
 
             File.Delete(filePath);
         }
