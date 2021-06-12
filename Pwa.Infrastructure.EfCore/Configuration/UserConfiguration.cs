@@ -16,14 +16,9 @@ namespace Pwa.Infrastructure.EfCore.Configuration
                 .IsRequired();
 
             builder.Property(_ => _.Email)
-                .HasMaxLength(500)
-                .IsRequired();
+                .HasMaxLength(500);
 
             builder.Property(_ => _.UserName)
-                .HasMaxLength(500)
-                .IsRequired();
-
-            builder.Property(_ => _.FullName)
                 .HasMaxLength(500)
                 .IsRequired();
 
