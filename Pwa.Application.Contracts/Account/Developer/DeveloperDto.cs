@@ -41,6 +41,7 @@ namespace Pwa.Application.Contracts.Account.Developer
 
         [Display(Name = "وضعیت")]
         public StatusDto Status { get; init; }
+        public RoleStatusDto Role { get; init; }
 
         [Display(Name = "تاریخ ثبت نام")]
         public string CreationDate { get; init; }
@@ -48,6 +49,6 @@ namespace Pwa.Application.Contracts.Account.Developer
         [Display(Name = "تاریخ آخرین ویرایش")]
         public string LastEditDate { get; init; }
 
-        public List<int>? StatisticId { get; init; }
+        public List<int> StatisticId { get; init; }
     }
 }
