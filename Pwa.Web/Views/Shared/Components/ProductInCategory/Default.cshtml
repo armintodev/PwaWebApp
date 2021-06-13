@@ -1,4 +1,4 @@
-﻿@model Pwa.Query.Contracts.Category.CategoryQueryModel
+﻿@model IEnumerable<CategoryQueryModel>
 
 <div class="app_category">
     <div class="container">
@@ -9,47 +9,15 @@
             <div class="slider_tab">
                 <div class="swiper-container app_category_slider">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <button data-sliderNumber="0"
-                                    class="active btn_custom_tab_slider">
-                                کاربردی
-                            </button>
-                        </div>
-                        <div class="swiper-slide">
-                            <button data-sliderNumber="1" class="btn_custom_tab_slider">
-                                ابزار
-                            </button>
-                        </div>
-                        <div class="swiper-slide">
-                            <button data-sliderNumber="2" class="btn_custom_tab_slider">
-                                سرگرمی
-                            </button>
-                        </div>
-                        <div class="swiper-slide">
-                            <button data-sliderNumber="3" class="btn_custom_tab_slider">
-                                شبکه اجتماعی
-                            </button>
-                        </div>
-                        <div class="swiper-slide">
-                            <button data-sliderNumber="4" class="btn_custom_tab_slider">
-                                پزشکی
-                            </button>
-                        </div>
-                        <div class="swiper-slide">
-                            <button data-sliderNumber="5" class="btn_custom_tab_slider">
-                                پزشکی
-                            </button>
-                        </div>
-                        <div class="swiper-slide">
-                            <button data-sliderNumber="6" class="btn_custom_tab_slider">
-                                ورزش
-                            </button>
-                        </div>
-                        <div class="swiper-slide">
-                            <button data-sliderNumber="7" class="btn_custom_tab_slider">
-                                کتاب و مطبوعات
-                            </button>
-                        </div>
+                        @foreach (var category in Model)
+                        {
+                            <div class="swiper-slide">
+                                <button data-sliderNumber="@category.Id"
+                                        class="@(Model.First()==category? "active":"") btn_custom_tab_slider">
+                                    @category.Title
+                                </button>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div class="swiper-button-next_slider_tab">
@@ -91,71 +59,27 @@
             </div>
 
             <div class="slider_tab_items">
-                <div class="slider_tab_item">
-                    <div class="
-                  swiper-container
-                  app_category_tab_content app_category_tab_content_0 ">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="item_app_category">
-                                    <img src="/Main/img/pic/pasargard_logo.png" alt="" />
-                                    <h4>همراه بانک پاسارگاد</h4>
-                                    <span> ابزار . بانکداری </span>
-                                    <a href="#">دریافت</a>
-                                </div>
+                @foreach (var category in Model)
+                {
+                    <div class="slider_tab_item @(Model.First()==category? "":"d-none")">
+                        <div class=" swiper-container app_category_tab_content app_category_tab_content_@category.Id ">
+                            <div class="swiper-wrapper">
+                                @foreach (var webApp in category.WebApps)
+                                {
+                                    <div class="swiper-slide">
+                                        <div class="item_app_category">
+                                            <img src="/lib/Photos/@webApp.Icon" alt="" />
+                                            <h4>@webApp.Name</h4>
+                                            <span>@webApp.Category</span>
+                                            <a asp-action="Detail">دریافت</a>
+                                        </div>
+                                    </div>
+                                }
                             </div>
-                            <div class="swiper-slide">
-                                <div class="item_app_category">
-                                    <img src="/Main/img/pic/pasargard_logo.png" alt="" />
-                                    <h4>همراه بانک پاسارگاد</h4>
-                                    <span> ابزار . بانکداری </span>
-                                    <a href="#">دریافت</a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item_app_category">
-                                    <img src="/Main/img/pic/pasargard_logo.png" alt="" />
-                                    <h4>همراه بانک پاسارگاد</h4>
-                                    <span> ابزار . بانکداری </span>
-                                    <a href="#">دریافت</a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item_app_category">
-                                    <img src="/Main/img/pic/pasargard_logo.png" alt="" />
-                                    <h4>همراه بانک پاسارگاد</h4>
-                                    <span> ابزار . بانکداری </span>
-                                    <a href="#">دریافت</a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item_app_category">
-                                    <img src="/Main/img/pic/pasargard_logo.png" alt="" />
-                                    <h4>همراه بانک پاسارگاد</h4>
-                                    <span> ابزار . بانکداری </span>
-                                    <a href="#">دریافت</a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item_app_category">
-                                    <img src="/Main/img/pic/pasargard_logo.png" alt="" />
-                                    <h4>همراه بانک پاسارگاد</h4>
-                                    <span> ابزار . بانکداری </span>
-                                    <a href="#">دریافت</a>
-                                </div>
-                            </div>
+                            <div class="swiper-pagination"></div>
                         </div>
-
-                        <div class="swiper-pagination"></div>
                     </div>
-                </div>
-                <div class="slider_tab_item d-none">2</div>
-                <div class="slider_tab_item d-none">3</div>
-                <div class="slider_tab_item d-none">4</div>
-                <div class="slider_tab_item d-none">5</div>
-                <div class="slider_tab_item d-none">6</div>
-                <div class="slider_tab_item d-none">7</div>
-                <div class="slider_tab_item d-none">8</div>
+                }
             </div>
         </div>
     </div>
