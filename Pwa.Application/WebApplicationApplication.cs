@@ -41,6 +41,7 @@ namespace Pwa.Application
                 Name = _.Name,
                 Description = _.Description,
                 WebSiteAddress = _.WebSiteAddress,
+                Icon = _.Icon,
                 TypeAdd = (TypeAddDto)_.TypeAdd,
                 Status = (StatusDto)_.Status,
                 Visit = _.Visit,
@@ -71,7 +72,9 @@ namespace Pwa.Application
             if (check is false)
                 return new OperationResult(false, "سایت شما وب اپلیکیشن نمی باشد");
 
-            WebApplication webApp = new(dto.Name, dto.Description, dto.WebSiteAddress, (TypeAdd)dto.TypeAdd, (Status)dto.Status, dto.CategoryId, developerId);
+            var icon = await _file.Upload(dto.Icon, UploadPath.WebApplicationIcon);
+
+            WebApplication webApp = new(dto.Name, dto.Description, dto.WebSiteAddress, icon, dto.IsGame, (TypeAdd)dto.TypeAdd, (Status)dto.Status, dto.CategoryId, developerId);
             await _webRepository.AddAsync(webApp, CancellationToken.None);
 
             List<Picture> pictures = new();
@@ -115,6 +118,12 @@ namespace Pwa.Application
                 return new OperationResult(false, "وب اپلیکیشنی با این عنوان وجود دارد");
             }
 
+            string icon = "";
+            if (dto.Icon is not null)
+            {
+                _file.Delete(webApp.Icon);
+                icon = await _file.Upload(dto.Icon, UploadPath.WebApplicationIcon);
+            }
             if (dto.Files is not null)
             {
                 var oldPictures = await _pictureRepository.Table.Where(_ => _.WebApplicationId == webApp.Id).ToListAsync();
@@ -136,7 +145,7 @@ namespace Pwa.Application
                 await _pictureRepository.AddRangeAsync(newPictures, CancellationToken.None);
             }
 
-            webApp.Edit(dto.Name, dto.Description);
+            webApp.Edit(dto.Name, dto.Description, icon);
             await _webRepository.SaveChangesAsync();
             return new OperationResult(true, "عملیات ویرایش با موفقیت انجام شد");
         }
@@ -169,8 +178,10 @@ namespace Pwa.Application
                 WebSiteAddress = webApp.WebSiteAddress,
                 CategoryTitle = webApp.Category.Title,
                 Pictures = pics,
+                Icon = webApp.Icon,
                 Installed = webApp.Installed,
                 Visit = webApp.Visit,
+                IsGame = webApp.IsGame,
                 Status = (StatusDto)webApp.Status,
                 TypeAdd = (TypeAddDto)webApp.TypeAdd,
                 CreationDate = webApp.CreationDate.ToFarsiFull(),
@@ -184,6 +195,7 @@ namespace Pwa.Application
             var webApp = await _webRepository.GetByIdAsync(CancellationToken.None, id);
             var oldPictures = await _pictureRepository.Table.Where(_ => _.WebApplicationId == webApp.Id).ToListAsync();
 
+            _file.Delete(webApp.Icon);
             foreach (var _ in oldPictures)
             {
                 _file.Delete(_.FileName);
