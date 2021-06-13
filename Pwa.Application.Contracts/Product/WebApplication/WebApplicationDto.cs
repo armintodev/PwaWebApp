@@ -1,6 +1,4 @@
-﻿using Pwa.Application.Contracts.Account.Developer;
-using Pwa.Application.Contracts.Product.Category;
-using Pwa.Application.Contracts.Product.Picture;
+﻿using Pwa.Application.Contracts.Product.Picture;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using WebFramework.Enums;
@@ -21,6 +19,12 @@ namespace Pwa.Application.Contracts.Product.WebApplication
 
         [Display(Name = "آدرس وب سایت")]
         public string WebSiteAddress { get; init; }
+
+        [Display(Name = "آیکون")]
+        public string Icon { get; init; }
+
+        [Display(Name = "بازی")]
+        public bool IsGame { get; init; }
 
         [Display(Name = "نوع اضافه شده")]
         public TypeAddDto TypeAdd { get; init; }
@@ -48,7 +52,5 @@ namespace Pwa.Application.Contracts.Product.WebApplication
         public List<PictureDto> Pictures { get; init; }
 
         public int DeveloperId { get; init; }
-        //public CategoryDto Category { get; init; }
-        //public DeveloperDto Developer { get; init; }
     }
 }

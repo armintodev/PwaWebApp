@@ -30,6 +30,13 @@ namespace Pwa.Application.Contracts.Product.WebApplication
         [Required(ErrorMessage = ValidationMessages.Required)]
         public string WebSiteAddress { get; init; }
 
+        [Display(Name = "آیکون")]
+        [Required(ErrorMessage = ValidationMessages.Required)]
+        public IFormFile Icon { get; init; }
+
+        [Display(Name = "بازی")]
+        public bool IsGame { get; init; }
+
         [Display(Name = "نوع اضافه کردن")]
         [Required(ErrorMessage = ValidationMessages.Required)]
         public TypeAddDto TypeAdd { get; init; }

@@ -20,6 +20,10 @@ namespace Pwa.Application.Contracts.Product.WebApplication
         [Required(ErrorMessage = ValidationMessages.Required)]
         public string Description { get; init; }
 
+        [Display(Name = "آیکون")]
+        [Required(ErrorMessage = ValidationMessages.Required)]
+        public IFormFile Icon { get; init; }
+
         [Display(Name = "وضعیت")]
         [Required(ErrorMessage = ValidationMessages.Required)]
         public StatusDto Status { get; init; }
