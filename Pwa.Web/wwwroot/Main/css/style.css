@@ -2532,6 +2532,10 @@ section.app__list .wrapper main .items .item .info .details .category h5 {
   font-weight: 500;
 }
 
+section.app__list .wrapper main .items .item .install {
+  text-align: center;
+}
+
 section.app__list .wrapper main .items .item .install button {
   width: 90%;
   border-radius: 17px;
