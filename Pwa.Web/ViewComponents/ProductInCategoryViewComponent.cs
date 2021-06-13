@@ -1,20 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pwa.Query.Contracts.WebApp;
+using Pwa.Query.Contracts.Category;
 using System.Threading.Tasks;
 
 namespace Pwa.Web.ViewComponents
 {
     public class ProductInCategoryViewComponent : ViewComponent
     {
-        private readonly IWebAppQuery _webApp;
-        public ProductInCategoryViewComponent(IWebAppQuery webApp)
+        private readonly ICategoryQuery _category;
+        public ProductInCategoryViewComponent(ICategoryQuery category)
         {
-            _webApp = webApp;
+            _category = category;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View();
+            var categories = await _category.GetProductInCategory();
+            return View(categories);
         }
     }
 }
