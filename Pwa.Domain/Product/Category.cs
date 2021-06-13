@@ -9,7 +9,7 @@ namespace Pwa.Domain.Product
     {
         public string Title { get; private set; }
 
-        public ICollection<WebApplication> WebApplications { get; private set; }
+        public List<WebApplication> WebApplications { get; private set; }
 
         protected Category()
         {
