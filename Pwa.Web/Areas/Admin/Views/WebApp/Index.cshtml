@@ -16,6 +16,9 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Icon)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
@@ -40,11 +43,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
+                <th>
+                    <img src="/lib/Photos/@item.Icon" alt="آیکون" />
+                </th>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                <td style="max-width:300px">
+                    @item.Description.Substring(1, 100) ...
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.WebSiteAddress)

@@ -24,12 +24,17 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="Icon" class="control-label"></label>
+                    <input asp-for="Icon" class="form-control" multiple />
+                    <span asp-validation-for="Icon" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="Files" class="control-label"></label>
                     <input asp-for="Files" class="form-control" multiple />
                     <span asp-validation-for="Files" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="ایجاد" class="btn btn-primary" />
+                    <input type="submit" value="ویرایش" class="btn btn-primary" />
                 </div>
             </form>
         </div>
