@@ -28,13 +28,6 @@ namespace Pwa.Query.Queries
                     WebApps = MapWebApps(_.WebApplications)
                 });
 
-            //foreach (var category in categories)
-            //{
-            //    foreach (var product in category.WebApps)
-            //    {
-
-            //    }
-            //}
             return await categories.ToListAsync();
         }
 
@@ -55,6 +48,7 @@ namespace Pwa.Query.Queries
                 Id = _.Id,
                 Name = _.Name,
                 Category = _.Category.Title,
+                Icon = _.Icon,
                 Pictures = MapPictures(_.Pictures, _.Id)
             }).ToList();
         }
