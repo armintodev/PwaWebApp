@@ -14,6 +14,7 @@ namespace Pwa.Domain.Product
         public string Name { get; private set; }
         public string Description { get; private set; }
         public string WebSiteAddress { get; private set; }
+        public string Icon { get; private set; }
         public bool IsGame { get; private set; }
         public TypeAdd TypeAdd { get; private set; }
         public Status Status { get; private set; }
@@ -23,7 +24,7 @@ namespace Pwa.Domain.Product
         public Category Category { get; private set; }
         public Developer Developer { get; private set; }
         public ICollection<Comment> Comments { get; private set; }
-        public ICollection<Picture> Pictures { get; private set; }
+        public List<Picture> Pictures { get; private set; }
 
 
         protected WebApplication()
@@ -31,11 +32,12 @@ namespace Pwa.Domain.Product
 
         }
 
-        public WebApplication(string name, string description, string websiteAddress, bool isGame, TypeAdd typeAdd, Status status, int categoryId, int developerId)
+        public WebApplication(string name, string description, string websiteAddress, string icon, bool isGame, TypeAdd typeAdd, Status status, int categoryId, int developerId)
         {
             Name = name;
             Description = description;
             WebSiteAddress = websiteAddress;
+            Icon = icon;
             IsGame = isGame;
             TypeAdd = typeAdd;
             Status = status;
@@ -48,10 +50,12 @@ namespace Pwa.Domain.Product
             Pictures = new List<Picture>();
         }
 
-        public void Edit(string name, string description)
+        public void Edit(string name, string description, string icon)
         {
             Name = name;
             Description = description;
+            if (string.IsNullOrEmpty(icon))
+                Icon = icon;
             LastEditDate = DateTime.Now;
         }
 
