@@ -14,6 +14,7 @@ namespace Pwa.Domain.Product
         public string Name { get; private set; }
         public string Description { get; private set; }
         public string WebSiteAddress { get; private set; }
+        public bool IsGame { get; private set; }
         public TypeAdd TypeAdd { get; private set; }
         public Status Status { get; private set; }
         public int Visit { get; private set; }
@@ -30,11 +31,12 @@ namespace Pwa.Domain.Product
 
         }
 
-        public WebApplication(string name, string description, string websiteAddress, TypeAdd typeAdd, Status status, int categoryId, int developerId)
+        public WebApplication(string name, string description, string websiteAddress, bool isGame, TypeAdd typeAdd, Status status, int categoryId, int developerId)
         {
             Name = name;
             Description = description;
             WebSiteAddress = websiteAddress;
+            IsGame = isGame;
             TypeAdd = typeAdd;
             Status = status;
             DeActivate();
