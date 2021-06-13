@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Pwa.Infrastructure.EfCore\Pwa.Infrastructure.EfCore.csproj" />
+    <ProjectReference Include="..\Pwa.Query\Pwa.Query.csproj" />
   </ItemGroup>
 
 </Project>
