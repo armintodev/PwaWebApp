@@ -41,6 +41,7 @@ namespace Pwa.Application
                 Name = _.Name,
                 Description = _.Description,
                 WebSiteAddress = _.WebSiteAddress,
+                IsGame = _.IsGame,
                 Icon = _.Icon,
                 TypeAdd = (TypeAddDto)_.TypeAdd,
                 Status = (StatusDto)_.Status,
@@ -52,7 +53,7 @@ namespace Pwa.Application
             return await webApps.ToListAsync();
         }
 
-        public async Task<OperationResult> Create(CreateWebApplicationDto dto)
+        public async Task<OperationResult> Create(CreateWebApplicationDto dto, CancellationToken cancellationToken)
         {
             if (dto is null)
                 return new OperationResult(false);
@@ -84,7 +85,7 @@ namespace Pwa.Application
                 pictures.Add(new Picture(url, webApp.Id));
             }
 
-            await _pictureRepository.AddRangeAsync(pictures, CancellationToken.None);
+            await _pictureRepository.AddRangeAsync(pictures, cancellationToken);
 
             await _webRepository.SaveChangesAsync();
             return new OperationResult();
