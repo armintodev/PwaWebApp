@@ -82,11 +82,11 @@
                     </button>
                     @if (User.Identity.IsAuthenticated)
                     {
-                            <a class="login_btn" asp-controller="User" asp-action="Logout">خروج</a>
+                        <a class="login_btn" asp-controller="User" asp-action="Logout">خروج</a>
                     }
                     else
                     {
-                            <a class="login_btn" asp-controller="User" asp-action="Login">ثبت نام<span>/</span> ورود</a>
+                        <a class="login_btn" asp-controller="User" asp-action="Login">ثبت نام<span>/</span> ورود</a>
                     }
                     <div class="search_box">
                         <button class="close_search_box_btn">
@@ -275,33 +275,5 @@
     <script src="/Main/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/Main/js/index.js"></script>
     <script src="/Main/js/common.js"></script>
-    <script>
-        var swiper = new Swiper(`.app_category_tab_content_0`, {
-            slidesPerView: 4,
-            spaceBetween: 18,
-            slidesPerGroup: 1,
-            loop: true,
-            loopFillGroupWithBlank: true,
-            breakpoints: {
-                992: {
-                    slidesPerView: 4,
-                    spaceBetween: 18,
-                },
-                768: {
-                    slidesPerView: 3,
-                    spaceBetween: 18,
-                },
-
-                500: {
-                    slidesPerView: 2,
-                    spaceBetween: 18,
-                },
-                280: {
-                    slidesPerView: 1,
-                    spaceBetween: 0,
-                },
-            },
-        });
-    </script>
 </body>
 </html>
