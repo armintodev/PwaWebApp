@@ -21,6 +21,8 @@ namespace Pwa.Query.Queries
         {
             var categories = _context.Categories.Include(_ => _.WebApplications)
                 .ThenInclude(_ => _.Category)
+                .Include(_ => _.WebApplications)
+                .ThenInclude(_ => _.Pictures)
                 .Select(_ => new CategoryQueryModel
                 {
                     Id = _.Id,
