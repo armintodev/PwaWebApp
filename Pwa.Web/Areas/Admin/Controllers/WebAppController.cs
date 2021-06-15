@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Pwa.Application.Contracts.Product.Category;
 using Pwa.Application.Contracts.Product.WebApplication;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Pwa.Web.Areas.Admin.Controllers
@@ -34,11 +35,11 @@ namespace Pwa.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateWebApplicationDto dto)
+        public async Task<IActionResult> Create(CreateWebApplicationDto dto, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
-                var result = await _webApplication.Create(dto);
+                var result = await _webApplication.Create(dto, cancellationToken);
                 if (result.Success)
                     return RedirectToAction("Index");
 
