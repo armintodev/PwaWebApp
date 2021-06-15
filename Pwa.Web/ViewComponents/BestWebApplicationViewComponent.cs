@@ -14,7 +14,8 @@ namespace Pwa.Web.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View();
+            var webApps = await _webApp.GetBests();
+            return View(webApps);
         }
     }
 }
