@@ -1,7 +1,8 @@
-﻿using Pwa.Infrastructure.EfCore;
-using Pwa.Query.Contracts.Category;
+﻿using Microsoft.EntityFrameworkCore;
+using Pwa.Infrastructure.EfCore;
 using Pwa.Query.Contracts.WebApp;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Pwa.Query.Queries
@@ -9,22 +10,54 @@ namespace Pwa.Query.Queries
     public class WebAppQuery : IWebAppQuery
     {
         private readonly ApplicationDbContext _context;
-        private readonly ICategoryQuery _category;
-        public WebAppQuery(ApplicationDbContext context, ICategoryQuery category)
+        public WebAppQuery(ApplicationDbContext context)
         {
             _context = context;
-            _category = category;
         }
 
-        public async Task<List<WebAppQueryModel>> GetInCategory()
+        public async Task<List<WebAppQueryModel>> GetBests()
         {
-            //var categories = await _category.List();
-            throw new System.NotImplementedException();
+            var webApps = _context.WebApplications.Select(_ => new WebAppQueryModel
+            {
+                Id = _.Id,
+                Name = _.Name,
+                Address = _.WebSiteAddress,
+                Category = _.Category.Title,
+                Icon = _.Icon,
+                Visit = _.Visit
+            }).AsNoTracking();
+
+
+            return await webApps.ToListAsync();
         }
 
-        public Task<List<WebAppQueryModel>> GetMostVisited()
+        public async Task<List<WebAppQueryModel>> GetGames()
         {
-            throw new System.NotImplementedException();
+            var games = _context.WebApplications.Include(_ => _.Pictures).Where(_ => _.IsGame).Select(_ => new WebAppQueryModel
+            {
+                Id = _.Id,
+                Name = _.Name,
+                Description = _.Description.Substring(0, 30),
+                Address = _.WebSiteAddress,
+                Picture = _.Pictures.Select(_ => _.FileName).First(),
+                Visit = _.Visit
+            }).AsNoTracking();
+
+            return await games.ToListAsync();
+        }
+
+        public async Task<List<WebAppQueryModel>> GetMostVisit()
+        {
+            var webApps = _context.WebApplications.Include(_ => _.Pictures).Select(_ => new WebAppQueryModel
+            {
+                Id = _.Id,
+                Name = _.Name,
+                Address = _.WebSiteAddress,
+                Picture = _.Pictures.Select(_ => _.FileName).First(),
+                Visit = _.Visit
+            }).AsNoTracking();
+
+            return await webApps.Take(5).ToListAsync();
         }
     }
 }

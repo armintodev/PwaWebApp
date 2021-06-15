@@ -5,7 +5,8 @@ namespace Pwa.Query.Contracts.WebApp
 {
     public interface IWebAppQuery
     {
-        Task<List<WebAppQueryModel>> GetMostVisited();
-        Task<List<WebAppQueryModel>> GetInCategory();
+        Task<List<WebAppQueryModel>> GetBests();
+        Task<List<WebAppQueryModel>> GetGames();
+        Task<List<WebAppQueryModel>> GetMostVisit();
     }
 }
