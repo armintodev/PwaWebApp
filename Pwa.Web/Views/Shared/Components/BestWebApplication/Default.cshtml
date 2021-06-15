@@ -10,54 +10,17 @@
             <div class="slider">
                 <div class="swiper-container the_best_slider">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="item_app_category">
-                                <img src="/Main/img/pic/pasargard_logo.png" alt="" />
-                                <h4>همراه بانک پاسارگاد</h4>
-                                <span> ابزار . بانکداری </span>
-                                <a href="#">دریافت</a>
+                        @foreach (var webApps in Model)
+                        {
+                            <div class="swiper-slide">
+                                <div class="item_app_category">
+                                    <img src="/lib/Photos/@webApps.Icon" alt="@webApps.Name" />
+                                    <h4>@webApps.Name</h4>
+                                    <span>@webApps.Category</span>
+                                    <a asp-controller="Home" asp-action="Detail" asp-route-id="@webApps.Id">دریافت</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="item_app_category">
-                                <img src="/Main/img/pic/pasargard_logo.png" alt="" />
-                                <h4>همراه بانک پاسارگاد</h4>
-                                <span> ابزار . بانکداری </span>
-                                <a href="#">دریافت</a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="item_app_category">
-                                <img src="/Main/img/pic/pasargard_logo.png" alt="" />
-                                <h4>همراه بانک پاسارگاد</h4>
-                                <span> ابزار . بانکداری </span>
-                                <a href="#">دریافت</a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="item_app_category">
-                                <img src="/Main/img/pic/pasargard_logo.png" alt="" />
-                                <h4>همراه بانک پاسارگاد</h4>
-                                <span> ابزار . بانکداری </span>
-                                <a href="#">دریافت</a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="item_app_category">
-                                <img src="/Main/img/pic/pasargard_logo.png" alt="" />
-                                <h4>همراه بانک پاسارگاد</h4>
-                                <span> ابزار . بانکداری </span>
-                                <a href="#">دریافت</a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="item_app_category">
-                                <img src="/Main/img/pic/pasargard_logo.png" alt="" />
-                                <h4>همراه بانک پاسارگاد</h4>
-                                <span> ابزار . بانکداری </span>
-                                <a href="#">دریافت</a>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
                 <div class="swiper-button-next-the_best_slider slider_arrow_next">
@@ -105,7 +68,7 @@
                     میتواند با امتیاز دادن به وب اپ مورد نظرتون مارو تو این کار مشارکت
                     کنید
                 </p>
-                <a class="show_more" href="#">
+                <a class="show_more" asp-controller="Home" asp-action="List">
                     نمایش همه
                     <svg xmlns="http://www.w3.org/2000/svg"
                          width="9.672"
