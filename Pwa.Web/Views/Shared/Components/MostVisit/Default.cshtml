@@ -1,0 +1,49 @@
+﻿@model List<WebAppQueryModel>
+
+<section class="most_veiw">
+    <div class="container">
+        <div class="content">
+            <div class="section_title">
+                <h3><span>پربازدید ترین</span> وب اپلیکیشن ها</h3>
+            </div>
+        </div>
+    </div>
+    <div class="slider">
+        <div class="swiper-container most_veiw_slider">
+            <div class="swiper-wrapper">
+                @foreach (var webApp in Model)
+                {
+                    <div class="swiper-slide">
+                        <div class="item">
+                            <img src="/lib/Photos/@webApp.Picture" alt="@webApp.Name" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content_text">
+            <div class="more_btn__desc">
+                <p>
+                    این لیست بر اساس امتیاز کاربران و سردبیر سایت محاسبه میشورد شما هم
+                    میتواند با امتیاز دادن به وب اپ مورد نظرتون مارو تو این کار مشارکت
+                    کنید
+                </p>
+                <a class="show_more" asp-action="List">
+                    نمایش همه
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="9.672"
+                         height="12.233"
+                         viewBox="0 0 9.672 12.233">
+                        <path id="Polygon_12"
+                              data-name="Polygon 12"
+                              d="M5.271,1.337a1,1,0,0,1,1.69,0l4.3,6.8a1,1,0,0,1-.845,1.534h-8.6A1,1,0,0,1,.97,8.138Z"
+                              transform="translate(0 12.233) rotate(-90)"
+                              fill="#fff" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
