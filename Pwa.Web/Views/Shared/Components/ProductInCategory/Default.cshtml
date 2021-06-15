@@ -62,7 +62,7 @@
                 @foreach (var category in Model)
                 {
                     <div class="slider_tab_item @(Model.First()==category? "":"d-none")">
-                        <div class=" swiper-container app_category_tab_content app_category_tab_content_@category.Id ">
+                        <div class="swiper-container app_category_tab_content app_category_tab_content_@category.Id ">
                             <div class="swiper-wrapper">
                                 @foreach (var webApp in category.WebApps)
                                 {
