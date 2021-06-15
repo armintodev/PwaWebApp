@@ -8,8 +8,8 @@ var swiper = new Swiper(".the_best_slider", {
     loop: true,
     loopFillGroupWithBlank: true,
     navigation: {
-        nextEl: ".swiper-button-next-the_best_slider",
-        prevEl: ".swiper-button-prev-the_best_slider",
+        nextEl: ".swiper-button-prev-the_best_slider",
+        prevEl: ".swiper-button-next-the_best_slider",
     },
     breakpoints: {
         992: {
@@ -39,8 +39,8 @@ var swiper = new Swiper(".game_slider", {
     loop: true,
     loopFillGroupWithBlank: true,
     navigation: {
-        nextEl: ".swiper-button-next-game_slider",
-        prevEl: ".swiper-button-prev-game_slider",
+        nextEl: ".swiper-button-prev-game_slider",
+        prevEl: ".swiper-button-next-game_slider",
     },
     breakpoints: {
         768: {
