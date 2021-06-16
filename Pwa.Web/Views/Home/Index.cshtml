@@ -31,7 +31,7 @@
     </div>
 </section>
 
-@await Component.InvokeAsync("ProductInCategory")
+@await Component.InvokeAsync("WebAppInCategory")
 
 @await Component.InvokeAsync("BestWebApplication")
 
@@ -92,7 +92,7 @@
 
             <div class="items">
                 <div class="item">
-                    <img src=".//Main/img/pic/slider_img.png" alt="" />
+                    <img src="/Main/img/pic/slider_img.png" alt="" />
                     <p>
                         مقادیر متنوعی از Lorem Ipsum در دسترس است ، اما اکثریت از طریق
                         تزریق یا تصادفی. کلمات دچار تغییراتی شده اند که اگر بخواهید
@@ -154,7 +154,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src=".//Main/img/pic/slider_img.png" alt="" />
+                    <img src="/Main/img/pic/slider_img.png" alt="" />
                     <p>
                         مقادیر متنوعی از Lorem Ipsum در دسترس است ، اما اکثریت از طریق
                         تزریق یا تصادفی. کلمات دچار تغییراتی شده اند که اگر بخواهید
@@ -216,7 +216,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src=".//Main/img/pic/slider_img.png" alt="" />
+                    <img src="/Main/img/pic/slider_img.png" alt="" />
                     <p>
                         مقادیر متنوعی از Lorem Ipsum در دسترس است ، اما اکثریت از طریق
                         تزریق یا تصادفی. کلمات دچار تغییراتی شده اند که اگر بخواهید
@@ -283,3 +283,7 @@
 </section>
 
 <partial name="Partials/_InviteFriendPartial" />
+
+@section Scripts{
+    <script src="/Main/js/index.js"></script>
+}
