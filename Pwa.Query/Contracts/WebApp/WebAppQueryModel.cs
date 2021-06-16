@@ -1,4 +1,5 @@
-﻿using Pwa.Query.Contracts.Comment;
+﻿using Pwa.Application.Contracts.Product.Comment;
+using Pwa.Query.Contracts.Comment;
 using System.Collections.Generic;
 
 namespace Pwa.Query.Contracts.WebApp
@@ -13,9 +14,12 @@ namespace Pwa.Query.Contracts.WebApp
         public bool IsGame { get; set; }
         public int Visit { get; set; }
         public int Installed { get; set; }
+        public float Rate { get; set; }
         public string Category { get; set; }
         public string Picture { get; set; }
+        public int CommentCount { get; set; }
         public List<CommentQueryModel> Comments { get; set; }
         public List<PictureQueryModel> Pictures { get; set; }
+        public CreateCommentDto Comment { get; set; }
     }
 }
