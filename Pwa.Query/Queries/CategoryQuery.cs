@@ -6,6 +6,7 @@ using Pwa.Query.Contracts.WebApp;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebFramework.Enums;
 
 namespace Pwa.Query.Queries
 {
@@ -28,7 +29,7 @@ namespace Pwa.Query.Queries
                     Id = _.Id,
                     Title = _.Title,
                     WebApps = MapWebApps(_.WebApplications)
-                });
+                }).AsNoTracking();
 
             return await categories.ToListAsync();
         }
@@ -45,7 +46,7 @@ namespace Pwa.Query.Queries
 
         private static List<WebAppQueryModel> MapWebApps(List<WebApplication> webApplications)
         {
-            return webApplications.Select(_ => new WebAppQueryModel
+            return webApplications.Where(_ => _.Status == Status.Active).Select(_ => new WebAppQueryModel
             {
                 Id = _.Id,
                 Name = _.Name,
