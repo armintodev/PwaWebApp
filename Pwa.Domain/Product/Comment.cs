@@ -22,10 +22,9 @@ namespace Pwa.Domain.Product
 
         }
 
-        public Comment(string description, bool isDeveloper, int userId, int webApplicationId)
+        public Comment(string description, int userId, int webApplicationId)
         {
             Description = description;
-            IsDeveloper = isDeveloper;
             Status = Status.Pending;
             UserId = userId;
             WebApplicationId = webApplicationId;
