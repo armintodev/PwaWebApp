@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 
 namespace Pwa.Web.ViewComponents
 {
-    public class ProductInCategoryViewComponent : ViewComponent
+    public class WebAppInCategoryViewComponent : ViewComponent
     {
         private readonly ICategoryQuery _category;
-        public ProductInCategoryViewComponent(ICategoryQuery category)
+        public WebAppInCategoryViewComponent(ICategoryQuery category)
         {
             _category = category;
         }
