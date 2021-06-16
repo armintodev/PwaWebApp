@@ -8,5 +8,7 @@ namespace Pwa.Query.Contracts.WebApp
         Task<List<WebAppQueryModel>> GetBests();
         Task<List<WebAppQueryModel>> GetGames();
         Task<List<WebAppQueryModel>> GetMostVisit();
+        Task<WebAppQueryModel> GetSingle(int id);
+        Task<List<WebAppQueryModel>> RelatedApps(int id);
     }
 }
