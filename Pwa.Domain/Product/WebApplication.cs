@@ -23,7 +23,7 @@ namespace Pwa.Domain.Product
 
         public Category Category { get; private set; }
         public Developer Developer { get; private set; }
-        public ICollection<Comment> Comments { get; private set; }
+        public List<Comment> Comments { get; private set; }
         public List<Picture> Pictures { get; private set; }
 
 
