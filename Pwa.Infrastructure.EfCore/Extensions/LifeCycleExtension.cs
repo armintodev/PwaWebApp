@@ -5,6 +5,7 @@ using Pwa.Application.Contracts.Account.Role;
 using Pwa.Application.Contracts.Account.Statistic;
 using Pwa.Application.Contracts.Account.User;
 using Pwa.Application.Contracts.Product.Category;
+using Pwa.Application.Contracts.Product.Comment;
 using Pwa.Application.Contracts.Product.Ticket;
 using Pwa.Application.Contracts.Product.WebApplication;
 using Pwa.Domain.Account;
@@ -35,6 +36,8 @@ namespace Pwa.Infrastructure.EfCore.Extensions
             service.AddScoped<ICategoryApplication, CategoryApplication>();
 
             service.AddScoped<ICommentRepository, CommentRepository>();
+            service.AddScoped<ICommentApplication, CommentApplication>();
+
             service.AddScoped<ISourceSiteRepository, SourceSiteRepository>();
 
             service.AddScoped<ITicketRepository, TicketRepository>();
