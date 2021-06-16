@@ -25,7 +25,6 @@ namespace Pwa.Application
 
             Category category = new(dto.Title);
             await _category.AddAsync(category, CancellationToken.None);
-            await _category.SaveChangesAsync();
             return new OperationResult();
         }
 
