@@ -2,10 +2,10 @@ let ButtonMore = document.querySelector("#button__more");
 let TextItem = document.querySelector("#text_item");
 
 ButtonMore.addEventListener("click", () => {
-  TextItem.classList.toggle("active");
-  if (ButtonMore.classList.contains("active")) {
-    ButtonMore.classList.remove("active");
-    ButtonMore.innerHTML = `بیشتر  <svg
+    TextItem.classList.toggle("active");
+    if (ButtonMore.classList.contains("active")) {
+        ButtonMore.classList.remove("active");
+        ButtonMore.innerHTML = `بیشتر  <svg
   xmlns="http://www.w3.org/2000/svg"
   width="7.691"
   height="13.667"
@@ -31,10 +31,10 @@ ButtonMore.addEventListener("click", () => {
   </g>
 </svg>`;
 
-    return;
-  }
-  ButtonMore.classList.add("active");
-  ButtonMore.innerHTML = `بستن  <svg
+        return;
+    }
+    ButtonMore.classList.add("active");
+    ButtonMore.innerHTML = `بستن  <svg
   xmlns="http://www.w3.org/2000/svg"
   width="7.691"
   height="13.667"
@@ -62,87 +62,87 @@ ButtonMore.addEventListener("click", () => {
 });
 
 var swiper = new Swiper(".mySwiper", {
-  slidesPerView: 4,
-  spaceBetween: 10,
-  slidesPerGroup: 1,
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-  navigation: {
-    nextEl: "#nextright",
-    prevEl: "#nextleft",
-  },
-  breakpoints: {
-    1326: {
-      slidesPerView: 4,
+    slidesPerView: 4,
+    spaceBetween: 10,
+    slidesPerGroup: 1,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
     },
-    1250: {
-      slidesPerView: 4,
+    navigation: {
+        nextEl: "#nextright",
+        prevEl: "#nextleft",
     },
-    1000: {
-      slidesPerView: 4,
+    breakpoints: {
+        1326: {
+            slidesPerView: 4,
+        },
+        1250: {
+            slidesPerView: 4,
+        },
+        1000: {
+            slidesPerView: 4,
+        },
+        992: {
+            slidesPerView: 3,
+        },
+        800: {
+            slidesPerView: 3,
+        },
+        768: {
+            slidesPerView: 2,
+        },
+        550: {
+            slidesPerView: 2,
+        },
+        450: {
+            slidesPerView: 2,
+        },
+        350: {
+            slidesPerView: 1,
+        },
+        320: {
+            slidesPerView: 1,
+        },
     },
-    992: {
-      slidesPerView: 3,
-    },
-    800: {
-      slidesPerView: 3,
-    },
-    768: {
-      slidesPerView: 2,
-    },
-    550: {
-      slidesPerView: 2,
-    },
-    450: {
-      slidesPerView: 2,
-    },
-    350: {
-      slidesPerView: 1,
-    },
-    320: {
-      slidesPerView: 1,
-    },
-  },
 });
 
 var swiper = new Swiper(".the_best_slider", {
-  slidesPerView: 1,
-  spaceBetween: 16,
-  slidesPerGroup: 1,
-  loop: true,
-  loopFillGroupWithBlank: true,
-  navigation: {
-    nextEl: ".swiper-button-next-the_best_slider",
-    prevEl: ".swiper-button-prev-the_best_slider",
-  },
-  breakpoints: {
-    992: {
-      slidesPerView: 4,
-      spaceBetween: 16,
+    slidesPerView: 1,
+    spaceBetween: 16,
+    slidesPerGroup: 1,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    navigation: {
+        nextEl: ".swiper-button-prev-the_best_slider",
+        prevEl: ".swiper-button-next-the_best_slider",
     },
-    768: {
-      slidesPerView: 3,
-      spaceBetween: 16,
-    },
+    breakpoints: {
+        992: {
+            slidesPerView: 4,
+            spaceBetween: 16,
+        },
+        768: {
+            slidesPerView: 3,
+            spaceBetween: 16,
+        },
 
-    500: {
-      slidesPerView: 2,
-      spaceBetween: 20,
+        500: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+        },
     },
-  },
 });
 
 $(".my-rating").starRating({
-  initialRating: 1,
-  starSize: 7,
-  emptyColor: "#D0C3EF",
-  hoverColor: "#7140e0",
-  activeColor: "#7140e0",
-  strokeColor: "#7140e0",
-  useGradient: false,
-  callback: function (currentRating) {
-    alert("rated ", currentRating);
-  },
+    initialRating: 1,
+    starSize: 7,
+    emptyColor: "#D0C3EF",
+    hoverColor: "#7140e0",
+    activeColor: "#7140e0",
+    strokeColor: "#7140e0",
+    useGradient: false,
+    callback: function (currentRating) {
+        alert("rated ", currentRating);
+    },
 });
