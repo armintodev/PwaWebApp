@@ -62,7 +62,7 @@
                     <ul>
                         <li><a class="active" href="/">خانه</a></li>
                         <li><a href="#">درباره ما</a></li>
-                        <li><a href="#">دسته بندی</a></li>
+                        <li><a asp-controller="Home" asp-action="List">دسته بندی</a></li>
                         <li><a href="#">توسعه دهندگان</a></li>
                     </ul>
                 </nav>
@@ -273,7 +273,7 @@
 
     <script src="/Main/lib/swiper/swiper-bundle.min.js"></script>
     <script src="/Main/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/Main/js/index.js"></script>
     <script src="/Main/js/common.js"></script>
+    @await RenderSectionAsync("Scripts", false)
 </body>
 </html>
