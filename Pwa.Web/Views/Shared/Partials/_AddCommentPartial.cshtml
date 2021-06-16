@@ -1,0 +1,50 @@
+﻿@model Pwa.Application.Contracts.Product.Comment.CreateCommentDto
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="add__comment__down">
+        <div class="title">
+            <div class="right">
+                <h4>افزودن دیدگاه</h4>
+            </div>
+            <div class="left">
+                <div class="my-rating"></div>
+            </div>
+        </div>
+        <form class="form__comment" asp-action="Single" method="post">
+            <input type="hidden" asp-for="WebApplicationId" />
+            <textarea asp-for="Description"></textarea>
+            <div class="button__box">
+                <button class="cancellation">لغو</button>
+                <button class="submit">ارسال</button>
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <a asp-controller="User" asp-action="Login">
+        <div class="add__comment">
+            <div class="title">
+                <div class="right">
+                    <h4>افزودن دیدگاه</h4>
+                </div>
+            </div>
+            <div class="login">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="23.042"
+                     height="28.163"
+                     viewBox="0 0 23.042 28.163">
+                    <g id="padlock" transform="translate(-36.548)">
+                        <path id="Path_26032"
+                              data-name="Path 26032"
+                              d="M59.03,13.362a1.852,1.852,0,0,0-1.36-.56h-.64V8.961a8.623,8.623,0,0,0-2.64-6.32,8.886,8.886,0,0,0-12.641,0,8.623,8.623,0,0,0-2.64,6.321V12.8h-.64a1.912,1.912,0,0,0-1.92,1.92V26.243a1.912,1.912,0,0,0,1.92,1.92h19.2a1.912,1.912,0,0,0,1.92-1.92V14.722A1.851,1.851,0,0,0,59.03,13.362Zm-5.84-.56H42.949V8.961a4.933,4.933,0,0,1,1.5-3.62,5.119,5.119,0,0,1,7.241,0,4.934,4.934,0,0,1,1.5,3.62Z"
+                              transform="translate(0 0)"
+                              fill="#575757" />
+                    </g>
+                </svg>
+                برای نظر دادن ابتدا <span> ورود </span> کنید
+            </div>
+        </div>
+    </a>
+}
