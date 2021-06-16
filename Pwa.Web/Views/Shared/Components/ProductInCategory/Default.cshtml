@@ -11,12 +11,15 @@
                     <div class="swiper-wrapper">
                         @foreach (var category in Model)
                         {
-                            <div class="swiper-slide">
-                                <button data-sliderNumber="@category.Id"
-                                        class="@(Model.First()==category? "active":"") btn_custom_tab_slider">
-                                    @category.Title
-                                </button>
-                            </div>
+                            if (category.WebApps.Count is not 0)
+                            {
+                                <div class="swiper-slide">
+                                    <button data-sliderNumber="@category.Id"
+                                            class="@(Model.First()==category? "active":"") btn_custom_tab_slider">
+                                        @category.Title
+                                    </button>
+                                </div>
+                            }
                         }
                     </div>
                 </div>
