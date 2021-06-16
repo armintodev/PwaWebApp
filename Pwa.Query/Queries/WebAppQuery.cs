@@ -66,6 +66,9 @@ namespace Pwa.Query.Queries
 
         public async Task<WebAppQueryModel> GetSingle(int id)
         {
+            _context.WebApplications.FirstOrDefaultAsync(_ => _.Id == id).Result.IncreaseVisit();
+            await _context.SaveChangesAsync();
+
             return await _context.WebApplications
                 .Include(_ => _.Pictures)
                 .Include(_ => _.Comments).ThenInclude(_ => _.User)
