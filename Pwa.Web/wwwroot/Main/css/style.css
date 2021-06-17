@@ -2134,6 +2134,47 @@ header .content .left .search_active {
   top: 0rem !important;
 }
 
+header .content .left .user__info .dropdown {
+  cursor: pointer;
+}
+
+header .content .left .user__info .dropdown button {
+  all: unset;
+}
+
+header .content .left .user__info .dropdown button::after {
+  all: unset;
+}
+
+header .content .left .user__info .dropdown button .wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header .content .left .user__info .dropdown button .wrapper .image {
+  border-radius: 6px;
+  overflow: hidden;
+  width: 38px;
+  height: 38px;
+  margin-left: 10px;
+}
+
+header .content .left .user__info .dropdown button .wrapper .image img {
+  width: 100%;
+  height: 100%;
+}
+
+header .content .left .user__info .dropdown button .wrapper h4,
+header .content .left .user__info .dropdown button .wrapper h4 span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
 @media only screen and (min-width: 992px) {
   header .hamberger_menu_btn {
     display: none;
@@ -2530,10 +2571,6 @@ section.app__list .wrapper main .items .item .info .details .category h5 {
   color: #162341;
   font-size: 15px;
   font-weight: 500;
-}
-
-section.app__list .wrapper main .items .item .install {
-  text-align: center;
 }
 
 section.app__list .wrapper main .items .item .install button {
