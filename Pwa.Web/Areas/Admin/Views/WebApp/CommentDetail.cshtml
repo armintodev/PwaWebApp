@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Pwa.Application.Contracts.Product.Comment.CommentDto>
+@{
+    ViewData["Title"] = "کامنت های وب اپ";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WebAppName)
+            </th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td style="max-width:300px">
+                    @item.Description ...
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserInfo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WebAppName)
+                </td>
+                <td>
+                    @*<a class="btn btn-warning" asp-controller="Comment" asp-action="CommentEdit" asp-route-id="@item.Id">ویرایش</a> |*@
+                    <a class="btn btn-info" asp-controller="Comment" asp-action="Detail" asp-route-id="@item.Id">جزیات</a> |
+                    <a class="btn btn-danger" asp-controller="Comment" asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+                    @if (item.Status == StatusDto.Accepted)
+                    {
+                        <a class="btn btn-outline-danger" asp-controller="Comment" asp-action="Reject" asp-route-id="@item.Id">ردکردن</a>
+                    }
+                    else if (item.Status == StatusDto.Rejected || item.Status == StatusDto.Pending)
+                    {
+                        <a class="btn btn-outline-success" asp-controller="Comment" asp-action="Accept" asp-route-id="@item.Id">قبول کردن</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
