@@ -10,7 +10,7 @@ namespace Pwa.Domain.Product
     public class WebApplication : BaseDetail, IWebApplicationAggregate
     {
         public int CategoryId { get; private set; }
-        public int DeveloperId { get; private set; }
+        public int UserId { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
         public string WebSiteAddress { get; private set; }
@@ -22,7 +22,7 @@ namespace Pwa.Domain.Product
         public int Installed { get; private set; }
 
         public Category Category { get; private set; }
-        public Developer Developer { get; private set; }
+        public User User { get; private set; }
         public List<Comment> Comments { get; private set; }
         public List<Picture> Pictures { get; private set; }
 
@@ -32,7 +32,7 @@ namespace Pwa.Domain.Product
 
         }
 
-        public WebApplication(string name, string description, string websiteAddress, string icon, bool isGame, TypeAdd typeAdd, Status status, int categoryId, int developerId)
+        public WebApplication(string name, string description, string websiteAddress, string icon, bool isGame, TypeAdd typeAdd, Status status, int categoryId, int userId)
         {
             Name = name;
             Description = description;
@@ -45,7 +45,7 @@ namespace Pwa.Domain.Product
             CreationDate = DateTime.Now;
             LastEditDate = DateTime.Now;
             CategoryId = categoryId;
-            DeveloperId = developerId;
+            UserId = userId;
             Comments = new List<Comment>();
             Pictures = new List<Picture>();
         }
