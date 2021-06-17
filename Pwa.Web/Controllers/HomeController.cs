@@ -53,7 +53,7 @@ namespace Pwa.Web.Controllers
             return View(webApp);
         }
 
-        [HttpPost]
+        [HttpPost("single/{id}")]
         public async Task<IActionResult> Single(CreateCommentDto comment, int id, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
