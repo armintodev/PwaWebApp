@@ -6,6 +6,8 @@ using Pwa.Query.Contracts.WebApp;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebFramework;
+using WebFramework.Domain;
 using WebFramework.Enums;
 using WebFramework.Infrastructure;
 
@@ -122,6 +124,43 @@ namespace Pwa.Query.Queries
                     Category = _.Category.Title,
                     Icon = _.Icon,
                 }).Take(5).AsNoTracking().ToListAsync();
+        }
+
+        public async Task<ResponseDto<WebAppQueryModel>> List(ResponseDto<WebAppQueryModel> response)
+        {
+            var webApps = _context.WebApplications.Include(_ => _.Category).Select(_ => new WebAppQueryModel
+            {
+                Id = _.Id,
+                Name = _.Name,
+                Rate = 4f,
+                Category = _.Category.Title,
+                Icon = _.Icon,
+                CreationDate = _.CreationDate.ToFarsi(),
+                IsGame = _.IsGame
+            }).AsNoTracking();
+
+            if (response.Search is not null)
+            {
+                webApps = webApps.Where(_ => _.Name.Contains(response.Search)
+                || _.Category.Contains(response.Search));
+            }
+
+            const int pageSize = 3;
+            if (response.Page < 1)
+                response.Page = 1;
+
+            int recsCount = webApps.Count();
+            var pager = new Pager(recsCount, response.Page, pageSize);
+
+            int recSkip = (response.Page - 1) * pageSize;
+
+            webApps = webApps.Skip(recSkip)
+           .Take(pager.PageSize);
+
+            response.Items = await webApps.ToListAsync();
+            response.Pager = new(recsCount, response.Page, pageSize);
+
+            return response;
         }
     }
 }
