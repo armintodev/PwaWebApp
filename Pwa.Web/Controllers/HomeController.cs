@@ -1,8 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Pwa.Application.Contracts.Product.Comment;
+using Pwa.Infrastructure.EfCore;
 using Pwa.Query.Contracts.WebApp;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using WebFramework;
+using WebFramework.Domain;
 using WebFramework.Utilities.Sms;
 
 namespace Pwa.Web.Controllers
@@ -11,12 +16,14 @@ namespace Pwa.Web.Controllers
     {
         private readonly IWebAppQuery _webApp;
         private readonly ICommentApplication _comment;
+        private readonly ApplicationDbContext _context;
         private readonly ISmsService _sms;
-        public HomeController(ISmsService sms, IWebAppQuery webApp, ICommentApplication comment)
+        public HomeController(ISmsService sms, IWebAppQuery webApp, ICommentApplication comment, ApplicationDbContext context)
         {
             _sms = sms;
             _webApp = webApp;
             _comment = comment;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -35,6 +42,7 @@ namespace Pwa.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("single/{id}")]
         public async Task<IActionResult> Single(int id)
         {
             var webApp = await _webApp.GetSingle(id);
@@ -55,6 +63,24 @@ namespace Pwa.Web.Controllers
                     return RedirectToAction("Single", new { Id = id });
             }
             return View(comment);
+        }
+
+        [Route("list/{page}.{search?}")]
+        public async Task<IActionResult> List(int page = 1, [FromQuery] string search = "")
+        {
+            ResponseDto<WebAppQueryModel> response = new()
+            {
+                Page = page,
+                Search = search,
+            };
+
+            var webApps = await _webApp.List(response);
+
+            ViewBag.Pager = webApps.Pager;
+
+            ViewBag.SearchQuery = search;
+
+            return View(webApps.Items);
         }
     }
 }
