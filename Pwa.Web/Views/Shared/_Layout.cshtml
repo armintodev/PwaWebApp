@@ -62,7 +62,7 @@
                     <ul>
                         <li><a class="active" href="/">خانه</a></li>
                         <li><a href="#">درباره ما</a></li>
-                        <li><a asp-controller="Home" asp-action="List">دسته بندی</a></li>
+                        <li><a asp-action="List" asp-route-page="1">دسته بندی</a></li>
                         <li><a href="#">توسعه دهندگان</a></li>
                     </ul>
                 </nav>
@@ -89,21 +89,24 @@
                         <a class="login_btn" asp-controller="User" asp-action="Login">ثبت نام<span>/</span> ورود</a>
                     }
                     <div class="search_box">
-                        <button class="close_search_box_btn">
-                            <svg id="Group_2322"
-                                 data-name="Group 2322"
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 width="21.291"
-                                 height="20.589"
-                                 viewBox="0 0 21.291 20.589">
-                                <path id="Path_26033"
-                                      data-name="Path 26033"
-                                      d="M18.173,3.015A10.761,10.761,0,0,0,10.645,0,10.761,10.761,0,0,0,3.118,3.015a10.056,10.056,0,0,0,0,14.559,10.761,10.761,0,0,0,7.527,3.015,10.761,10.761,0,0,0,7.527-3.015,10.056,10.056,0,0,0,0-14.559ZM15.338,13.98a.589.589,0,0,1,0,.853.639.639,0,0,1-.882,0l-3.811-3.685L6.835,14.833a.639.639,0,0,1-.882,0,.589.589,0,0,1,0-.853l3.811-3.685L5.953,6.609a.589.589,0,0,1,0-.853.639.639,0,0,1,.882,0l3.811,3.685,3.811-3.685a.639.639,0,0,1,.882,0,.589.589,0,0,1,0,.853l-3.811,3.685Z"
-                                      transform="translate(0 0)"
-                                      fill="#fff" />
-                            </svg>
-                        </button>
-                        <input type="text" placeholder="جستجو کنید" />
+                        <form asp-action="List" asp-route-page="1" method="get">
+                            <button class="close_search_box_btn">
+                                <svg id="Group_2322"
+                                     data-name="Group 2322"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     width="21.291"
+                                     height="20.589"
+                                     viewBox="0 0 21.291 20.589">
+                                    <path id="Path_26033"
+                                          data-name="Path 26033"
+                                          d="M18.173,3.015A10.761,10.761,0,0,0,10.645,0,10.761,10.761,0,0,0,3.118,3.015a10.056,10.056,0,0,0,0,14.559,10.761,10.761,0,0,0,7.527,3.015,10.761,10.761,0,0,0,7.527-3.015,10.056,10.056,0,0,0,0-14.559ZM15.338,13.98a.589.589,0,0,1,0,.853.639.639,0,0,1-.882,0l-3.811-3.685L6.835,14.833a.639.639,0,0,1-.882,0,.589.589,0,0,1,0-.853l3.811-3.685L5.953,6.609a.589.589,0,0,1,0-.853.639.639,0,0,1,.882,0l3.811,3.685,3.811-3.685a.639.639,0,0,1,.882,0,.589.589,0,0,1,0,.853l-3.811,3.685Z"
+                                          transform="translate(0 0)"
+                                          fill="#fff" />
+                                </svg>
+                            </button>
+                            <input type="text" name="search" placeholder="جستجو کنید" />
+                        </form>
+
                     </div>
                     <button class="account_icon">
                         <svg xmlns="http://www.w3.org/2000/svg"
