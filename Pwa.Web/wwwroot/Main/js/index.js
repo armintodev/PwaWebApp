@@ -107,16 +107,19 @@ var swiper = new Swiper(".app_category_slider", {
 
 btnTabCustom.forEach((item) => {
     item.addEventListener("click", () => {
-        changeSliderContent(item.getAttribute("data-slidernumber"));
-        btnTabCustom.forEach((element) => {
-            element.classList.remove("active");
-        });
-        item.classList.add("active");
+        changeSliderContent(item.getAttribute("data-slidernumber"), item);
+        
     });
 });
-changeSliderContent(1)
-function changeSliderContent(number) {
-    console.log(number);
+changeSliderContent(btnTabCustom[0].dataset.slidernumber, btnTabCustom[0])
+
+function changeSliderContent(number, item) {
+ 
+    btnTabCustom.forEach((element) => {
+        element.classList.remove("active");
+    });
+    item.classList.add("active");
+
     sliderBoxContent.forEach((item) => {
         item.classList.add("d-none");
     });
