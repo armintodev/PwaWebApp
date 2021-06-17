@@ -7,6 +7,7 @@ namespace Pwa.Query.Contracts.Category
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public bool IsChecked { get; set; }
         public List<WebAppQueryModel> WebApps { get; set; }
     }
 }
