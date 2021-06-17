@@ -42,9 +42,9 @@ namespace Pwa.Web
                 app.InitializeDataBase();
             }
 
-            app.UseRouting();
-
             app.UseStaticFiles();
+
+            app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -56,7 +56,7 @@ namespace Pwa.Web
                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
 
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute("default", pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
