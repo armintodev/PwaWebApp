@@ -1,0 +1,14 @@
+﻿@model List<CategoryQueryModel>
+
+<div class="categories">
+    <h3>دسته بندی ها</h3>
+    <div class="items">
+        @foreach (var category in Model)
+        {
+            <div class="item">
+                <input class="form-check-input" asp-for="@category.IsChecked">
+                <label>@category.Title</label>
+            </div>
+        }
+    </div>
+</div>
