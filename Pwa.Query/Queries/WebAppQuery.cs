@@ -10,6 +10,7 @@ using WebFramework;
 using WebFramework.Domain;
 using WebFramework.Enums;
 using WebFramework.Infrastructure;
+using WebFramework.Utilities;
 
 namespace Pwa.Query.Queries
 {
@@ -66,12 +67,16 @@ namespace Pwa.Query.Queries
             return await webApps.ToListAsync();
         }
 
-        public async Task<WebAppQueryModel> GetSingle(int id)
+        public async Task<OperationResult<WebAppQueryModel>> GetSingle(int id)
         {
-            _context.WebApplications.FirstOrDefaultAsync(_ => _.Id == id).Result.IncreaseVisit();
+            var result = await _context.WebApplications.Where(_ => _.Status == Status.Accepted).FirstOrDefaultAsync(_ => _.Id == id);
+            if (result is null)
+                return new OperationResult<WebAppQueryModel>(new WebAppQueryModel(), false);
+            result.IncreaseVisit();
             await _context.SaveChangesAsync();
 
-            return await _context.WebApplications
+            var data = await _context.WebApplications
+                .Where(_ => _.Status == Status.Accepted)
                 .Include(_ => _.Pictures)
                 .Include(_ => _.Comments).ThenInclude(_ => _.User)
                 .Include(_ => _.Category)
@@ -88,6 +93,8 @@ namespace Pwa.Query.Queries
                     Comments = MapComments(_.Comments),
                     CommentCount = _.Comments.Count(_ => _.Status == Status.Accepted)
                 }).AsNoTracking().FirstOrDefaultAsync(_ => _.Id == id);
+
+            return new OperationResult<WebAppQueryModel>(data);
         }
 
         private static List<PictureQueryModel> MapPictures(List<Picture> pictures)
