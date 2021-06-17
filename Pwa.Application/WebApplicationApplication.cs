@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Pwa.Application.Contracts.Product.Category;
+using Pwa.Application.Contracts.Product.Comment;
 using Pwa.Application.Contracts.Product.Picture;
 using Pwa.Application.Contracts.Product.WebApplication;
 using Pwa.Domain.Product;
@@ -33,24 +34,52 @@ namespace Pwa.Application
             _accessor = accessor;
         }
 
+        public async Task Activate(int id, CancellationToken cancellationToken)
+        {
+            var webApp = await _webRepository.GetByIdAsync(cancellationToken, id);
+            webApp.Activate();
+            await _webRepository.SaveChangesAsync();
+        }
+
+        public async Task DeActivate(int id, CancellationToken cancellationToken)
+        {
+            var webApp = await _webRepository.GetByIdAsync(cancellationToken, id);
+            webApp.DeActivate();
+            await _webRepository.SaveChangesAsync();
+        }
+
         public async Task<List<WebApplicationDto>> List()
         {
-            var webApps = _webRepository.TableNoTracking.Select(_ => new WebApplicationDto
-            {
-                Id = _.Id,
-                Name = _.Name,
-                Description = _.Description,
-                WebSiteAddress = _.WebSiteAddress,
-                IsGame = _.IsGame,
-                Icon = _.Icon,
-                TypeAdd = (TypeAddDto)_.TypeAdd,
-                Status = (StatusDto)_.Status,
-                Visit = _.Visit,
-                Installed = _.Visit,
-                CreationDate = _.CreationDate.ToFarsiFull()
-            });
+            var webApps = _webRepository.TableNoTracking
+                .Include(_ => _.Comments)
+                .ThenInclude(_ => _.User)
+                .Select(_ => new WebApplicationDto
+                {
+                    Id = _.Id,
+                    Name = _.Name,
+                    Description = _.Description,
+                    WebSiteAddress = _.WebSiteAddress,
+                    IsGame = _.IsGame,
+                    Icon = _.Icon,
+                    TypeAdd = (TypeAddDto)_.TypeAdd,
+                    Status = (StatusDto)_.Status,
+                    Visit = _.Visit,
+                    Installed = _.Installed,
+                    Comments = MapComments(_.Comments),
+                    CreationDate = _.CreationDate.ToFarsiFull()
+                });
 
             return await webApps.ToListAsync();
+        }
+
+        private static List<CommentDto> MapComments(List<Comment> comments)
+        {
+            return comments.Select(_ => new CommentDto()
+            {
+                Id = _.Id,
+                Description = _.Description.Substring(0, 100),
+                UserInfo = _.User.FullName == null ? _.User.UserName : _.User.PhoneNumber,
+            }).ToList();
         }
 
         public async Task<OperationResult> Create(CreateWebApplicationDto dto, CancellationToken cancellationToken)
