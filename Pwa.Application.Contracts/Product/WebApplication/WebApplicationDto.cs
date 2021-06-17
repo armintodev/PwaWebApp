@@ -1,4 +1,5 @@
-﻿using Pwa.Application.Contracts.Product.Picture;
+﻿using Pwa.Application.Contracts.Product.Comment;
+using Pwa.Application.Contracts.Product.Picture;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using WebFramework.Enums;
@@ -50,6 +51,7 @@ namespace Pwa.Application.Contracts.Product.WebApplication
         public string CategoryTitle { get; init; }
 
         public List<PictureDto> Pictures { get; init; }
+        public List<CommentDto> Comments { get; set; }
 
         public int DeveloperId { get; init; }
     }
