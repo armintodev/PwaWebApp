@@ -131,6 +131,9 @@ function changeSliderContent(number) {
         slidesPerGroup: 1,
         loop: false,
         loopFillGroupWithBlank: false,
+        pagination: {
+            el: ".swiper-pagination",
+        },
         breakpoints: {
             992: {
                 slidesPerView: 4,
