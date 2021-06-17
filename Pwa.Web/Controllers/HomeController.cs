@@ -46,11 +46,11 @@ namespace Pwa.Web.Controllers
         public async Task<IActionResult> Single(int id)
         {
             var webApp = await _webApp.GetSingle(id);
-            webApp.Comment = new CreateCommentDto
+            webApp.Data.Comment = new CreateCommentDto
             {
-                WebApplicationId = webApp.Id
+                WebApplicationId = webApp.Data.Id
             };
-            return View(webApp);
+            return View(webApp.Data);
         }
 
         [HttpPost("single/{id}")]
