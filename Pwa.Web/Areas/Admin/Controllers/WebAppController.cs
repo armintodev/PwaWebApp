@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Pwa.Application.Contracts.Product.Category;
+using Pwa.Application.Contracts.Product.Comment;
 using Pwa.Application.Contracts.Product.WebApplication;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,10 +12,12 @@ namespace Pwa.Web.Areas.Admin.Controllers
     {
         private readonly IWebApplicationApplication _webApplication;
         private readonly ICategoryApplication _categoryApplication;
-        public WebAppController(IWebApplicationApplication webApplication, ICategoryApplication categoryApplication)
+        private readonly ICommentApplication _commentApplication;
+        public WebAppController(IWebApplicationApplication webApplication, ICategoryApplication categoryApplication, ICommentApplication commentApplication)
         {
             _webApplication = webApplication;
             _categoryApplication = categoryApplication;
+            _commentApplication = commentApplication;
         }
 
         public async Task<IActionResult> Index()
@@ -95,6 +98,32 @@ namespace Pwa.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
 
             return BadRequest(result.Message);
+        }
+
+        public async Task<IActionResult> Activate(int id, CancellationToken cancellationToken)
+        {
+            var webApp = await _webApplication.Get(id);
+            if (webApp.Success is false)
+                return NotFound();
+
+            await _webApplication.Activate(id, cancellationToken);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DeActivate(int id, CancellationToken cancellationToken)
+        {
+            var webApp = await _webApplication.Get(id);
+            if (webApp.Success is false)
+                return NotFound();
+
+            await _webApplication.DeActivate(id, cancellationToken);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> CommentDetail(int id, CancellationToken cancellationToken)
+        {
+            var comments = await _commentApplication.List(id, cancellationToken);
+            return View(comments);
         }
     }
 }
