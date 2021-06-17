@@ -18,6 +18,7 @@ namespace Pwa.Query.Contracts.WebApp
         public string Category { get; set; }
         public string Picture { get; set; }
         public int CommentCount { get; set; }
+        public string CreationDate { get; set; }
         public List<CommentQueryModel> Comments { get; set; }
         public List<PictureQueryModel> Pictures { get; set; }
         public CreateCommentDto Comment { get; set; }
