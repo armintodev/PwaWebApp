@@ -12,5 +12,6 @@
         public const string UserLogin = "/User/Login";
         public const string UserRegister = "/User/Register";
         public const string UserVerifyAccount = "/User/VerifyAccount";
+        public const string HeaderBackgroundRequest = "/";
     }
 }
