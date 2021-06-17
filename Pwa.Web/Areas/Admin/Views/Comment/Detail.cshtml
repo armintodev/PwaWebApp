@@ -1,0 +1,45 @@
+﻿@model Pwa.Application.Contracts.Product.Comment.CommentDto
+
+@{
+    ViewData["Title"] = $"کامنت";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control" disabled></textarea>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status" class="control-label"></label>
+                    <input asp-for="Status" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserInfo" class="control-label"></label>
+                    <input asp-for="UserInfo" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label asp-for="WebAppName" class="control-label"></label>
+                    <input asp-for="WebAppName" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreationDate" class="control-label"></label>
+                    <input asp-for="CreationDate" class="form-control" disabled />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index" class="btn btn-info">بازگشت به لیست</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">ویرایش</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">حذف</a>
+    </div>
+</div>
+
