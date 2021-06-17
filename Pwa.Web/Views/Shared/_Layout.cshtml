@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using WebFramework.Utilities
+<!DOCTYPE html>
 <html lang="fa">
 <head>
     <meta charset="UTF-8" />
@@ -10,7 +11,7 @@
     <title>Pwa DariaTech</title>
 </head>
 <body>
-    <header class="">
+    <header class="@(Url.ActionContext.HttpContext.Request.Path.StartsWithSegments(UrlPathRequest.HeaderBackgroundRequest)? "" : "header_bg")">
         <div class="container">
             <div class="content">
                 <div class="logo">
@@ -82,7 +83,25 @@
                     </button>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a class="login_btn" asp-controller="User" asp-action="Logout">خروج</a>
+                        <div class="user__info">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="wrapper">
+                                        <div class="image">
+                                            <img src="/Main/img/pic/user.png" alt="">
+                                        </div>
+                                        <h4>
+                                            سلام
+                                            <span>علی</span>
+                                        </h4>
+                                    </div>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" asp-controller="User" asp-action="Logout">خروج</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     }
                     else
                     {
