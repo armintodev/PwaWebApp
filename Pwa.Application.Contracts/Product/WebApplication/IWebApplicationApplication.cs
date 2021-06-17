@@ -13,5 +13,7 @@ namespace Pwa.Application.Contracts.Product.WebApplication
         Task<OperationResult> Edit(EditWebApplicationDto dto);
         Task<OperationResult<WebApplicationDto>> Detail(int id);
         Task<OperationResult> Delete(int id);
+        Task Activate(int id, CancellationToken cancellationToken);
+        Task DeActivate(int id, CancellationToken cancellationToken);
     }
 }
