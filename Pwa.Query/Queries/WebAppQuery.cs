@@ -156,7 +156,7 @@ namespace Pwa.Query.Queries
                 || _.Category.Contains(response.Search));
             }
 
-            const int pageSize = 3;
+            const int pageSize = 9;
             if (response.Page < 1)
                 response.Page = 1;
 
