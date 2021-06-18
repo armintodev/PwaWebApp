@@ -11,6 +11,7 @@ namespace Pwa.Domain.Account
     {
         public string FullName { get; private set; }
         public string Code { get; private set; }
+        public string ProfileUrl { get; private set; }
         public Status Status { get; private set; }
         public RoleStatus RoleStatus { get; private set; }
         public DateTime CreationDate { get; private set; }
@@ -25,11 +26,12 @@ namespace Pwa.Domain.Account
 
         }
 
-        public User(string phone, string fullName = "")
+        public User(string phone, string fullName = "", string profileUrl = "")
         {
             FullName = fullName;
             PhoneNumber = phone;
             UserName = phone;
+            ProfileUrl = profileUrl;
             RoleStatus = RoleStatus.Basic;
             DeActive();
             CreationDate = DateTime.Now;

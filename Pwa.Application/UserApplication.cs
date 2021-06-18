@@ -67,6 +67,7 @@ namespace Pwa.Application
                 Status = (StatusDto)user.Status,
                 UserName = user.UserName,
                 PhoneNumber = user.PhoneNumber,
+                ProfileUrl = user.ProfileUrl,
                 Role = (RoleStatusDto)user.RoleStatus,
                 CreationDate = user.CreationDate.ToFarsiFull(),
                 LastEditDate = user.LastEditDate.ToFarsiFull(),
@@ -93,7 +94,7 @@ namespace Pwa.Application
             if (await _user.IsExistsAsync(_ => _.PhoneNumber == dto.PhoneNumber))
                 return new OperationResult(false, "کاربری با این مشخصات وجود دارد");
 
-            User user = new(dto.PhoneNumber, dto.FullName);
+            User user = new(dto.PhoneNumber, dto.FullName, "User/profile.png");
 
             var userResult = await _userManager.CreateAsync(user);
             if (userResult.Succeeded is false)
