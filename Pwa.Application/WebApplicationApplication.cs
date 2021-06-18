@@ -5,6 +5,7 @@ using Pwa.Application.Contracts.Product.Comment;
 using Pwa.Application.Contracts.Product.Picture;
 using Pwa.Application.Contracts.Product.WebApplication;
 using Pwa.Domain.Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -90,21 +91,18 @@ namespace Pwa.Application
             if (await _webRepository.IsExistsAsync(_ => _.WebSiteAddress == dto.WebSiteAddress))
                 return new OperationResult(false, "سایتی با این مشخصات وجود دارد");
 
-            //developer id
-            //var developerId = _accessor.HttpContext.User.Claims.FirstOrDefault(_ => _.Type == ClaimTypes.NameIdentifier).Value;
-            var developerId = 1;
+            var userId = Convert.ToInt32(_accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             if (dto.CategoryId is 0)
                 return new OperationResult(false, "دسته بندی را انتخاب کنید");
 
-            //check website for he has pwa website
             var check = await PwaCheck.Check(dto.WebSiteAddress);
             if (check is false)
                 return new OperationResult(false, "سایت شما وب اپلیکیشن نمی باشد");
 
             var icon = await _file.Upload(dto.Icon, UploadPath.WebApplicationIcon);
 
-            WebApplication webApp = new(dto.Name, dto.Description, dto.WebSiteAddress, icon, dto.IsGame, (TypeAdd)dto.TypeAdd, (Status)dto.Status, dto.CategoryId, developerId);
+            WebApplication webApp = new(dto.Name, dto.Description, dto.WebSiteAddress, icon, dto.IsGame, (TypeAdd)dto.TypeAdd, (Status)dto.Status, dto.CategoryId, userId);
             await _webRepository.AddAsync(webApp, CancellationToken.None);
 
             List<Picture> pictures = new();
