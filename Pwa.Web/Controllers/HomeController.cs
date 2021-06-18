@@ -16,14 +16,12 @@ namespace Pwa.Web.Controllers
     {
         private readonly IWebAppQuery _webApp;
         private readonly ICommentApplication _comment;
-        private readonly ApplicationDbContext _context;
         private readonly ISmsService _sms;
-        public HomeController(ISmsService sms, IWebAppQuery webApp, ICommentApplication comment, ApplicationDbContext context)
+        public HomeController(ISmsService sms, IWebAppQuery webApp, ICommentApplication comment)
         {
             _sms = sms;
             _webApp = webApp;
             _comment = comment;
-            _context = context;
         }
 
         public IActionResult Index()
