@@ -145,6 +145,8 @@ namespace Pwa.Query.Queries
                 Name = _.Name,
                 Rate = 4f,
                 Category = _.Category.Title,
+                Installed = _.Installed,
+                Visit = _.Visit,
                 Icon = _.Icon,
                 CreationDate = _.CreationDate.ToFarsi(),
                 IsGame = _.IsGame
@@ -154,6 +156,23 @@ namespace Pwa.Query.Queries
             {
                 webApps = webApps.Where(_ => _.Name.Contains(response.Search)
                 || _.Category.Contains(response.Search));
+            }
+
+            if (response.SortOrder is not null)
+            {
+                webApps = response.SortOrder switch
+                {
+                    SortOrderBy.MostInstalled =>
+                     webApps.OrderByDescending(_ => _.Installed),
+
+                    SortOrderBy.MostVisited =>
+                     webApps.OrderByDescending(_ => _.Visit),
+
+                    SortOrderBy.Newest =>
+                     webApps.OrderByDescending(_ => _.CreationDate),
+
+                    _ => webApps.OrderBy(_ => _.Rate),
+                };
             }
 
             const int pageSize = 9;

@@ -68,12 +68,13 @@ namespace Pwa.Web.Controllers
         }
 
         [Route("list/{page}.{search?}")]
-        public async Task<IActionResult> List(int page = 1, [FromQuery] string search = "")
+        public async Task<IActionResult> List(int page = 1, [FromQuery] string search = "", [FromQuery] string sortOrder = "")
         {
             ResponseDto<WebAppQueryModel> response = new()
             {
                 Page = page,
                 Search = search,
+                SortOrder = sortOrder
             };
 
             var webApps = await _webApp.List(response);
