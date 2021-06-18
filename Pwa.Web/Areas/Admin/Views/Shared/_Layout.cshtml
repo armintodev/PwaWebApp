@@ -50,14 +50,7 @@
             <div class="sidebar" style="direction: ltr">
                 <div style="direction: rtl">
                     <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                        <div class="image">
-                            <img src="https://www.gravatar.com/avatar/52f0fbcbedee04a121cba8dad1174462?s=200&d=mm&r=g" class="img-circle elevation-2" alt="User Image">
-                        </div>
-                        <div class="info">
-                            <a href="#" class="d-block">@User.Identity?.Name</a>
-                        </div>
-                    </div>
+                    @await Component.InvokeAsync("AdminInfo")
 
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
@@ -79,7 +72,7 @@
                                             <p>مدیریت کاربران</p>
                                         </a>
                                     </li>
-                                     <li class="nav-item">
+                                    <li class="nav-item">
                                         <a asp-area="Admin" asp-controller="Role" asp-action="Index" class='nav-link @(Url.ActionContext.HttpContext.Request.Path.StartsWithSegments(UrlPathRequest.AdminRole)? "active" : "") '>
                                             <i class="fa fa-circle-o nav-icon"></i>
                                             <p>مدیریت نقش</p>
