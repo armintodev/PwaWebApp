@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Pwa.Application.Contracts.Product.Comment;
 using Pwa.Infrastructure.EfCore;
 using Pwa.Query.Contracts.WebApp;
 using System.Collections.Generic;
+using System.Security.Policy;
 using System.Threading;
 using System.Threading.Tasks;
 using WebFramework;
@@ -81,6 +83,14 @@ namespace Pwa.Web.Controllers
             ViewBag.SearchQuery = search;
 
             return View(webApps.Items);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Install(int id, CancellationToken cancellationToken)
+        {
+            var address = await _webApp.Install(id, cancellationToken);
+            if (address.Success is false) return NotFound();
+            return Redirect(address.Data);
         }
     }
 }
