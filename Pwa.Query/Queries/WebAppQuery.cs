@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Pwa.Domain.Product;
 using Pwa.Infrastructure.EfCore;
 using Pwa.Query.Contracts.Comment;
 using Pwa.Query.Contracts.WebApp;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using WebFramework;
 using WebFramework.Domain;
@@ -17,9 +19,11 @@ namespace Pwa.Query.Queries
     public class WebAppQuery : IWebAppQuery
     {
         private readonly ApplicationDbContext _context;
-        public WebAppQuery(ApplicationDbContext context)
+        private readonly IHttpContextAccessor _accessor;
+        public WebAppQuery(ApplicationDbContext context, IHttpContextAccessor accessor)
         {
             _context = context;
+            _accessor = accessor;
         }
 
         public async Task<List<WebAppQueryModel>> GetBests()
@@ -168,6 +172,18 @@ namespace Pwa.Query.Queries
             response.Pager = new(recsCount, response.Page, pageSize);
 
             return response;
+        }
+
+        public async Task<OperationResult<string>> Install(int id, CancellationToken cancellationToken)
+        {
+            var webApp = await _context.WebApplications.FirstOrDefaultAsync(_ => _.Id == id, cancellationToken);
+            if (webApp is null)
+                return new OperationResult<string>("", false);
+
+            webApp.IncreaseInstalled();
+            await _context.SaveChangesAsync();
+
+            return new OperationResult<string>($"https://{webApp.WebSiteAddress}");
         }
     }
 }
