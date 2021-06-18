@@ -22,6 +22,9 @@ namespace Pwa.Application.Contracts.Account.User
         [Display(Name = "شماره همراه")]
         public string PhoneNumber { get; init; }
 
+        [Display(Name = "تصویر پروفایل")]
+        public string ProfileUrl { get; init; }
+
         [Display(Name = "کد فعال سازی")]
         public string Code { get; init; }
 
