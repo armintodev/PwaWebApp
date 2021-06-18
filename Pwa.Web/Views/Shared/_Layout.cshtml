@@ -81,32 +81,7 @@
                                   stroke-width="0.25" />
                         </svg>
                     </button>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <div class="user__info">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div class="wrapper">
-                                        <div class="image">
-                                            <img src="/Main/img/pic/user.png" alt="">
-                                        </div>
-                                        <h4>
-                                            سلام
-                                            <span>علی</span>
-                                        </h4>
-                                    </div>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" asp-controller="User" asp-action="Logout">خروج</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <a class="login_btn" asp-controller="User" asp-action="Login">ثبت نام<span>/</span> ورود</a>
-                    }
+                    @await Component.InvokeAsync("UserInfo")
                     <div class="search_box">
                         <form asp-action="List" asp-route-page="1" method="get">
                             <button class="close_search_box_btn">

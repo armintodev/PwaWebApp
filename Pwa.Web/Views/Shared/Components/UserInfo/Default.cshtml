@@ -1,0 +1,28 @@
+﻿@model Pwa.Query.Contracts.User.UserQueryModel
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="user__info">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="wrapper">
+                    <div class="image">
+                        <img src="/lib/Photos/@Model.ProfileUrl" alt="">
+                    </div>
+                    <h4>
+                        <span>
+                            @Model.Name
+                        </span>
+                    </h4>
+                </div>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" asp-controller="User" asp-action="Logout">خروج</a></li>
+            </ul>
+        </div>
+    </div>
+}
+else
+{
+    <a class="login_btn" asp-controller="User" asp-action="Login">ثبت نام<span>/</span> ورود</a>
+}
