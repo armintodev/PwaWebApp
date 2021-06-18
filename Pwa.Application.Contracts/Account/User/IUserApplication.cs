@@ -10,6 +10,7 @@ namespace Pwa.Application.Contracts.Account.User
         Task<OperationResult> Register(AuthDto dto, CancellationToken cancellationToken);
         Task<List<UserDto>> List();
         Task<OperationResult<EditUserDto>> Get(int id, CancellationToken cancellationToken);
+        Task<UserDto> GetAdmin();
         Task<OperationResult> Edit(EditUserDto dto, CancellationToken cancellationToken);
         Task<OperationResult<UserDto>> Detail(int id, CancellationToken cancellationToken);
         Task<OperationResult> Delete(int id, CancellationToken cancellationToken);

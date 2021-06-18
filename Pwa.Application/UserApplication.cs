@@ -182,5 +182,15 @@ namespace Pwa.Application
         {
             await _signInManager.SignOutAsync();
         }
+
+        public async Task<UserDto> GetAdmin()
+        {
+            var admin = await _userManager.GetUserAsync(_signInManager.Context.User);
+            return new UserDto
+            {
+                UserName = admin.UserName,
+                ProfileUrl = admin.ProfileUrl
+            };
+        }
     }
 }
