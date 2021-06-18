@@ -46,13 +46,13 @@ namespace Pwa.Application
             return new OperationResult();
         }
 
-        public async Task<OperationResult> Delete(int id, CancellationToken cancellationToken)
+        public async Task<OperationResult<int>> Delete(int id, CancellationToken cancellationToken)
         {
             var comment = await _comment.GetByIdAsync(cancellationToken, id);
             if (comment is null)
-                return new OperationResult(false, "کامنتی با این مشخصات پیدا نشد");
+                return new OperationResult<int>(comment.WebApplicationId, false, "کامنتی با این مشخصات پیدا نشد");
             await _comment.DeleteAsync(comment, cancellationToken);
-            return new OperationResult();
+            return new OperationResult<int>(comment.WebApplicationId);
         }
 
         public async Task<OperationResult<CommentDto>> Detail(int id, CancellationToken cancellationToken)
@@ -91,6 +91,7 @@ namespace Pwa.Application
             EditCommentDto data = new()
             {
                 Id = comment.Id,
+                WebApplicationId = comment.WebApplicationId,
                 Description = comment.Description,
                 Status = (StatusDto)comment.Status
             };

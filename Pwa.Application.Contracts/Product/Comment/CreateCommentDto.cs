@@ -8,7 +8,7 @@ namespace Pwa.Application.Contracts.Product.Comment
     {
         [Display(Name = "توضیح")]
         [Required(ErrorMessage = ValidationMessages.Required)]
-        [MaxLength(2000, ErrorMessage = ValidationMessages.WrongMaxLength)]
+        [MaxLength(1500, ErrorMessage = ValidationMessages.WrongMaxLength)]
         public string Description { get; init; }
         public int UserId { get; init; }
         public int WebApplicationId { get; init; }

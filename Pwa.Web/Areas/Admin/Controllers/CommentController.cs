@@ -19,7 +19,7 @@ namespace Pwa.Web.Areas.Admin.Controllers
             var result = await _comment.Delete(id, cancellationToken);
             if (result.Success is false)
                 return NotFound();
-            return RedirectToAction("Index", "WebApp");
+            return RedirectToAction("CommentDetail", "WebApp", new { id = result.Data });
         }
 
         public async Task<IActionResult> Detail(int id, CancellationToken cancellationToken)
@@ -37,7 +37,7 @@ namespace Pwa.Web.Areas.Admin.Controllers
                 return NotFound();
 
             await _comment.Accepted(id, cancellationToken);
-            return RedirectToAction("Index", "WebApp");
+            return RedirectToAction("CommentDetail", "WebApp", new { id = comment.Data.WebApplicationId });
         }
 
         public async Task<IActionResult> Reject(int id, CancellationToken cancellationToken)
@@ -47,7 +47,7 @@ namespace Pwa.Web.Areas.Admin.Controllers
                 return NotFound();
 
             await _comment.Rejected(id, cancellationToken);
-            return RedirectToAction("Index", "WebApp");
+            return RedirectToAction("CommentDetail", "WebApp", new { id = comment.Data.WebApplicationId });
         }
     }
 }

@@ -46,6 +46,8 @@ namespace Pwa.Web.Controllers
         public async Task<IActionResult> Single(int id)
         {
             var webApp = await _webApp.GetSingle(id);
+            if (webApp.Success is false)
+                return NotFound();
             webApp.Data.Comment = new CreateCommentDto
             {
                 WebApplicationId = webApp.Data.Id

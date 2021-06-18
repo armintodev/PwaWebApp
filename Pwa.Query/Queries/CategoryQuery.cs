@@ -52,13 +52,13 @@ namespace Pwa.Query.Queries
                 Name = _.Name,
                 Category = _.Category.Title,
                 Icon = _.Icon,
-                Pictures = MapPictures(_.Pictures, _.Id)
+                Pictures = MapPictures(_.Pictures)
             }).ToList();
         }
 
-        private static List<PictureQueryModel> MapPictures(List<Picture> pictures, int webAppId)
+        private static List<PictureQueryModel> MapPictures(List<Picture> pictures)
         {
-            return pictures.Where(_ => _.WebApplicationId == webAppId).Select(_ => new PictureQueryModel
+            return pictures.Select(_ => new PictureQueryModel
             {
                 Id = _.Id,
                 Picture = _.FileName,

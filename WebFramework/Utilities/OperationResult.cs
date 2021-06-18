@@ -1,4 +1,6 @@
-﻿namespace WebFramework.Utilities
+﻿using System;
+
+namespace WebFramework.Utilities
 {
     public class OperationResult
     {
@@ -12,7 +14,7 @@
         }
     }
 
-    public class OperationResult<TData> : OperationResult where TData : class
+    public class OperationResult<TData> : OperationResult 
     {
         public TData Data { get; set; }
         public OperationResult(TData data, bool success = true, string message = "") : base(success, message)

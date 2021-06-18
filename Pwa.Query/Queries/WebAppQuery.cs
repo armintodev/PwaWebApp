@@ -69,14 +69,14 @@ namespace Pwa.Query.Queries
 
         public async Task<OperationResult<WebAppQueryModel>> GetSingle(int id)
         {
-            var result = await _context.WebApplications.Where(_ => _.Status == Status.Accepted).FirstOrDefaultAsync(_ => _.Id == id);
+            var result = await _context.WebApplications.Where(_ => _.Status == Status.Active).FirstOrDefaultAsync(_ => _.Id == id);
             if (result is null)
                 return new OperationResult<WebAppQueryModel>(new WebAppQueryModel(), false);
             result.IncreaseVisit();
             await _context.SaveChangesAsync();
 
             var data = await _context.WebApplications
-                .Where(_ => _.Status == Status.Accepted)
+                .Where(_ => _.Status == Status.Active)
                 .Include(_ => _.Pictures)
                 .Include(_ => _.Comments).ThenInclude(_ => _.User)
                 .Include(_ => _.Category)
@@ -135,7 +135,7 @@ namespace Pwa.Query.Queries
 
         public async Task<ResponseDto<WebAppQueryModel>> List(ResponseDto<WebAppQueryModel> response)
         {
-            var webApps = _context.WebApplications.Include(_ => _.Category).Select(_ => new WebAppQueryModel
+            var webApps = _context.WebApplications.Where(_ => _.Status == Status.Active).Include(_ => _.Category).Select(_ => new WebAppQueryModel
             {
                 Id = _.Id,
                 Name = _.Name,
