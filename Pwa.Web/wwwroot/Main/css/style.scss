@@ -477,10 +477,10 @@ section.app__list {
       .items {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
         .item {
           background-color: $white;
           width: calc((100% / 3) - 22px);
+          margin-left: 22px;
           @include mq(768) {
             width: calc((100% / 2) - 22px);
           }

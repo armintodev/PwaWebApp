@@ -2491,14 +2491,12 @@ section.app__list .wrapper main .items {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 
 section.app__list .wrapper main .items .item {
   background-color: #ffffff;
   width: calc((100% / 3) - 22px);
+  margin-left: 22px;
   margin-bottom: 22px;
   padding: 13.5px 10px 22px 13.9px;
   border-radius: 16px;
