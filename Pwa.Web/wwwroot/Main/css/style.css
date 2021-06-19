@@ -2468,6 +2468,19 @@ section.app__list .wrapper aside .filter .categories .items .item input {
   margin: 0 0 0 16px;
 }
 
+section.app__list .wrapper aside .search_category button[type="submit"] {
+  width: 100%;
+  padding: 13px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #744cc7;
+  border-radius: 10px;
+  margin-top: 19px;
+  -webkit-box-shadow: 0px 3px 16px rgba(80, 80, 80, 0.05);
+          box-shadow: 0px 3px 16px rgba(80, 80, 80, 0.05);
+}
+
 section.app__list .wrapper main {
   width: calc(77% - 8.5px);
 }
@@ -2571,8 +2584,8 @@ section.app__list .wrapper main .items .item .info .details .category h5 {
   font-weight: 500;
 }
 
-section.app__list .wrapper main .items .item .install button {
-  width: 90%;
+section.app__list .wrapper main .items .item .install a {
+  width: 100;
   border-radius: 17px;
   background: #f3f4f5;
   padding: 10px 0 10px 0;
@@ -2581,9 +2594,18 @@ section.app__list .wrapper main .items .item .install button {
   font-weight: normal;
   -webkit-transition: 0.3s all ease-in-out;
   transition: 0.3s all ease-in-out;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-section.app__list .wrapper main .items .item .install button:hover {
+section.app__list .wrapper main .items .item .install a:hover {
   background-color: #162341;
   color: #f3f4f5;
 }
