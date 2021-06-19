@@ -23,9 +23,9 @@ namespace Pwa.Infrastructure.EfCore.SeedData
             if (await _user.TableNoTracking.AnyAsync() is false)
             {
                 List<User> users = new();
-                users.Add(new("09106692003"));
-                users.Add(new("09118613957"));
-                users.Add(new("09111275582"));
+                users.Add(new("09106692003", profileUrl: "User/profile.png"));
+                users.Add(new("09118613957", profileUrl: "User/profile.png"));
+                users.Add(new("09111275582", profileUrl: "User/profile.png"));
 
                 foreach (var user in users)
                 {

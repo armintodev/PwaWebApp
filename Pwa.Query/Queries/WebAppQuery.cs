@@ -118,7 +118,7 @@ namespace Pwa.Query.Queries
                 Description = _.Description,
                 Like = 5,
                 UserName = _.User.FullName is null ? _.User.PhoneNumber : _.User.FullName,
-                UserIcon = "not implement in domain user",
+                UserIcon = _.User.ProfileUrl,
                 CreationDate = _.CreationDate.ToFarsi()
             }).ToList();
         }
