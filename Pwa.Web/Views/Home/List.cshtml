@@ -15,25 +15,32 @@
     <div class="container">
         <div class="wrapper">
             <aside>
-                <div class="filter">
-                    <h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15.619" height="15.619"
-                             viewBox="0 0 15.619 15.619">
-                            <path id="filter"
-                                  d="M14.153,0H1.466A1.465,1.465,0,0,0,.431,2.5L5.369,7.44v5.25a1.634,1.634,0,0,0,.586,1.22l1.952,1.436a1.479,1.479,0,0,0,2.343-1.171V7.44L15.188,2.5A1.465,1.465,0,0,0,14.153,0ZM8.785,6.833v7.321L6.833,12.69V6.833L1.464,1.464h12.69Z" />
-                        </svg>
-                        فیلتر ها
-                    </h3>
-                    <div class="orderby">
-                        <h5>مرتب سازی بر‌اساس</h5>
-                        <select>
-                            <option value="1">پر بازدید ترین</option>
-                            <option value="2">پر نصب ترین</option>
-                            <option value="3">تازه ترین</option>
-                        </select>
+                <form action="">
+                    <div class="filter">
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15.619" height="15.619"
+                                    viewBox="0 0 15.619 15.619">
+                                <path id="filter"
+                                        d="M14.153,0H1.466A1.465,1.465,0,0,0,.431,2.5L5.369,7.44v5.25a1.634,1.634,0,0,0,.586,1.22l1.952,1.436a1.479,1.479,0,0,0,2.343-1.171V7.44L15.188,2.5A1.465,1.465,0,0,0,14.153,0ZM8.785,6.833v7.321L6.833,12.69V6.833L1.464,1.464h12.69Z" />
+                            </svg>
+                            فیلتر ها
+                        </h3>
+                        <div class="orderby">
+                            <h5>مرتب سازی بر‌اساس</h5>
+                            <select>
+                                <option value="1">پر بازدید ترین</option>
+                                <option value="2">پر نصب ترین</option>
+                                <option value="3">تازه ترین</option>
+                            </select>
+                        </div>
+                        @await Component.InvokeAsync("Category")                                                                
                     </div>
-                    @await Component.InvokeAsync("Category")
-                </div>
+                    <div class="search_category">
+                        <button type="submit">
+                        جستجو
+                        </button>
+                    </div>  
+                </form>
             </aside>
             <main>
                 <div class="items">
@@ -67,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="install">
-                                <button>دریافت</button>
+                                <a href="#">دریافت</a>
                             </div>
                         </div>
                     }
