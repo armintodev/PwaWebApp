@@ -26,7 +26,7 @@ namespace Pwa.Web.Areas.Admin.Controllers
             return View();
         }
 
-        [HttpPost, NeedInformation, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(CreateDeveloperDto dto, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
