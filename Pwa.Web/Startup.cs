@@ -26,7 +26,6 @@ namespace Pwa.Web
             services.AddHttpContextAccessor();
             services.AddScoped<IFileUploader, FileUploader>();
             services.AddScoped<ISmsService, SmsService>();
-            services.AddInitializerDatabase();
             services.AddDetection();
 
             services.AddExtensionsApplication(Configuration.GetConnectionString("PwaWebAppConnection"));
