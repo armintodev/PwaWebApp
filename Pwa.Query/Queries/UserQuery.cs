@@ -24,7 +24,8 @@ namespace Pwa.Query.Queries
             return new UserQueryModel
             {
                 Name = user.UserName,
-                ProfileUrl = user.ProfileUrl
+                ProfileUrl = user.ProfileUrl,
+                IsAdmin = await _user.IsInRoleAsync(user, "Admin")
             };
         }
     }

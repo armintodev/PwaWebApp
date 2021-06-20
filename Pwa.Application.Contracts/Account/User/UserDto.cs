@@ -33,6 +33,7 @@ namespace Pwa.Application.Contracts.Account.User
 
         [Display(Name = "نقش")]
         public RoleStatusDto Role { get; init; }
+        public string Roles { get; init; }
 
         [Display(Name = "تاریخ ایجاد")]
         public string CreationDate { get; init; }

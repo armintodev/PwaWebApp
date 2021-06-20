@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Pwa.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminBaseController : Controller
     {
     }

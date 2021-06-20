@@ -31,6 +31,7 @@ namespace Pwa.Infrastructure.EfCore.SeedData
                 {
                     await _manager.CreateAsync(user);
                     await _manager.AddToRoleAsync(user, RoleStatus.Basic.ToString());
+                    await _manager.AddToRoleAsync(user, RoleStatus.Admin.ToString());
                 }
             }
         }

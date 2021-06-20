@@ -6,8 +6,8 @@
         @foreach (var category in Model)
         {
             <div class="item">
-                <input class="form-check-input" asp-for="@category.IsChecked">
-                <label>@category.Title</label>
+                <input type="checkbox" class="form-check-input" name="search" id="title" value="@category.Title">
+                <label for="title">@category.Title</label>
             </div>
         }
     </div>

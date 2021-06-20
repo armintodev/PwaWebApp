@@ -16,5 +16,7 @@ namespace Pwa.Application.Contracts.Account.User
         [Display(Name = "مرا به خاطر بسپار")]
         public bool RememberMe { get; init; }
 
+        public bool IsAdmin { get; init; }
+
     }
 }

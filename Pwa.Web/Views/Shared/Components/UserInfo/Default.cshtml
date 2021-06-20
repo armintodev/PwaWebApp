@@ -1,4 +1,4 @@
-﻿@model Pwa.Query.Contracts.User.UserQueryModel
+﻿@using Microsoft.AspNetCore.Identity
 @if (User.Identity.IsAuthenticated)
 {
     <div class="user__info">
@@ -18,6 +18,10 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" asp-controller="User" asp-action="Logout">خروج</a></li>
+                @if (Model.IsAdmin)
+                {
+                    <li><a class="dropdown-item" asp-area="Admin">مدیریت</a></li>
+                }
             </ul>
         </div>
     </div>

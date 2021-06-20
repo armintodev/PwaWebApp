@@ -68,7 +68,7 @@ namespace Pwa.Application
                 UserName = user.UserName,
                 PhoneNumber = user.PhoneNumber,
                 ProfileUrl = user.ProfileUrl,
-                Role = (RoleStatusDto)user.RoleStatus,
+                Roles = string.Join("-", await _userManager.GetRolesAsync(user)),
                 CreationDate = user.CreationDate.ToFarsiFull(),
                 LastEditDate = user.LastEditDate.ToFarsiFull(),
             };
@@ -100,6 +100,8 @@ namespace Pwa.Application
             if (userResult.Succeeded is false)
                 return new OperationResult(false, "ثبت نام کاربر با مشکل مواجه شد");
 
+            if (dto.IsAdmin)
+                await _userManager.AddToRoleAsync(user, RoleStatus.Admin.ToString());
             var roleResult = await _userManager.AddToRoleAsync(user, user.RoleStatus.ToString());
             if (roleResult.Succeeded is false)
                 return new OperationResult(false, "ثبت نام کاربر با مشکل مواجه شد");

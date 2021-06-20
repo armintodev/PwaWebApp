@@ -5,5 +5,6 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public string ProfileUrl { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

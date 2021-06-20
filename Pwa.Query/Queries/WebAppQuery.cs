@@ -148,7 +148,6 @@ namespace Pwa.Query.Queries
                 Installed = _.Installed,
                 Visit = _.Visit,
                 Icon = _.Icon,
-                CreationDate = _.CreationDate.ToFarsi(),
                 IsGame = _.IsGame
             }).AsNoTracking();
 
@@ -167,9 +166,6 @@ namespace Pwa.Query.Queries
 
                     SortOrderBy.MostVisited =>
                      webApps.OrderByDescending(_ => _.Visit),
-
-                    SortOrderBy.Newest =>
-                     webApps.OrderByDescending(_ => _.CreationDate),
 
                     _ => webApps.OrderBy(_ => _.Rate),
                 };
